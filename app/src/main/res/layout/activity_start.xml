@@ -28,19 +28,46 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp">
         <TextView
+            android:id="@+id/user_name_tv"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
             android:id="@+id/welcome_text"
             android:layout_width="match_parent"
             android:text="@string/welcome_main"
             android:textAlignment="center"
             android:textSize="20sp"
-            android:textColor="@color/colorPrimary"
             android:layout_height="wrap_content" />
-        <Button
-            android:id="@+id/login_button"
-            android:text="@string/login_main"
-            android:layout_gravity="center"
-            android:onClick="promptUserLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/login_button"
+                android:text="@string/login_main"
+                android:layout_gravity="center"
+                android:onClick="promptUserLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/logout_button"
+                android:text="@string/logout_main"
+                android:layout_gravity="center"
+                android:onClick="promptUserLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/create_user_button"
+                android:text="@string/create_user"
+                android:layout_gravity="center"
+                android:onClick="createUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

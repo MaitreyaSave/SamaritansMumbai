@@ -4,7 +4,6 @@
     <!-- Strings related to login -->
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="action_add_user">Add User</string>
     <string name="error_invalid_username">This username is invalid</string>
@@ -29,7 +28,20 @@
     <string name="welcome_main">Welcome to Samaritans Mumbai</string>
     <string name="prompt_email">Email</string>
     <string name="error_invalid_email">This email address is invalid</string>
+    <string name="create_user">Create User</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="login_proceed">Proceed</string>
+    <string name="logout_main">Logout</string>
+    <string name="title_activity_create_user">CreateUserActivity</string>
+
+    <!-- Strings related to creating user -->
+    <string name="enter_user_name">Enter User Name</string>
+    <string name="enter_user_email">Enter User Email</string>
+    <string name="enter_user_password">Enter User Password</string>
+    <string name="submit_user">Submit</string>
+    <!-- Random Strings -->
+
+
 </resources>
