@@ -1,6 +1,7 @@
 package in.apps.maitreya.samaritansmumbai;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -20,6 +21,16 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -41,6 +52,34 @@ public class StartActivity extends AppCompatActivity {
         loginButton = (Button) findViewById(R.id.login_button);
         logoutButton = (Button) findViewById(R.id.logout_button);
         createUserButton = (Button) findViewById(R.id.create_user_button);
+
+        //Shared Preferences
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        final SharedPreferences.Editor editor = pref.edit();
+
+        //Server TimeStamp
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                Long ts = (Long) snapshot.getValue();
+                Date date = new Date(ts);
+                SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yyyy", Locale.UK);
+                String dateText = df2.format(date);
+                System.out.println("taklu "+dateText);
+                editor.putString("time_stamp", dateText); // Storing string
+                editor.commit();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        ref.setValue(ServerValue.TIMESTAMP);
+        //
     }
     public void promptUserLogin(View v){
         if(userLoggedIn){

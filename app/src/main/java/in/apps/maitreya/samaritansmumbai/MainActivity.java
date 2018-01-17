@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
     public void showCallerDetails(View v){
-        //Intent intent =new Intent(this,null);
-        //startActivity(intent);
+        Intent intent =new Intent(this,CallerDetailsActivity.class);
+        startActivity(intent);
     }
 
 }

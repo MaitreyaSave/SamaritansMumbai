@@ -41,6 +41,45 @@
     <string name="enter_user_email">Enter User Email</string>
     <string name="enter_user_password">Enter User Password</string>
     <string name="submit_user">Submit</string>
+
+    <!-- Strings related to caller details -->
+    <string name="title_activity_caller_details">CallerDetailsActivity</string>
+    <string name="tab_text_1">Basic</string>
+    <string name="tab_text_2">Descriptive</string>
+    <string name="tab_text_3">Other</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="tab1_description">Enter basic details of Caller</string>
+    <string name="tab2_description">Enter descriptive details of Caller</string>
+    <string name="tab3_description">Enter other details of Caller</string>
+
+    <!-- Strings related to basic caller details -->
+    <string name="cd_date">Date:</string>
+    <string name="cd_male_female">Male/Female:</string>
+    <string name="cd_tel_door">Tel/Door:</string>
+    <string name="cd_new_old">New/Old:</string>
+    <string name="cd_suicide_qn">Suicide Question?:</string>
+    <string name="cd_risk_level">Risk Level:</string>
+    <string name="cd_nature_problem">Nature of Problem:</string>
+    <string name="cd_caller_name">Caller Name:</string>
+    <string name="cd_caller_age">Caller Age:</string>
+    <string name="cd_caller_support">Support:</string>
+    <string name="cd_caller_occupation">Occupation:</string>
+
+    <!-- Strings related to descriptive caller details -->
+    <string name="cd_gist">Gist:</string>
+    <string name="cd_feelings">Feelings Addressed:</string>
+    <string name="cd_vol_response">Volunteers Response:</string>
+    <string name="cd_call_end">How did the call end?:</string>
+
+    <!-- Strings related to other caller details -->
+    <string name="cd_sam_name">Samaritan Name:</string>
+    <string name="cd_alt_sam_name">Alternative Name:</string>
+    <string name="cd_sam_leader">Leader Name:</string>
+    <string name="cd_sam_leader_msg">Special Message from Leader:</string>
+    <string name="cd_self_assessment">Self Assessment:</string>
+    <string name="cd_refer_PU">Referred to PU?:</string>
     <!-- Random Strings -->
 
 
