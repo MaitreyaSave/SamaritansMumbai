@@ -80,7 +80,8 @@
     <string name="cd_sam_leader_msg">Special Message from Leader:</string>
     <string name="cd_self_assessment">Self Assessment:</string>
     <string name="cd_refer_PU">Referred to PU?:</string>
-    <!-- Random Strings -->
 
+    <!-- Random Strings -->
+    <string name="network_location_access">Please make sure your GPS and Internet is ON in order to login!</string>
 
 </resources>
