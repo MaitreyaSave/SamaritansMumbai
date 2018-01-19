@@ -27,7 +27,9 @@ import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class StartActivity extends AppCompatActivity {
@@ -42,6 +44,8 @@ public class StartActivity extends AppCompatActivity {
     private Button loginButton,logoutButton,createUserButton;
     private FloatingActionButton refresh_fab;
     boolean doubleBackToExitPressedOnce = false;
+    List<String> ad_users = Arrays.asList("maitreya.save@gmail.com","samaritans.helpline@gmail.com");
+
     private static final String TAG = StartActivity.class.getName();
 
     @Override
@@ -73,7 +77,7 @@ public class StartActivity extends AppCompatActivity {
                 SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yyyy", Locale.UK);
                 String dateText = df2.format(date);
                 editor.putString("time_stamp", dateText); // Storing string
-                editor.commit();
+                editor.apply();
             }
 
             @Override
@@ -109,8 +113,9 @@ public class StartActivity extends AppCompatActivity {
         if(Functions.checkPermissions(this,MY_PERMISSIONS_REQUEST_LOCATION,locationManager)) {
             network_location_access.setVisibility(View.GONE);
             refresh_fab.setVisibility(View.GONE);
+            loginButton.setVisibility(View.VISIBLE);
             if (currentUser != null) {
-                if (currentUser.getEmail().equals("maitreya.save@gmail.com"))
+                if (ad_users.contains(currentUser.getEmail()))
                     createUserButton.setVisibility(View.VISIBLE);
                 else
                     createUserButton.setVisibility(View.GONE);
