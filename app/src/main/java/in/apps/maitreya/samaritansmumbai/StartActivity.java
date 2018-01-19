@@ -72,12 +72,14 @@ public class StartActivity extends AppCompatActivity {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                Long ts = (Long) snapshot.getValue();
-                Date date = new Date(ts);
-                SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yyyy", Locale.UK);
-                String dateText = df2.format(date);
-                editor.putString("time_stamp", dateText); // Storing string
-                editor.apply();
+                if(!snapshot.hasChildren()) {
+                    Long ts = (Long) snapshot.getValue();
+                    Date date = new Date(ts);
+                    SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yyyy", Locale.UK);
+                    String dateText = df2.format(date);
+                    editor.putString("time_stamp", dateText); // Storing string
+                    editor.apply();
+                }
             }
 
             @Override
