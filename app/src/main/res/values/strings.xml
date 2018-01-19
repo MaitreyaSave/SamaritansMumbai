@@ -40,7 +40,10 @@
     <string name="enter_user_name">Enter User Name</string>
     <string name="enter_user_email">Enter User Email</string>
     <string name="enter_user_password">Enter User Password</string>
+    <string name="enter_user_role">Enter User Role</string>
     <string name="submit_user">Submit</string>
+    <string name="radio_admin">admin</string>
+    <string name="radio_user">user</string>
 
     <!-- Strings related to caller details -->
     <string name="title_activity_caller_details">CallerDetailsActivity</string>

@@ -67,7 +67,7 @@ public class StartActivity extends AppCompatActivity {
         final SharedPreferences.Editor editor = pref.edit();
 
         //Server TimeStamp
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("timestamp");
 
         ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -141,9 +141,7 @@ public class StartActivity extends AppCompatActivity {
         username.setText(hi_user);
     }
     public void promptUserLogout(View v){
-        FirebaseAuth.getInstance().signOut();
-        finish();
-        startActivity(getIntent());
+        Functions.signOut(this);
     }
     @Override
     public void onBackPressed() {

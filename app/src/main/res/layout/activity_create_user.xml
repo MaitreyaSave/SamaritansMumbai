@@ -48,11 +48,31 @@
             android:inputType="textVisiblePassword"
             android:hint="@string/enter_user_password"
             android:layout_height="wrap_content" />
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <RadioButton android:id="@+id/radio_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/radio_user"
+                android:checked="true"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:onClick="onRadioButtonClicked"/>
+            <RadioButton android:id="@+id/radio_admin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:text="@string/radio_admin"
+                android:onClick="onRadioButtonClicked"/>
+        </RadioGroup>
         <Button
             android:id="@+id/submit_user"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
             android:text="@string/submit_user"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:onClick="submitUser"
             android:layout_height="wrap_content" />
 
