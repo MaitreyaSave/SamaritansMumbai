@@ -50,6 +50,9 @@ public class CreateUserActivity extends AppCompatActivity {
         //Firebase
         mAuth = FirebaseAuth.getInstance();
 
+        //Default value of radio button
+        role = "user";
+
     }
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
