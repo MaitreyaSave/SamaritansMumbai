@@ -11,6 +11,7 @@ import java.util.Map;
 
 public class User {
     private String role, email, username, uid;
+    private long timestamp;
     public User(){
 
     }
@@ -52,6 +53,14 @@ public class User {
         this.username = username;
     }
 
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
@@ -59,6 +68,7 @@ public class User {
         result.put("username", username);
         result.put("email", email);
         result.put("role", role);
+        result.put("time_stamp", timestamp);
 
         return result;
     }

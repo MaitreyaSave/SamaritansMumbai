@@ -2,6 +2,7 @@ package in.apps.maitreya.samaritansmumbai;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -33,8 +34,8 @@ public class CreateUserActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private static final String TAG = CreateUserActivity.class.getName();
     private EditText userEmail, userName, userPassword;
-    private RadioButton radioButton_admin,radioButton_user;
     private String role;
+    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,33 +94,33 @@ public class CreateUserActivity extends AppCompatActivity {
                                 firebaseUser.updateProfile(profileUpdates);
                                 Toast.makeText(CreateUserActivity.this, "Authentication successful.",
                                         Toast.LENGTH_SHORT).show();
+                                //Shared prefs
+                                SharedPreferences pref = getSharedPreferences("MyPref", 0); // 0 - for private mode
+                                String og_name = pref.getString("user_email", "-1");
+                                String og_pwd = pref.getString("user_pwd", "-1");
+                                long ts = Long.parseLong(pref.getString("time_stamp","-1"));
+                                //
 
                                 // Database entry
                                 User user = new User(name,email,role);
                                 String userId = FirebaseAuth.getInstance().getUid();
                                 user.setUid(userId);
+                                user.setTimestamp(ts);
                                 //
+
                                 // Write a message to the database
                                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                                 DatabaseReference myRef = database.getReference("users");
 
-                                String key = myRef.child("users").push().getKey();
-                                Map<String, Object> userValues = user.toMap();
+                                myRef.child(userId).setValue(user);
 
-                                Map<String, Object> childUpdates = new HashMap<>();
-                                childUpdates.put(key, userValues);
-                                myRef.updateChildren(childUpdates);
-                                //
                                 // Read from the database
                                 myRef.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
                                         // This method is called once with the initial value and again
                                         // whenever data at this location is updated.
-                                        if(dataSnapshot.hasChildren()) {
-
-                                            Toast.makeText(CreateUserActivity.this, "Database Updated!", Toast.LENGTH_SHORT).show();
-                                        }
+                                        Toast.makeText(CreateUserActivity.this, "Database Updated!", Toast.LENGTH_SHORT).show();
                                     }
 
                                     @Override
@@ -129,11 +130,7 @@ public class CreateUserActivity extends AppCompatActivity {
                                     }
                                 });
                                 //
-                                //Shared prefs
-                                SharedPreferences pref = getSharedPreferences("MyPref", 0); // 0 - for private mode
-                                String og_name = pref.getString("user_email", "-1");
-                                String og_pwd = pref.getString("user_pwd", "-1");
-                                //
+
                                 Functions.signOut(CreateUserActivity.this);
                                 Functions.signIn(og_name,og_pwd,CreateUserActivity.this);
                                 //
@@ -154,6 +151,24 @@ public class CreateUserActivity extends AppCompatActivity {
 
 
 
+    }
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to return", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 
 }

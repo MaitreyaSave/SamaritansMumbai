@@ -39,9 +39,18 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -101,8 +110,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         //
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
-    }
 
+
+
+    }
 
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -121,6 +132,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
+        //
+
+        //
 
         boolean cancel = false;
         View focusView = null;
@@ -275,6 +289,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             editor.apply();
             //
             Functions.signIn(mEmail,mPassword,LoginActivity.this);
+            //
+            //
             try {
                 // Simulate network access.
                 Thread.sleep(2000);

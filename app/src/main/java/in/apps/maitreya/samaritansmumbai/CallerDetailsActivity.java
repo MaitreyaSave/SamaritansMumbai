@@ -182,8 +182,11 @@ public class CallerDetailsActivity extends AppCompatActivity {
 
 
             //Shared Preferences time stamp
-            String timestamp=pref.getString("time_stamp", "-1");
-
+            String timestamp_long=pref.getString("time_stamp", "-1");
+            long ts = Long.parseLong(timestamp_long);
+            Date date = new Date(ts);
+            SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yyyy", Locale.UK);
+            String timestamp = df2.format(date);
             //Use separate logic for each tab
             int tabNumber = getArguments().getInt(ARG_SECTION_NUMBER);
             switch (tabNumber){

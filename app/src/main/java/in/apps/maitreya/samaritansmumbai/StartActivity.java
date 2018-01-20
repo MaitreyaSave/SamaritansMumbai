@@ -12,6 +12,7 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -38,13 +39,13 @@ public class StartActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 0, MY_PERMISSIONS_REQUEST_NETWORK = 1;
     LocationManager locationManager;
     //
+    //
     private FirebaseAuth mAuth;
     private boolean userLoggedIn =false;
     private TextView username, network_location_access;
     private Button loginButton,logoutButton,createUserButton;
     private FloatingActionButton refresh_fab;
     boolean doubleBackToExitPressedOnce = false;
-    List<String> ad_users = Arrays.asList("maitreya.save@gmail.com","samaritans.helpline@gmail.com");
 
     private static final String TAG = StartActivity.class.getName();
 
@@ -64,32 +65,8 @@ public class StartActivity extends AppCompatActivity {
 
         //Shared Preferences
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-        final SharedPreferences.Editor editor = pref.edit();
+        pref.edit().clear().commit();
 
-        //Server TimeStamp
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("timestamp");
-
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                if(!snapshot.hasChildren()) {
-                    Long ts = (Long) snapshot.getValue();
-                    Date date = new Date(ts);
-                    SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yyyy", Locale.UK);
-                    String dateText = df2.format(date);
-                    editor.putString("time_stamp", dateText); // Storing string
-                    editor.apply();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        ref.setValue(ServerValue.TIMESTAMP);
-        //
 
         //Location manager
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -117,11 +94,42 @@ public class StartActivity extends AppCompatActivity {
             refresh_fab.setVisibility(View.GONE);
             loginButton.setVisibility(View.VISIBLE);
             if (currentUser != null) {
-                if (ad_users.contains(currentUser.getEmail()))
-                    createUserButton.setVisibility(View.VISIBLE);
-                else
-                    createUserButton.setVisibility(View.GONE);
+                //
+                //update timestamp
+                //Shared Preferences
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                final SharedPreferences.Editor editor = pref.edit();
+                String user_uid = currentUser.getUid();
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users/"+user_uid+"/");
+                ref.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        Long ts = (Long) snapshot.child("timestamp").getValue();
+                        String role = (String)snapshot.child("role").getValue();
+
+                        if (ts != null) {
+                            editor.putString("time_stamp", ts.toString()); // Storing string
+                            editor.apply();
+                        }
+                        if(role == null)
+                            role = "user";
+                        if (role.equals("admin"))
+                            createUserButton.setVisibility(View.VISIBLE);
+                        else
+                            createUserButton.setVisibility(View.GONE);
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                //
+                ref.child("timestamp").setValue(ServerValue.TIMESTAMP);
+                //
                 updateUI(currentUser);
+
             } else {
                 createUserButton.setVisibility(View.GONE);
                 logoutButton.setVisibility(View.GONE);
