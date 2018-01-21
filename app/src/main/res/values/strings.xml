@@ -86,5 +86,6 @@
 
     <!-- Random Strings -->
     <string name="network_location_access">Please make sure your GPS and Internet is ON in order to login!</string>
+    <string name="na">N/A</string>
 
 </resources>

@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,7 +62,9 @@ public class CallerDetailsActivity extends AppCompatActivity {
     //Shared preferences
     private static SharedPreferences pref;
     private static final String TAG = CallerDetailsActivity.class.getName();
-
+    private static String timestamp,sams_name;
+    private String gist;
+    public static  int cnt = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +86,12 @@ public class CallerDetailsActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
-
+        //
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser != null) {
+            sams_name = firebaseUser.getDisplayName();
+        }
+        //
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.submit_caller_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +109,47 @@ public class CallerDetailsActivity extends AppCompatActivity {
                 alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        //
+                        cnt++;
+                        //Get values
+                        //
+                        EditText gist_et = (EditText) findViewById(R.id.cd_gist_et);
+                        gist = gist_et.getText().toString();
+                        Log.d(TAG,"mgist "+gist);
+                        //
+                        //
+                        //Firebase Database
+                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("log");
+                        LogEntry logEntry = new LogEntry(cnt,timestamp,gist,sams_name);
+                        final String child_sr_no = String.valueOf(cnt);
+                        ref.child(child_sr_no).setValue(logEntry);
+                        Log.d(TAG,"cnt "+child_sr_no);
 
+                        ref.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                DatabaseReference ref_count = FirebaseDatabase.getInstance().getReference("count");
+                                ref_count.setValue(child_sr_no);
+                                ref_count.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        cnt = Integer.parseInt(dataSnapshot.getValue().toString());
+                                        Log.d(TAG,"server cnt "+cnt);
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                        //
                         //
                         Toast.makeText(CallerDetailsActivity.this, "Caller Details submitted!", Toast.LENGTH_SHORT).show();
                         finish();
@@ -168,17 +216,25 @@ public class CallerDetailsActivity extends AppCompatActivity {
             View rootView = inflater.inflate(R.layout.fragment_caller_details, container, false);
 
             // TextViews and Values
-            TextView tv_section_description, tv_cd_date, tv_cd_date_val;
+            TextView tv_section_description, tv_cd_date_val, tv_cd_sams_name_val;
+
+            //Layouts
+            LinearLayout tab1,tab2,tab3;
 
             //
             //Initializes TextViews
             tv_section_description = (TextView) rootView.findViewById(R.id.section_label);
-            tv_cd_date = (TextView) rootView.findViewById(R.id.cd_date_tv);
             //
             //Initialize Values
             tv_cd_date_val = (TextView) rootView.findViewById(R.id.cd_date_val);
-            tv_cd_date_val.setText("D: ");
+            tv_cd_sams_name_val = (TextView) rootView.findViewById(R.id.sams_name_tv_val);
+
             //
+            //Initializes Layouts
+            tab1 = (LinearLayout) rootView.findViewById(R.id.tab_linear_layout_child1);
+            tab2 = (LinearLayout) rootView.findViewById(R.id.tab_linear_layout_child2);
+            tab3 = (LinearLayout) rootView.findViewById(R.id.tab_linear_layout_child3);
+
 
 
             //Shared Preferences time stamp
@@ -186,23 +242,29 @@ public class CallerDetailsActivity extends AppCompatActivity {
             long ts = Long.parseLong(timestamp_long);
             Date date = new Date(ts);
             SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yyyy", Locale.UK);
-            String timestamp = df2.format(date);
+            timestamp = df2.format(date);
+
+            //
+            tv_cd_date_val.setText(timestamp);
+            tv_cd_sams_name_val.setText(sams_name);
+
             //Use separate logic for each tab
             int tabNumber = getArguments().getInt(ARG_SECTION_NUMBER);
             switch (tabNumber){
                 case 1:
                     tv_section_description.setText(getString(R.string.tab1_description));
-                    tv_cd_date_val.setText(timestamp);
+                    tab2.setVisibility(View.GONE);
+                    tab3.setVisibility(View.GONE);
                     break;
                 case 2:
                     tv_section_description.setText(getString(R.string.tab2_description));
-                    tv_cd_date.setVisibility(View.GONE);
-                    tv_cd_date_val.setVisibility(View.GONE);
+                    tab1.setVisibility(View.GONE);
+                    tab3.setVisibility(View.GONE);
                     break;
                 case 3:
                     tv_section_description.setText(getString(R.string.tab3_description));
-                    tv_cd_date.setVisibility(View.GONE);
-                    tv_cd_date_val.setVisibility(View.GONE);
+                    tab1.setVisibility(View.GONE);
+                    tab2.setVisibility(View.GONE);
                     break;
                 default:
                     tv_section_description.setText("");
