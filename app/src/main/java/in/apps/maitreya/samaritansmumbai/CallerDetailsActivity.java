@@ -16,6 +16,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.telecom.Call;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -81,7 +82,7 @@ public class CallerDetailsActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
@@ -110,13 +111,25 @@ public class CallerDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //
-                        cnt++;
+
                         //Get values
                         //
                         EditText gist_et = (EditText) findViewById(R.id.cd_gist_et);
-                        gist = gist_et.getText().toString();
-                        Log.d(TAG,"mgist "+gist);
-                        //
+                        if( TextUtils.isEmpty(gist_et.getText())){
+                            /**
+                             *   You can Toast a message here that the Username is Empty
+                             **/
+                            TabLayout.Tab tab=tabLayout.getTabAt(1);
+                            tab.select();
+                            gist_et.setHint(getResources().getString( R.string.error_field_required));
+                            gist_et.setBackground(getResources().getDrawable(R.drawable.edit_text_error_style));
+                            return;
+
+                        }else{
+                            gist = gist_et.getText().toString();
+
+                        }
+                        cnt++;
                         //
                         //Firebase Database
                         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("log");
@@ -234,8 +247,6 @@ public class CallerDetailsActivity extends AppCompatActivity {
             tab1 = (LinearLayout) rootView.findViewById(R.id.tab_linear_layout_child1);
             tab2 = (LinearLayout) rootView.findViewById(R.id.tab_linear_layout_child2);
             tab3 = (LinearLayout) rootView.findViewById(R.id.tab_linear_layout_child3);
-
-
 
             //Shared Preferences time stamp
             String timestamp_long=pref.getString("time_stamp", "-1");

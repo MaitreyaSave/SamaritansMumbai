@@ -1,5 +1,7 @@
 package in.apps.maitreya.samaritansmumbai;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -149,7 +151,22 @@ public class StartActivity extends AppCompatActivity {
         username.setText(hi_user);
     }
     public void promptUserLogout(View v){
-        Functions.signOut(this);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(StartActivity.this);
+        alertDialog.setTitle("Confirm Logout");
+        alertDialog.setMessage("Are you sure you want to logout?");
+        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        alertDialog.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Functions.signOut(StartActivity.this);
+            }
+        });
+        alertDialog.show();
     }
     @Override
     public void onBackPressed() {
