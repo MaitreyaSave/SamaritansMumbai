@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        app:layout_scrollFlags="scroll|enterAlways"
         >
         <TextView
             android:id="@+id/section_label"
@@ -25,7 +26,12 @@
             tools:layout_constraintTop_creator="1" />
 
         <LinearLayout
-                android:id="@+id/tab_linear_layout_child1"
+            android:id="@+id/tab_linear_layout_child1"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/tab_linear_layout_child1_field1"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:padding="@dimen/activity_vertical_margin"
@@ -41,11 +47,274 @@
                 <TextView
                     android:id="@+id/cd_date_val"
                     android:layout_width="wrap_content"
-                    android:layout_weight="3"
+                    android:layout_weight="2"
                     android:textSize="20sp"
                     android:textColor="@color/colorPrimaryDark"
                     android:layout_height="wrap_content"
                     />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tab_linear_layout_child1_field8"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:padding="@dimen/activity_vertical_margin"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/cd_time"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:textSize="20sp"
+                    android:labelFor="@id/cd_time_hours"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cd_time"/>
+                <EditText
+                    android:id="@+id/cd_time_hours"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/cd_time_colon"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/cd_time_colon"
+                    android:labelFor="@id/cd_time_mins"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:id="@+id/cd_time_mins"
+                    android:layout_width="0dp"
+                    android:inputType="number"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+                <Spinner
+                    android:id="@+id/spinner_cd_ampm"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimary"
+                    android:layout_height="wrap_content"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tab_linear_layout_child1_field2"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:padding="@dimen/activity_vertical_margin"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/cd_gender_tv"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cd_male_female"/>
+                <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:gravity="start"
+                    android:orientation="horizontal">
+                    <RadioButton android:id="@+id/cd_radio_male"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_male"
+                        android:checked="true"
+                        android:onClick="onRadioButtonClickedCD"/>
+                    <RadioButton android:id="@+id/cd_radio_female"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_female"
+                        android:onClick="onRadioButtonClickedCD"/>
+                </RadioGroup>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tab_linear_layout_child1_field3"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:padding="@dimen/activity_vertical_margin"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/cd_tel_door"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cd_tel_door"/>
+                <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="start"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:orientation="horizontal">
+                    <RadioButton android:id="@+id/cd_radio_tel"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_tel"
+                        android:checked="true"
+                        android:onClick="onRadioButtonClickedCD"/>
+                    <RadioButton android:id="@+id/cd_radio_door"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_door"
+                        android:onClick="onRadioButtonClickedCD"/>
+                </RadioGroup>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tab_linear_layout_child1_field4"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:padding="@dimen/activity_vertical_margin"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/cd_old_new"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cd_new_old"/>
+                <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:gravity="start"
+                    android:orientation="horizontal">
+                    <RadioButton android:id="@+id/cd_radio_old"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_old"
+                        android:checked="true"
+                        android:onClick="onRadioButtonClickedCD"/>
+                    <RadioButton android:id="@+id/cd_radio_new"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_new"
+                        android:onClick="onRadioButtonClickedCD"/>
+                </RadioGroup>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tab_linear_layout_child1_field5"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:padding="@dimen/activity_vertical_margin"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/cd_suicide_qn"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cd_suicide_qn"/>
+                <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:gravity="start"
+                    android:orientation="horizontal">
+                    <RadioButton android:id="@+id/cd_radio_suicide_Y"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_Y"
+                        android:checked="true"
+                        android:onClick="onRadioButtonClickedCD"/>
+                    <RadioButton android:id="@+id/cd_radio_suicide_N"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_N"
+                        android:onClick="onRadioButtonClickedCD"/>
+                </RadioGroup>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tab_linear_layout_child1_field6"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:padding="@dimen/activity_vertical_margin"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/cd_risk_level"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cd_risk_level"/>
+                <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:gravity="start"
+                    android:orientation="horizontal">
+                    <RadioButton android:id="@+id/cd_radio_risk0"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_risk_0"
+                        android:checked="true"
+                        android:onClick="onRadioButtonClickedCD"/>
+                    <RadioButton android:id="@+id/cd_radio_risk1"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_risk_1"
+                        android:onClick="onRadioButtonClickedCD"/>
+                    <RadioButton android:id="@+id/cd_radio_risk2"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_risk_2"
+                        android:onClick="onRadioButtonClickedCD"/>
+                    <RadioButton android:id="@+id/cd_radio_risk3"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_risk_3"
+                        android:onClick="onRadioButtonClickedCD"/>
+                </RadioGroup>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tab_linear_layout_child1_field7"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:padding="@dimen/activity_vertical_margin"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/cd_problem_nature"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cd_nature_problem"/>
+                <Spinner
+                    android:id="@+id/spinner_cd_problem_nature_val"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+
+                </Spinner>
+            </LinearLayout>
         </LinearLayout>
 
             <LinearLayout

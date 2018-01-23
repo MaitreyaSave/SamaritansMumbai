@@ -24,8 +24,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,6 +69,33 @@ public class CallerDetailsActivity extends AppCompatActivity {
     private static final String TAG = CallerDetailsActivity.class.getName();
     private static String timestamp,sams_name;
     private String gist;
+    private String gender;
+    private String tel_door;
+    private String new_old;
+    private String suicide_qn;
+    private String risk_level;
+    private static String problem_nature;
+    private String support;
+    private String occupation;
+    private String self_assessment;
+    private String age;
+    private String PU_referred;
+    private String leader_name;
+    private String pseudo_name;
+    private String leader_spl_msg;
+    private String name;
+    private String agePU_referred;
+    private String feelings_addressed;
+    private String volunteers_response;
+    private String call_end;
+    private String hours;
+    private String mins;
+    private static String ampm;
+    private String duration;
+    private String language;
+    private String frequent_caller;
+    private String plan;
+    private String attempt;
     public static  int cnt = 0;
 
     @Override
@@ -72,8 +103,8 @@ public class CallerDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_caller_details);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -86,6 +117,8 @@ public class CallerDetailsActivity extends AppCompatActivity {
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
+        //
+
 
         //
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -133,7 +166,9 @@ public class CallerDetailsActivity extends AppCompatActivity {
                         //
                         //Firebase Database
                         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("log");
-                        LogEntry logEntry = new LogEntry(cnt,timestamp,gist,sams_name);
+                        //LogEntry logEntry = new LogEntry(cnt,timestamp,gist,sams_name,);
+                        String time = hours+":"+mins+" "+ampm;
+                        LogEntry logEntry = new  LogEntry(cnt,timestamp,gist,sams_name,gender,tel_door,new_old,suicide_qn,risk_level,problem_nature,leader_name,pseudo_name,leader_spl_msg,name,age,support,occupation,self_assessment,PU_referred,feelings_addressed,volunteers_response,call_end,time,duration,language,frequent_caller,plan,attempt);
                         final String child_sr_no = String.valueOf(cnt);
                         ref.child(child_sr_no).setValue(logEntry);
                         Log.d(TAG,"cnt "+child_sr_no);
@@ -198,6 +233,8 @@ public class CallerDetailsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -259,6 +296,52 @@ public class CallerDetailsActivity extends AppCompatActivity {
             tv_cd_date_val.setText(timestamp);
             tv_cd_sams_name_val.setText(sams_name);
 
+            //
+            //Spinner for Nature of Problem
+            Spinner spinner = (Spinner) rootView.findViewById(R.id.spinner_cd_problem_nature_val);
+            // Create an ArrayAdapter using the string array and a default spinner layout
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                    R.array.nature_array, android.R.layout.simple_spinner_item);
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            // Apply the adapter to the spinner
+            spinner.setAdapter(adapter);
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    problem_nature = adapterView.getItemAtPosition(i).toString();
+                    Log.d(TAG,"prob_n "+problem_nature);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+            //
+            //Spinner for Time
+            //
+            //AMPM
+            Spinner spinner_ampm = (Spinner) rootView.findViewById(R.id.spinner_cd_ampm);
+            ArrayAdapter<CharSequence> adapter_ampm = ArrayAdapter.createFromResource(getContext(),
+                    R.array.am_pm_array, android.R.layout.simple_spinner_item);
+            adapter_ampm.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner_ampm.setAdapter(adapter_ampm);
+
+            spinner_ampm.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    ampm = adapterView.getItemAtPosition(i).toString();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+            //
+            //
+
             //Use separate logic for each tab
             int tabNumber = getArguments().getInt(ARG_SECTION_NUMBER);
             switch (tabNumber){
@@ -306,6 +389,31 @@ public class CallerDetailsActivity extends AppCompatActivity {
         public int getCount() {
             // Show 3 total pages.
             return 3;
+        }
+    }
+    public void onRadioButtonClickedCD(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.cd_radio_male:
+                if (checked)
+                    gender = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_female:
+                if (checked)
+                    gender = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_door:
+                if (checked)
+                    tel_door = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_tel:
+                if (checked)
+                    tel_door = ((RadioButton) view).getText().toString();
+                break;
+
         }
     }
 }

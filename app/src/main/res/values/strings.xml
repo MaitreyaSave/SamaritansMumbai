@@ -59,16 +59,74 @@
 
     <!-- Strings related to basic caller details -->
     <string name="cd_date">Date:</string>
-    <string name="cd_male_female">Male/Female:</string>
+    <string name="cd_male_female">Gender:</string>
+    <string name="cd_male">Male</string>
+    <string name="cd_female">Female</string>
     <string name="cd_tel_door">Tel/Door:</string>
+    <string name="cd_tel">Tel</string>
+    <string name="cd_door">Door</string>
     <string name="cd_new_old">New/Old:</string>
-    <string name="cd_suicide_qn">Suicide Question?:</string>
+    <string name="cd_new">New</string>
+    <string name="cd_old">Old</string>
+    <string name="cd_suicide_qn">Suicide Question?</string>
+    <string name="cd_Y">Y</string>
+    <string name="cd_N">N</string>
     <string name="cd_risk_level">Risk Level:</string>
+    <string name="cd_risk_0">0</string>
+    <string name="cd_risk_1">1</string>
+    <string name="cd_risk_2">2</string>
+    <string name="cd_risk_3">3</string>
     <string name="cd_nature_problem">Nature of Problem:</string>
+    <string-array name="nature_array">
+        <item>N/A</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+    </string-array>
     <string name="cd_caller_name">Caller Name:</string>
     <string name="cd_caller_age">Caller Age:</string>
     <string name="cd_caller_support">Support:</string>
+    <string name="cd_support_F">F</string>
+    <string name="cd_support_A">A</string>
+    <string name="cd_support_H">H</string>
+    <string name="cd_support_PG">PG</string>
     <string name="cd_caller_occupation">Occupation:</string>
+    <string name="cd_occupation_E">E</string>
+    <string name="cd_occupation_UE">UE</string>
+    <string name="cd_occupation_B">B</string>
+    <string name="cd_occupation_S">S</string>
+    <string name="cd_occupation_R">R</string>
+    <string name="cd_occupation_W">W</string>
+    <string name="cd_time">Time:</string>
+    <string name="cd_time_colon">:</string>
+    <string-array name="am_pm_array">
+        <item>PM</item>
+        <item>AM</item>
+    </string-array>
+    <string name="cd_duration">Duration:</string>
+    <string name="cd_language">Language:</string>
+    <string name="cd_lang_E">E</string>
+    <string name="cd_lang_M">M</string>
+    <string name="cd_lang_H">H</string>
+    <string name="cd_lang_G">G</string>
+    <string name="cd_frequent_caller">Frequent Caller?</string>
+    <string name="cd_plan">Plan</string>
+    <string name="cd_attempt">Attempt</string>
 
     <!-- Strings related to descriptive caller details -->
     <string name="cd_gist">Gist:</string>
@@ -82,10 +140,14 @@
     <string name="cd_sam_leader">Leader Name:</string>
     <string name="cd_sam_leader_msg">Special Message from Leader:</string>
     <string name="cd_self_assessment">Self Assessment:</string>
-    <string name="cd_refer_PU">Referred to PU?:</string>
+    <string name="cd_assess_stood">Stood By</string>
+    <string name="cd_assess_lead">Lead</string>
+    <string name="cd_assess_pushed">Pushed</string>
+    <string name="cd_refer_PU">Referred to PU?</string>
 
     <!-- Random Strings -->
     <string name="network_location_access">Please make sure your GPS and Internet is ON in order to login!</string>
     <string name="na">N/A</string>
+    <string name="title_activity_test">TestActivity</string>
 
 </resources>
