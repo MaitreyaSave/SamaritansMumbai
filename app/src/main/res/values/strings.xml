@@ -15,12 +15,11 @@
         completions."
     </string> -->
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
-    <!-- Strings related to Caller Details -->
-    <string name="caller_details_main">Caller Details</string>
+    <!-- Strings related to Dashboard -->
+    <string name="add_log_main">Add Log</string>
     <string name="title_activity_start">StartActivity</string>
     <string name="title_activity_login">Sign in</string>
 

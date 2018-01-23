@@ -5,12 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="in.apps.maitreya.samaritansmumbai.CallerDetailsActivity$PlaceholderFragment">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
     <LinearLayout
         android:id="@+id/tab_linear_layout_template"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_scrollFlags="scroll|enterAlways"
         >
         <TextView
             android:id="@+id/section_label"
@@ -375,5 +378,6 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
     </LinearLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
