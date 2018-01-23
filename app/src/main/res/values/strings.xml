@@ -68,8 +68,8 @@
     <string name="cd_new">New</string>
     <string name="cd_old">Old</string>
     <string name="cd_suicide_qn">Suicide Question?</string>
-    <string name="cd_Y">Y</string>
-    <string name="cd_N">N</string>
+    <string name="cd_Y">Yes</string>
+    <string name="cd_N">No</string>
     <string name="cd_risk_level">Risk Level:</string>
     <string name="cd_risk_0">0</string>
     <string name="cd_risk_1">1</string>
@@ -118,24 +118,27 @@
         <item>AM</item>
     </string-array>
     <string name="cd_duration">Duration:</string>
+    <string name="cd_duration_hours">Hours</string>
+    <string name="cd_duration_mins">Mins</string>
     <string name="cd_language">Language:</string>
     <string name="cd_lang_E">E</string>
     <string name="cd_lang_M">M</string>
     <string name="cd_lang_H">H</string>
     <string name="cd_lang_G">G</string>
     <string name="cd_frequent_caller">Frequent Caller?</string>
-    <string name="cd_plan">Plan</string>
-    <string name="cd_attempt">Attempt</string>
+    <string name="cd_plan">Plan:</string>
+    <string name="cd_attempt">Attempt:</string>
 
     <!-- Strings related to descriptive caller details -->
     <string name="cd_gist">Gist:</string>
     <string name="cd_feelings">Feelings Addressed:</string>
     <string name="cd_vol_response">Volunteers Response:</string>
-    <string name="cd_call_end">How did the call end?:</string>
+    <string name="cd_call_end">How did the call end?</string>
 
     <!-- Strings related to other caller details -->
     <string name="cd_sam_name">Samaritan Name:</string>
-    <string name="cd_alt_sam_name">Alternative Name:</string>
+    <string name="cd_pseudo_name">Pseudo Name:</string>
+    <string name="cd_default_blank">Blank if not applicable</string>
     <string name="cd_sam_leader">Leader Name:</string>
     <string name="cd_sam_leader_msg">Special Message from Leader:</string>
     <string name="cd_self_assessment">Self Assessment:</string>

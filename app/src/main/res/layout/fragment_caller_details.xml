@@ -43,7 +43,7 @@
                     android:id="@+id/cd_date_tv"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/small_font"
                     android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_date"/>
@@ -51,7 +51,7 @@
                     android:id="@+id/cd_date_val"
                     android:layout_width="wrap_content"
                     android:layout_weight="2"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/small_font"
                     android:textColor="@color/colorPrimaryDark"
                     android:layout_height="wrap_content"
                     />
@@ -66,7 +66,7 @@
                     android:id="@+id/cd_time"
                     android:layout_width="0dp"
                     android:layout_weight="2"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/small_font"
                     android:labelFor="@id/cd_time_hours"
                     android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
@@ -76,12 +76,14 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:inputType="number"
+                    android:maxLength="2"
+                    android:textSize="@dimen/small_font"
                     android:layout_height="wrap_content" />
                 <TextView
                     android:id="@+id/cd_time_colon"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
                     android:text="@string/cd_time_colon"
+                    android:textSize="@dimen/small_font"
                     android:labelFor="@id/cd_time_mins"
                     android:layout_height="wrap_content" />
                 <EditText
@@ -89,17 +91,161 @@
                     android:layout_width="0dp"
                     android:inputType="number"
                     android:layout_weight="1"
+                    android:textSize="@dimen/small_font"
+                    android:maxLength="2"
                     android:layout_height="wrap_content" />
                 <Spinner
                     android:id="@+id/spinner_cd_ampm"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:background="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:dropDownWidth="fill_parent"
+                    android:background="@android:drawable/btn_dropdown"
                     android:layout_height="wrap_content"/>
 
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tab_linear_layout_child1_field13"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:padding="@dimen/activity_vertical_margin"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/cd_duration"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/small_font"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cd_duration"/>
+                <EditText
+                    android:id="@+id/cd_duration_hours_val"
+                    android:inputType="text"
+                    android:layout_width="wrap_content"
+                    android:textSize="@dimen/small_font"
+                    android:text="@string/cd_risk_0"
+                    android:maxLength="1"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_height="wrap_content"
+                    />
+                <TextView
+                    android:id="@+id/cd_duration_hours"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_font"
+                    android:labelFor="@id/cd_duration_hours_val"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cd_duration_hours"/>
+                <EditText
+                    android:id="@+id/cd_duration_mins_val"
+                    android:inputType="text"
+                    android:layout_width="wrap_content"
+                    android:maxLength="2"
+                    android:textSize="@dimen/small_font"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_height="wrap_content"
+                    />
+                <TextView
+                    android:id="@+id/cd_duration_mins"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_font"
+                    android:labelFor="@id/cd_duration_mins_val"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cd_duration_mins"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tab_linear_layout_child1_field14"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:padding="@dimen/activity_vertical_margin"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/cd_language"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_font"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cd_language"/>
+                <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:gravity="start"
+                    android:orientation="horizontal">
+                    <RadioButton android:id="@+id/cd_radio_E"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/small_font"
+                        android:text="@string/cd_lang_E"
+                        android:checked="true"
+                        android:onClick="onRadioButtonClickedCD"/>
+                    <RadioButton android:id="@+id/cd_radio_H"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/small_font"
+                        android:text="@string/cd_lang_H"
+                        android:onClick="onRadioButtonClickedCD"/>
+                    <RadioButton android:id="@+id/cd_radio_M"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/small_font"
+                        android:text="@string/cd_lang_M"
+                        android:onClick="onRadioButtonClickedCD"/>
+                    <RadioButton android:id="@+id/cd_radio_G"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/small_font"
+                        android:text="@string/cd_lang_G"
+                        android:onClick="onRadioButtonClickedCD"/>
+                </RadioGroup>
 
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tab_linear_layout_child1_field15"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:padding="@dimen/activity_vertical_margin"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/cd_frequent_caller"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_font"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cd_frequent_caller"/>
+                <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:gravity="start"
+                    android:orientation="horizontal">
+                    <RadioButton android:id="@+id/cd_frequent_caller_Y"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_Y"
+                        android:textSize="@dimen/small_font"
+                        android:checked="true"
+                        android:onClick="onRadioButtonClickedCD"/>
+                    <RadioButton android:id="@+id/cd_frequent_caller_N"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/small_font"
+                        android:text="@string/cd_N"
+                        android:onClick="onRadioButtonClickedCD"/>
+                </RadioGroup>
 
+            </LinearLayout>
             <LinearLayout
                 android:id="@+id/tab_linear_layout_child1_field2"
                 android:layout_width="match_parent"
@@ -110,7 +256,7 @@
                     android:id="@+id/cd_gender_tv"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/small_font"
                     android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_male_female"/>
@@ -126,11 +272,13 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="@string/cd_male"
+                        android:textSize="@dimen/small_font"
                         android:checked="true"
                         android:onClick="onRadioButtonClickedCD"/>
                     <RadioButton android:id="@+id/cd_radio_female"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textSize="@dimen/small_font"
                         android:layout_height="wrap_content"
                         android:text="@string/cd_female"
                         android:onClick="onRadioButtonClickedCD"/>
@@ -146,7 +294,7 @@
                     android:id="@+id/cd_tel_door"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/small_font"
                     android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_tel_door"/>
@@ -162,6 +310,7 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="@string/cd_tel"
+                        android:textSize="@dimen/small_font"
                         android:checked="true"
                         android:onClick="onRadioButtonClickedCD"/>
                     <RadioButton android:id="@+id/cd_radio_door"
@@ -169,6 +318,7 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="@string/cd_door"
+                        android:textSize="@dimen/small_font"
                         android:onClick="onRadioButtonClickedCD"/>
                 </RadioGroup>
 
@@ -183,7 +333,7 @@
                     android:id="@+id/cd_old_new"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/small_font"
                     android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_new_old"/>
@@ -199,6 +349,7 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="@string/cd_old"
+                        android:textSize="@dimen/small_font"
                         android:checked="true"
                         android:onClick="onRadioButtonClickedCD"/>
                     <RadioButton android:id="@+id/cd_radio_new"
@@ -206,6 +357,7 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="@string/cd_new"
+                        android:textSize="@dimen/small_font"
                         android:onClick="onRadioButtonClickedCD"/>
                 </RadioGroup>
 
@@ -220,7 +372,7 @@
                     android:id="@+id/cd_suicide_qn"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/small_font"
                     android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_suicide_qn"/>
@@ -236,12 +388,14 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="@string/cd_Y"
+                        android:textSize="@dimen/small_font"
                         android:checked="true"
                         android:onClick="onRadioButtonClickedCD"/>
                     <RadioButton android:id="@+id/cd_radio_suicide_N"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/small_font"
                         android:text="@string/cd_N"
                         android:onClick="onRadioButtonClickedCD"/>
                 </RadioGroup>
@@ -257,7 +411,7 @@
                     android:id="@+id/cd_risk_level"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/small_font"
                     android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_risk_level"/>
@@ -273,6 +427,7 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="@string/cd_risk_0"
+                        android:textSize="@dimen/small_font"
                         android:checked="true"
                         android:onClick="onRadioButtonClickedCD"/>
                     <RadioButton android:id="@+id/cd_radio_risk1"
@@ -280,74 +435,363 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="@string/cd_risk_1"
+                        android:textSize="@dimen/small_font"
                         android:onClick="onRadioButtonClickedCD"/>
                     <RadioButton android:id="@+id/cd_radio_risk2"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="@string/cd_risk_2"
+                        android:textSize="@dimen/small_font"
                         android:onClick="onRadioButtonClickedCD"/>
                     <RadioButton android:id="@+id/cd_radio_risk3"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="@string/cd_risk_3"
+                        android:textSize="@dimen/small_font"
                         android:onClick="onRadioButtonClickedCD"/>
                 </RadioGroup>
 
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/tab_linear_layout_child1_field7"
+                android:id="@+id/tab_linear_layout_child1_field9"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:padding="@dimen/activity_vertical_margin"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/cd_problem_nature"
+                    android:id="@+id/cd_name"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/small_font"
+                    android:labelFor="@id/cd_name_val"
                     android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
-                    android:text="@string/cd_nature_problem"/>
-                <Spinner
-                    android:id="@+id/spinner_cd_problem_nature_val"
+                    android:text="@string/cd_caller_name"/>
+                <EditText
+                    android:id="@+id/cd_name_val"
+                    android:inputType="text"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/small_font"
+                    android:hint="@string/cd_default_blank"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tab_linear_layout_child1_field10"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:padding="@dimen/activity_vertical_margin"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/cd_age"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content">
-
-                </Spinner>
+                    android:textSize="@dimen/small_font"
+                    android:labelFor="@id/cd_age_val"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cd_caller_age"/>
+                <EditText
+                    android:id="@+id/cd_age_val"
+                    android:inputType="text"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/small_font"
+                    android:hint="@string/cd_default_blank"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_height="wrap_content"
+                    />
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tab_linear_layout_child1_field11"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:padding="@dimen/activity_vertical_margin"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/cd_plan"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_font"
+                    android:labelFor="@id/cd_plan_val"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cd_plan"/>
+                <EditText
+                    android:id="@+id/cd_plan_val"
+                    android:inputType="text"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/small_font"
+                    android:hint="@string/cd_default_blank"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tab_linear_layout_child1_field12"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:padding="@dimen/activity_vertical_margin"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/cd_attempt"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_font"
+                    android:labelFor="@id/cd_attempt_val"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cd_attempt"/>
+                <EditText
+                    android:id="@+id/cd_attempt_val"
+                    android:inputType="text"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:textSize="@dimen/small_font"
+                    android:hint="@string/cd_default_blank"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tab_linear_layout_child1_field16"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:padding="@dimen/activity_vertical_margin"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/cd_support"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_font"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cd_caller_support"/>
+                <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:gravity="start"
+                    android:orientation="horizontal">
+                    <RadioButton android:id="@+id/cd_radio_support_F"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_support_F"
+                        android:textSize="@dimen/small_font"
+                        android:checked="true"
+                        android:onClick="onRadioButtonClickedCD"/>
+                    <RadioButton android:id="@+id/cd_radio_support_A"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_support_A"
+                        android:textSize="@dimen/small_font"
+                        android:onClick="onRadioButtonClickedCD"/>
+                    <RadioButton android:id="@+id/cd_radio_support_H"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_support_H"
+                        android:textSize="@dimen/small_font"
+                        android:onClick="onRadioButtonClickedCD"/>
+                    <RadioButton android:id="@+id/cd_radio_support_PG"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_support_PG"
+                        android:textSize="@dimen/small_font"
+                        android:onClick="onRadioButtonClickedCD"/>
+                </RadioGroup>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tab_linear_layout_child1_field17"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:padding="@dimen/activity_vertical_margin"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/cd_occupation"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_font"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cd_caller_occupation"/>
+                <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:gravity="start"
+                    android:orientation="horizontal">
+                    <RadioButton android:id="@+id/cd_radio_occupation_E"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_occupation_E"
+                        android:textSize="@dimen/small_font"
+                        android:checked="true"
+                        android:onClick="onRadioButtonClickedCD"/>
+                    <RadioButton android:id="@+id/cd_radio_occupation_UE"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_occupation_UE"
+                        android:textSize="@dimen/small_font"
+                        android:onClick="onRadioButtonClickedCD"/>
+                    <RadioButton android:id="@+id/cd_radio_occupation_B"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_occupation_B"
+                        android:textSize="@dimen/small_font"
+                        android:onClick="onRadioButtonClickedCD"/>
+                    <RadioButton android:id="@+id/cd_radio_occupation_S"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_occupation_S"
+                        android:textSize="@dimen/small_font"
+                        android:onClick="onRadioButtonClickedCD"/>
+                    <RadioButton android:id="@+id/cd_radio_occupation_W"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_occupation_W"
+                        android:textSize="@dimen/small_font"
+                        android:onClick="onRadioButtonClickedCD"/>
+                </RadioGroup>
+
+            </LinearLayout>
+
         </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/tab_linear_layout_child2"
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
-
+                android:orientation="vertical"
                 android:padding="@dimen/activity_vertical_margin"
                 android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/cd_gist_tv"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:labelFor="@id/cd_gist_et"
-                    android:textSize="20sp"
-                    android:text="@string/cd_gist"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:id="@+id/tab_linear_layout_child2_field1"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/cd_gist_tv"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:labelFor="@id/cd_gist_et"
+                        android:textSize="@dimen/small_font"
+                        android:text="@string/cd_gist"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_height="wrap_content" />
 
-                <EditText
-                    android:id="@+id/cd_gist_et"
-                    android:inputType="textMultiLine"
-                    android:layout_weight="3"
-                    android:layout_width="0dp"
-                    android:layout_height="100dp"
-                    android:gravity="top"
-                    android:background="@drawable/edit_text_style"
-                    android:textSize="20sp"
-                    android:textColor="@color/colorPrimaryDark"
+                    <EditText
+                        android:id="@+id/cd_gist_et"
+                        android:inputType="textMultiLine"
+                        android:layout_weight="3"
+                        android:layout_width="0dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_height="100dp"
+                        android:gravity="top"
+                        android:background="@drawable/edit_text_style"
+                        android:textSize="@dimen/small_font"
+                        android:textColor="@color/colorPrimaryDark"
                      />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/tab_linear_layout_child2_field2"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/cd_feelings_addressed"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:labelFor="@id/cd_feelings_addressed_et"
+                        android:textSize="@dimen/small_font"
+                        android:text="@string/cd_feelings"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/cd_feelings_addressed_et"
+                        android:inputType="textMultiLine"
+                        android:layout_weight="3"
+                        android:layout_width="0dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_height="100dp"
+                        android:gravity="top"
+                        android:background="@drawable/edit_text_style"
+                        android:textSize="@dimen/small_font"
+                        android:textColor="@color/colorPrimaryDark"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/tab_linear_layout_child2_field3"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/cd_volunteers_response"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:labelFor="@id/cd_volunteers_response_et"
+                        android:textSize="@dimen/small_font"
+                        android:text="@string/cd_vol_response"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/cd_volunteers_response_et"
+                        android:inputType="textMultiLine"
+                        android:layout_weight="3"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:layout_marginStart="10dp"
+                        android:gravity="top"
+                        android:background="@drawable/edit_text_style"
+                        android:textSize="@dimen/small_font"
+                        android:textColor="@color/colorPrimaryDark"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/tab_linear_layout_child2_field4"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/cd_call_end"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:labelFor="@id/cd_call_end_et"
+                        android:textSize="@dimen/small_font"
+                        android:text="@string/cd_call_end"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/cd_call_end_et"
+                        android:inputType="textMultiLine"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="3"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:gravity="top"
+                        android:background="@drawable/edit_text_style"
+                        android:textSize="@dimen/small_font"
+                        android:textColor="@color/colorPrimaryDark"
+                        />
+                </LinearLayout>
+
 
             </LinearLayout>
 
@@ -356,26 +800,213 @@
                 android:id="@+id/tab_linear_layout_child3"
                 android:layout_width="match_parent"
                 android:padding="@dimen/activity_vertical_margin"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/tab_linear_layout_child3_field1"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/sams_name_tv"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/small_font"
+                        android:text="@string/cd_sam_name"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/sams_name_tv"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:text="@string/cd_sam_name"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/sams_name_tv_val"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:textSize="@dimen/small_font"
+                        android:text="@string/na"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/tab_linear_layout_child3_field2"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/sams_pseudo_name"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/small_font"
+                        android:labelFor="@id/sams_pseudo_name_val"
+                        android:text="@string/cd_pseudo_name"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_height="wrap_content" />
 
-                <TextView
-                    android:id="@+id/sams_name_tv_val"
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:textSize="20sp"
-                    android:text="@string/na"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:layout_height="wrap_content" />
+                    <EditText
+                        android:id="@+id/sams_pseudo_name_val"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:textSize="@dimen/small_font"
+                        android:inputType="text"
+                        android:hint="@string/cd_default_blank"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/tab_linear_layout_child3_field3"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/cd_problem_nature"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/small_font"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_nature_problem"/>
+                    <Spinner
+                        android:id="@+id/spinner_cd_problem_nature_val"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:dropDownWidth="fill_parent"
+                        android:background="@android:drawable/btn_dropdown"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/tab_linear_layout_child3_field6"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/cd_self_assessment"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/small_font"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_self_assessment"/>
+                    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_marginStart="@dimen/activity_horizontal_margin"
+                        android:gravity="start"
+                        android:orientation="vertical">
+                        <RadioButton android:id="@+id/cd_radio_stood_by"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cd_assess_stood"
+                            android:textSize="@dimen/small_font"
+                            android:checked="true"
+                            android:onClick="onRadioButtonClickedCD"/>
+                        <RadioButton android:id="@+id/cd_radio_lead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cd_assess_lead"
+                            android:textSize="@dimen/small_font"
+                            android:onClick="onRadioButtonClickedCD"/>
+                        <RadioButton android:id="@+id/cd_radio_pushed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cd_assess_pushed"
+                            android:textSize="@dimen/small_font"
+                            android:onClick="onRadioButtonClickedCD"/>
+
+                    </RadioGroup>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/tab_linear_layout_child3_field7"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/cd_PU_referred"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/small_font"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cd_refer_PU"/>
+                    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_marginStart="@dimen/activity_horizontal_margin"
+                        android:gravity="start"
+                        android:orientation="horizontal">
+                        <RadioButton android:id="@+id/cd_radio_PU_Y"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cd_Y"
+                            android:textSize="@dimen/small_font"
+                            android:checked="true"
+                            android:onClick="onRadioButtonClickedCD"/>
+                        <RadioButton android:id="@+id/cd_radio_PU_N"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cd_N"
+                            android:textSize="@dimen/small_font"
+                            android:onClick="onRadioButtonClickedCD"/>
+
+
+                    </RadioGroup>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/tab_linear_layout_child3_field4"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/sams_leader_name"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/small_font"
+                        android:labelFor="@id/sams_leader_name_val"
+                        android:text="@string/cd_sam_leader"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/sams_leader_name_val"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:textSize="@dimen/small_font"
+                        android:inputType="text"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/tab_linear_layout_child3_field5"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/sams_leader_msg"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/small_font"
+                        android:labelFor="@id/sams_leader_msg_val"
+                        android:text="@string/cd_sam_leader_msg"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_height="wrap_content" />
+
+                    <EditText
+                        android:id="@+id/sams_leader_msg_val"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:textSize="@dimen/small_font"
+                        android:inputType="textMultiLine"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_height="100dp"
+                        android:gravity="top"
+                        android:background="@drawable/edit_text_style"
+                        />
+                </LinearLayout>
+
             </LinearLayout>
     </LinearLayout>
     </ScrollView>
