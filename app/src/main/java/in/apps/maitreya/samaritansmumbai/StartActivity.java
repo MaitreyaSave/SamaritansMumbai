@@ -102,6 +102,23 @@ public class StartActivity extends AppCompatActivity {
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
                 final SharedPreferences.Editor editor = pref.edit();
                 String user_uid = currentUser.getUid();
+                //
+                DatabaseReference ref_parent = FirebaseDatabase.getInstance().getReference();
+                ref_parent.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        int count= Integer.parseInt(snapshot.child("count").getValue().toString());
+                        editor.putInt("count", count); // Storing string
+                        editor.apply();
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                //
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users/"+user_uid+"/");
                 ref.addValueEventListener(new ValueEventListener() {
                     @Override

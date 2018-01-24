@@ -89,7 +89,7 @@ public class LogEntryActivity extends AppCompatActivity {
     private String frequent_caller;
     private String plan;
     private String attempt;
-    public static  int cnt = 0;
+    public static  int cnt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +119,8 @@ public class LogEntryActivity extends AppCompatActivity {
             sams_name = firebaseUser.getDisplayName();
         }
         //
+        //Shared preferences
+        pref = getSharedPreferences("MyPref", 0); // 0 - for private mode
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.submit_caller_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -155,6 +157,7 @@ public class LogEntryActivity extends AppCompatActivity {
                             gist = gist_et.getText().toString();
 
                         }
+                        cnt = pref.getInt("count",0);
                         cnt++;
                         //
                         //Firebase Database
@@ -174,7 +177,7 @@ public class LogEntryActivity extends AppCompatActivity {
                                 ref_count.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
-                                        cnt = Integer.parseInt(dataSnapshot.getValue().toString());
+
                                         Log.d(TAG,"server cnt "+cnt);
                                     }
 
@@ -199,8 +202,7 @@ public class LogEntryActivity extends AppCompatActivity {
                 alertDialog.show();
             }
         });
-        //Shared preferences
-        pref = getSharedPreferences("MyPref", 0); // 0 - for private mode
+
     }
 
 
