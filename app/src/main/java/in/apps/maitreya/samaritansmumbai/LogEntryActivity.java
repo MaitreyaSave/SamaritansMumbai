@@ -62,31 +62,31 @@ public class LogEntryActivity extends AppCompatActivity {
     private static final String TAG = LogEntryActivity.class.getName();
     private static String timestamp,sams_name;
     private String gist;
-    private String gender;
+    private String gender="Male";
     private String tel_door;
-    private String new_old;
-    private String suicide_qn;
-    private String risk_level;
+    private String new_old="Old";
+    private String suicide_qn="Yes";
+    private String risk_level="0";
     private static String problem_nature;
-    private String support;
-    private String occupation;
-    private String self_assessment;
-    private String age;
-    private String PU_referred;
+    private String support="F";
+    private String occupation="E";
+    private String self_assessment="Stood By";
+    private String PU_referred="Yes";
     private String leader_name;
     private String pseudo_name;
     private String leader_spl_msg;
     private String name;
-    private String agePU_referred;
+    private String age;
     private String feelings_addressed;
     private String volunteers_response;
     private String call_end;
     private String hours;
     private String mins;
     private static String ampm;
-    private String duration;
-    private String language;
-    private String frequent_caller;
+    private String duration_hours;
+    private String duration_mins;
+    private String language = "E";
+    private String frequent_caller ="Yes";
     private String plan;
     private String attempt;
     public static  int cnt;
@@ -142,21 +142,91 @@ public class LogEntryActivity extends AppCompatActivity {
 
                         //Get values
                         //
+                        EditText name_et = (EditText) findViewById(R.id.cd_name_val);
+                        EditText age_et = (EditText) findViewById(R.id.cd_age_val);
+                        EditText time_hours_et =(EditText) findViewById(R.id.cd_time_hours);
+                        EditText time_mins_et = (EditText) findViewById(R.id.cd_time_mins);
+                        EditText duration_hours_et =(EditText) findViewById(R.id.cd_duration_hours_val);
+                        EditText duration_mins_et = (EditText) findViewById(R.id.cd_duration_mins_val);
+                        EditText plan_et = (EditText) findViewById(R.id.cd_plan_val);
+                        EditText attempt_et = (EditText) findViewById(R.id.cd_attempt_val);
+                        //
                         EditText gist_et = (EditText) findViewById(R.id.cd_gist_et);
+                        EditText feelings_et = (EditText) findViewById(R.id.cd_feelings_addressed_et);
+                        EditText volunteers_response_et = (EditText) findViewById(R.id.cd_volunteers_response_et);
+                        EditText call_end_et = (EditText) findViewById(R.id.cd_call_end_et);
+                        //
+                        EditText sams_leader_name_et = (EditText) findViewById(R.id.sams_leader_name_val);
+                        EditText leader_msg_et = (EditText) findViewById(R.id.sams_leader_msg_val);
+                        EditText pseudo_name_et = (EditText) findViewById(R.id.sams_pseudo_name_val);
+                        //
+                        //1st tab
+                        if( TextUtils.isEmpty(name_et.getText())){
+                            name="N/A";
+                        }else{
+                            name = name_et.getText().toString();
+                        }
+                        if( TextUtils.isEmpty(age_et.getText())){
+                            age="N/A";
+                        }else{
+                            age = age_et.getText().toString();
+                        }
+                        hours = time_hours_et.getText().toString();
+                        mins = time_mins_et.getText().toString();
+                        duration_hours = duration_hours_et.getText().toString();
+                        duration_mins = duration_mins_et.getText().toString();
+                        if( TextUtils.isEmpty(plan_et.getText())){
+                            plan="N/A";
+                        }else{
+                            plan = plan_et.getText().toString();
+                        }
+                        if( TextUtils.isEmpty(attempt_et.getText())){
+                            attempt="N/A";
+                        }else{
+                            attempt = attempt_et.getText().toString();
+                        }
+
+                        //
+                        //2nd tab
                         if( TextUtils.isEmpty(gist_et.getText())){
-
-                            TabLayout.Tab tab=tabLayout.getTabAt(1);
-                            if (tab != null) {
-                                tab.select();
-                            }
-                            gist_et.setHint(getResources().getString( R.string.error_field_required));
-                            gist_et.setBackground(getResources().getDrawable(R.drawable.edit_text_error_style));
-                            return;
-
+                            gist="N/A";
                         }else{
                             gist = gist_et.getText().toString();
-
                         }
+                        if( TextUtils.isEmpty(feelings_et.getText())){
+                            feelings_addressed="N/A";
+                        }else{
+                            feelings_addressed = feelings_et.getText().toString();
+                        }
+                        if( TextUtils.isEmpty(volunteers_response_et.getText())){
+                            volunteers_response="N/A";
+                        }else{
+                            volunteers_response = volunteers_response_et.getText().toString();
+                        }
+                        if( TextUtils.isEmpty(call_end_et.getText())){
+                            call_end="N/A";
+                        }else{
+                            call_end = call_end_et.getText().toString();
+                        }
+                        //
+                        //3rd tab
+                        if( TextUtils.isEmpty(sams_leader_name_et.getText())){
+                            leader_name="N/A";
+                        }else{
+                            leader_name = sams_leader_name_et.getText().toString();
+                        }
+                        Log.d(TAG,"leaderm "+sams_leader_name_et.getText());
+                        if( TextUtils.isEmpty(leader_msg_et.getText())){
+                            leader_spl_msg="N/A";
+                        }else{
+                            leader_spl_msg = leader_msg_et.getText().toString();
+                        }
+                        if( TextUtils.isEmpty(pseudo_name_et.getText())){
+                            pseudo_name="N/A";
+                        }else{
+                            pseudo_name = pseudo_name_et.getText().toString();
+                        }
+                        //
                         cnt = pref.getInt("count",0);
                         cnt++;
                         //
@@ -164,10 +234,10 @@ public class LogEntryActivity extends AppCompatActivity {
                         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("log");
                         //LogEntry logEntry = new LogEntry(cnt,timestamp,gist,sams_name,);
                         String time = hours+":"+mins+" "+ampm;
+                        String duration = duration_hours+" hours "+duration_mins+" mins";
                         LogEntry logEntry = new  LogEntry(cnt,timestamp,gist,sams_name,gender,tel_door,new_old,suicide_qn,risk_level,problem_nature,leader_name,pseudo_name,leader_spl_msg,name,age,support,occupation,self_assessment,PU_referred,feelings_addressed,volunteers_response,call_end,time,duration,language,frequent_caller,plan,attempt);
                         final String child_sr_no = String.valueOf(cnt);
                         ref.child(child_sr_no).setValue(logEntry);
-                        Log.d(TAG,"cnt "+child_sr_no);
 
                         ref.addValueEventListener(new ValueEventListener() {
                             @Override
@@ -407,6 +477,94 @@ public class LogEntryActivity extends AppCompatActivity {
             case R.id.cd_radio_tel:
                 if (checked)
                     tel_door = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_suicide_Y:
+                if (checked)
+                    suicide_qn = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_suicide_N:
+                if (checked)
+                    suicide_qn = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_new:
+                if (checked)
+                    new_old = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_old:
+                if (checked)
+                    new_old = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_risk0:
+                if (checked)
+                    risk_level = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_risk1:
+                if (checked)
+                    risk_level = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_risk2:
+                if (checked)
+                    risk_level = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_risk3:
+                if (checked)
+                    risk_level = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_support_A:
+                if (checked)
+                    support = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_support_F:
+                if (checked)
+                    support = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_support_H:
+                if (checked)
+                    support = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_support_PG:
+                if (checked)
+                    support = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_occupation_B:
+                if (checked)
+                    occupation = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_occupation_E:
+                if (checked)
+                    occupation = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_occupation_S:
+                if (checked)
+                    occupation = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_occupation_UE:
+                if (checked)
+                    occupation = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_occupation_W:
+                if (checked)
+                    occupation = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_stood_by:
+                if (checked)
+                    self_assessment = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_lead:
+                if (checked)
+                    self_assessment = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_pushed:
+                if (checked)
+                    self_assessment = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_PU_Y:
+                if (checked)
+                    PU_referred = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_PU_N:
+                if (checked)
+                    PU_referred = ((RadioButton) view).getText().toString();
                 break;
 
         }

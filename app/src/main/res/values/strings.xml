@@ -115,6 +115,7 @@
     </string-array>
     <string name="cd_duration">Duration:</string>
     <string name="cd_duration_hours">Hours</string>
+    <string name="double_zero">00</string>
     <string name="cd_duration_mins">Mins</string>
     <string name="cd_language">Language:</string>
     <string name="cd_lang_E">E</string>
