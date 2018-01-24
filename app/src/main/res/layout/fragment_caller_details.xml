@@ -4,7 +4,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="in.apps.maitreya.samaritansmumbai.CallerDetailsActivity$PlaceholderFragment">
+    tools:context="in.apps.maitreya.samaritansmumbai.LogEntryActivity$PlaceholderFragment">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
                 <TextView
                     android:id="@+id/cd_date_val"
                     android:layout_width="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
                     android:textSize="@dimen/small_font"
                     android:textColor="@color/colorPrimaryDark"
                     android:layout_height="wrap_content"
@@ -172,7 +172,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:gravity="start"
                     android:orientation="horizontal">
                     <RadioButton android:id="@+id/cd_radio_E"
@@ -225,7 +224,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:gravity="start"
                     android:orientation="horizontal">
                     <RadioButton android:id="@+id/cd_frequent_caller_Y"
@@ -264,7 +262,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:gravity="start"
                     android:orientation="horizontal">
                     <RadioButton android:id="@+id/cd_radio_male"
@@ -303,7 +300,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:gravity="start"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:orientation="horizontal">
                     <RadioButton android:id="@+id/cd_radio_tel"
                         android:layout_width="0dp"
@@ -341,7 +337,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:gravity="start"
                     android:orientation="horizontal">
                     <RadioButton android:id="@+id/cd_radio_old"
@@ -380,7 +375,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:gravity="start"
                     android:orientation="horizontal">
                     <RadioButton android:id="@+id/cd_radio_suicide_Y"
@@ -419,7 +413,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:gravity="start"
                     android:orientation="horizontal">
                     <RadioButton android:id="@+id/cd_radio_risk0"
@@ -576,7 +569,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:gravity="start"
                     android:orientation="horizontal">
                     <RadioButton android:id="@+id/cd_radio_support_F"
@@ -614,23 +606,22 @@
             <LinearLayout
                 android:id="@+id/tab_linear_layout_child1_field17"
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:padding="@dimen/activity_vertical_margin"
                 android:layout_height="wrap_content">
                 <TextView
                     android:id="@+id/cd_occupation"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
                     android:textSize="@dimen/small_font"
                     android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_caller_occupation"/>
                 <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:gravity="start"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:orientation="horizontal">
                     <RadioButton android:id="@+id/cd_radio_occupation_E"
                         android:layout_width="wrap_content"
@@ -638,30 +629,35 @@
                         android:text="@string/cd_occupation_E"
                         android:textSize="@dimen/small_font"
                         android:checked="true"
+                        android:padding="5dp"
                         android:onClick="onRadioButtonClickedCD"/>
                     <RadioButton android:id="@+id/cd_radio_occupation_UE"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/cd_occupation_UE"
                         android:textSize="@dimen/small_font"
+                        android:padding="5dp"
                         android:onClick="onRadioButtonClickedCD"/>
                     <RadioButton android:id="@+id/cd_radio_occupation_B"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/cd_occupation_B"
                         android:textSize="@dimen/small_font"
+                        android:padding="5dp"
                         android:onClick="onRadioButtonClickedCD"/>
                     <RadioButton android:id="@+id/cd_radio_occupation_S"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/cd_occupation_S"
                         android:textSize="@dimen/small_font"
+                        android:padding="5dp"
                         android:onClick="onRadioButtonClickedCD"/>
                     <RadioButton android:id="@+id/cd_radio_occupation_W"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/cd_occupation_W"
                         android:textSize="@dimen/small_font"
+                        android:padding="5dp"
                         android:onClick="onRadioButtonClickedCD"/>
                 </RadioGroup>
 
@@ -669,13 +665,13 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/tab_linear_layout_child2"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/activity_vertical_margin"
+            android:layout_height="wrap_content">
             <LinearLayout
-                android:id="@+id/tab_linear_layout_child2"
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:padding="@dimen/activity_vertical_margin"
-                android:layout_height="wrap_content">
-                <LinearLayout
                     android:id="@+id/tab_linear_layout_child2_field1"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
@@ -693,9 +689,10 @@
 
                     <EditText
                         android:id="@+id/cd_gist_et"
-                        android:inputType="textMultiLine"
+                        android:inputType="textMultiLine|textCapSentences"
                         android:layout_weight="3"
                         android:layout_width="0dp"
+                        android:padding="10dp"
                         android:layout_marginStart="10dp"
                         android:layout_height="100dp"
                         android:gravity="top"
@@ -704,7 +701,7 @@
                         android:textColor="@color/colorPrimaryDark"
                      />
                 </LinearLayout>
-                <LinearLayout
+            <LinearLayout
                     android:id="@+id/tab_linear_layout_child2_field2"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
@@ -722,7 +719,8 @@
 
                     <EditText
                         android:id="@+id/cd_feelings_addressed_et"
-                        android:inputType="textMultiLine"
+                        android:inputType="textMultiLine|textCapSentences"
+                        android:padding="10dp"
                         android:layout_weight="3"
                         android:layout_width="0dp"
                         android:layout_marginStart="10dp"
@@ -733,7 +731,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         />
                 </LinearLayout>
-                <LinearLayout
+            <LinearLayout
                     android:id="@+id/tab_linear_layout_child2_field3"
                     android:layout_width="match_parent"
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
@@ -751,7 +749,8 @@
 
                     <EditText
                         android:id="@+id/cd_volunteers_response_et"
-                        android:inputType="textMultiLine"
+                        android:inputType="textMultiLine|textCapSentences"
+                        android:padding="10dp"
                         android:layout_weight="3"
                         android:layout_width="0dp"
                         android:layout_height="100dp"
@@ -762,7 +761,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         />
                 </LinearLayout>
-                <LinearLayout
+            <LinearLayout
                     android:id="@+id/tab_linear_layout_child2_field4"
                     android:layout_width="match_parent"
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
@@ -780,7 +779,8 @@
 
                     <EditText
                         android:id="@+id/cd_call_end_et"
-                        android:inputType="textMultiLine"
+                        android:inputType="textMultiLine|textCapSentences"
+                        android:padding="10dp"
                         android:layout_marginStart="10dp"
                         android:layout_weight="3"
                         android:layout_width="0dp"
@@ -793,16 +793,16 @@
                 </LinearLayout>
 
 
-            </LinearLayout>
+        </LinearLayout>
 
 
+        <LinearLayout
+            android:id="@+id/tab_linear_layout_child3"
+            android:layout_width="match_parent"
+            android:padding="@dimen/activity_vertical_margin"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
             <LinearLayout
-                android:id="@+id/tab_linear_layout_child3"
-                android:layout_width="match_parent"
-                android:padding="@dimen/activity_vertical_margin"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
-                <LinearLayout
                     android:id="@+id/tab_linear_layout_child3_field1"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
@@ -825,7 +825,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
-                <LinearLayout
+            <LinearLayout
                     android:id="@+id/tab_linear_layout_child3_field2"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
@@ -850,7 +850,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
-                <LinearLayout
+            <LinearLayout
                     android:id="@+id/tab_linear_layout_child3_field3"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
@@ -872,7 +872,7 @@
                         android:layout_height="wrap_content"/>
 
                 </LinearLayout>
-                <LinearLayout
+            <LinearLayout
                     android:id="@+id/tab_linear_layout_child3_field6"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
@@ -889,7 +889,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-                        android:layout_marginStart="@dimen/activity_horizontal_margin"
                         android:gravity="start"
                         android:orientation="vertical">
                         <RadioButton android:id="@+id/cd_radio_stood_by"
@@ -915,7 +914,7 @@
                     </RadioGroup>
 
                 </LinearLayout>
-                <LinearLayout
+            <LinearLayout
                     android:id="@+id/tab_linear_layout_child3_field7"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
@@ -932,7 +931,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-                        android:layout_marginStart="@dimen/activity_horizontal_margin"
                         android:gravity="start"
                         android:orientation="horizontal">
                         <RadioButton android:id="@+id/cd_radio_PU_Y"
@@ -955,7 +953,7 @@
                     </RadioGroup>
 
                 </LinearLayout>
-                <LinearLayout
+            <LinearLayout
                     android:id="@+id/tab_linear_layout_child3_field4"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
@@ -979,7 +977,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
-                <LinearLayout
+            <LinearLayout
                     android:id="@+id/tab_linear_layout_child3_field5"
                     android:layout_width="match_parent"
                     android:orientation="horizontal"
@@ -999,7 +997,8 @@
                         android:layout_width="0dp"
                         android:layout_weight="2"
                         android:textSize="@dimen/small_font"
-                        android:inputType="textMultiLine"
+                        android:inputType="textMultiLine|textCapSentences"
+                        android:padding="10dp"
                         android:textColor="@color/colorPrimaryDark"
                         android:layout_height="100dp"
                         android:gravity="top"
@@ -1007,7 +1006,15 @@
                         />
                 </LinearLayout>
 
-            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/tab_linear_layout_child4"
+            android:layout_width="match_parent"
+            android:padding="@dimen/activity_vertical_margin"
+            android:orientation="vertical"
+            android:layout_height="80dp">
+
+        </LinearLayout>
     </LinearLayout>
     </ScrollView>
 

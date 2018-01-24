@@ -29,13 +29,16 @@ import static android.content.ContentValues.TAG;
  */
 
 abstract class Functions {
-    static void showGPSDisabledAlertToUser(final Activity a) {
+    static boolean showGPSDisabledAlertToUser(final Activity a) {
+        final boolean[] result = {false};
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(a);
-        alertDialogBuilder.setMessage("GPS is disabled in your device. Would you like to enable it?")
+        alertDialogBuilder.setTitle("Enable GPS?");
+        alertDialogBuilder.setMessage("GPS is disabled in your device. Please turn GPS on in order to create a new log entry.")
                 .setCancelable(false)
                 .setPositiveButton("Open Location Settings",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                result[0] =true;
                                 Intent callGPSSettingIntent = new Intent(
                                         android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                                 a.startActivity(callGPSSettingIntent);
@@ -49,14 +52,18 @@ abstract class Functions {
                 });
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
+        return result[0];
     }
-    static void showNetworkDisabledAlertToUser(final Activity a){
+    static boolean showNetworkDisabledAlertToUser(final Activity a){
+        final boolean[] result = {false};
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(a);
+        alertDialogBuilder.setTitle("Enable Internet?");
         alertDialogBuilder.setMessage("Internet Connection is disabled in your device. Would you like to enable it?")
                 .setCancelable(false)
                 .setPositiveButton("Open Network Settings",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                result[0] =true;
                                 Intent intent=new Intent(Settings.ACTION_DATA_ROAMING_SETTINGS);
                                 a.startActivity(intent);
                             }
@@ -69,6 +76,7 @@ abstract class Functions {
                 });
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
+        return result[0];
     }
     @RequiresApi(api = Build.VERSION_CODES.M)
     static boolean checkPermissions(Activity a, int permissionsRequest, LocationManager locationManager) {
@@ -83,17 +91,17 @@ abstract class Functions {
                     result = true;
 
                 } else {
-                    showGPSDisabledAlertToUser(a);
+                    result = showGPSDisabledAlertToUser(a);
                 }
             }
             else {
-                showNetworkDisabledAlertToUser(a);
+                result = showNetworkDisabledAlertToUser(a);
             }
         }
         return result;
     }
 
-    private static boolean isNetworkAvailable(Activity a) {
+    static boolean isNetworkAvailable(Activity a) {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) a.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();

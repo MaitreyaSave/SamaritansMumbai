@@ -1,22 +1,24 @@
 package in.apps.maitreya.samaritansmumbai;
 
 import android.content.Intent;
+import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
     private Button mButton;
-
+    LocationManager locationManager;
+    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 0;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -47,10 +49,16 @@ public class MainActivity extends AppCompatActivity {
         mButton = (Button) findViewById(R.id.caller_details);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        //
+        //Location manager
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
     }
-    public void showCallerDetails(View v){
-        Intent intent =new Intent(this,CallerDetailsActivity.class);
-        startActivity(intent);
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void addLogEntry(View v){
+        if(Functions.checkPermissions(this,MY_PERMISSIONS_REQUEST_LOCATION,locationManager)) {
+            Intent intent = new Intent(this, LogEntryActivity.class);
+            startActivity(intent);
+        }
     }
 
 }

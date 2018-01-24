@@ -1,21 +1,17 @@
 package in.apps.maitreya.samaritansmumbai;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.telecom.Call;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,16 +35,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
-public class CallerDetailsActivity extends AppCompatActivity {
+public class LogEntryActivity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -66,7 +59,7 @@ public class CallerDetailsActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     //Shared preferences
     private static SharedPreferences pref;
-    private static final String TAG = CallerDetailsActivity.class.getName();
+    private static final String TAG = LogEntryActivity.class.getName();
     private static String timestamp,sams_name;
     private String gist;
     private String gender;
@@ -101,7 +94,7 @@ public class CallerDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_caller_details);
+        setContentView(R.layout.activity_log_entry);
 
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
@@ -131,7 +124,7 @@ public class CallerDetailsActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(CallerDetailsActivity.this);
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(LogEntryActivity.this);
                 alertDialog.setTitle("Submit");
                 alertDialog.setMessage("Do you wish to submit these Caller Details?");
                 alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -149,11 +142,11 @@ public class CallerDetailsActivity extends AppCompatActivity {
                         //
                         EditText gist_et = (EditText) findViewById(R.id.cd_gist_et);
                         if( TextUtils.isEmpty(gist_et.getText())){
-                            /**
-                             *   You can Toast a message here that the Username is Empty
-                             **/
+
                             TabLayout.Tab tab=tabLayout.getTabAt(1);
-                            tab.select();
+                            if (tab != null) {
+                                tab.select();
+                            }
                             gist_et.setHint(getResources().getString( R.string.error_field_required));
                             gist_et.setBackground(getResources().getDrawable(R.drawable.edit_text_error_style));
                             return;
@@ -199,7 +192,7 @@ public class CallerDetailsActivity extends AppCompatActivity {
                         });
                         //
                         //
-                        Toast.makeText(CallerDetailsActivity.this, "Caller Details submitted!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LogEntryActivity.this, "Caller Details submitted!", Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 });

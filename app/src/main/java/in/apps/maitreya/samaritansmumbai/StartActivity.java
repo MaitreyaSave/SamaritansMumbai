@@ -38,7 +38,7 @@ import java.util.Locale;
 public class StartActivity extends AppCompatActivity {
 
     //
-    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 0, MY_PERMISSIONS_REQUEST_NETWORK = 1;
+    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 0;
     LocationManager locationManager;
     //
     //
@@ -84,14 +84,14 @@ public class StartActivity extends AppCompatActivity {
                 startActivity(intent);
             }
     }
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         //checkpermissions
-        if(Functions.checkPermissions(this,MY_PERMISSIONS_REQUEST_LOCATION,locationManager)) {
+        //Functions.checkPermissions(this,MY_PERMISSIONS_REQUEST_LOCATION,locationManager)
+        if(Functions.isNetworkAvailable(this)) {
             network_location_access.setVisibility(View.GONE);
             refresh_fab.setVisibility(View.GONE);
             loginButton.setVisibility(View.VISIBLE);
@@ -133,6 +133,7 @@ public class StartActivity extends AppCompatActivity {
                 updateUI(currentUser);
 
             } else {
+                Functions.showNetworkDisabledAlertToUser(this);
                 createUserButton.setVisibility(View.GONE);
                 logoutButton.setVisibility(View.GONE);
             }

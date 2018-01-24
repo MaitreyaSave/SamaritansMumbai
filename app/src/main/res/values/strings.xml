@@ -11,9 +11,7 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="login_main">Log In</string>
-    <!--<string name="permission_rationale">"Contacts permissions are needed for providing username
-        completions."
-    </string> -->
+
     <string name="title_activity_main">MainActivity</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -28,9 +26,7 @@
     <string name="prompt_email">Email</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="create_user">Create User</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+
     <string name="login_proceed">Proceed</string>
     <string name="logout_main">Logout</string>
     <string name="title_activity_create_user">CreateUserActivity</string>
@@ -148,7 +144,7 @@
     <string name="cd_refer_PU">Referred to PU?</string>
 
     <!-- Random Strings -->
-    <string name="network_location_access">Please make sure your GPS and Internet is ON in order to login!</string>
+    <string name="network_location_access">Please make sure your Internet is ON in order to login!</string>
     <string name="na">N/A</string>
     <string name="title_activity_test">TestActivity</string>
 
