@@ -63,7 +63,7 @@ public class LogEntryActivity extends AppCompatActivity {
     private static String timestamp,sams_name;
     private String gist;
     private String gender="Male";
-    private String tel_door;
+    private String tel_door="Tel";
     private String new_old="Old";
     private String suicide_qn="Yes";
     private String risk_level="0";
@@ -72,23 +72,23 @@ public class LogEntryActivity extends AppCompatActivity {
     private String occupation="E";
     private String self_assessment="Stood By";
     private String PU_referred="Yes";
-    private String leader_name;
-    private String pseudo_name;
-    private String leader_spl_msg;
-    private String name;
-    private String age;
+    private static String leader_name;
+    private static String pseudo_name;
+    private static String leader_spl_msg;
+    private static String name;
+    private static String age;
     private String feelings_addressed;
     private String volunteers_response;
     private String call_end;
-    private String hours;
-    private String mins;
+    private static String hours;
+    private static String mins;
     private static String ampm;
-    private String duration_hours;
-    private String duration_mins;
+    private static String duration_hours;
+    private static String duration_mins;
     private String language = "E";
     private String frequent_caller ="Yes";
-    private String plan;
-    private String attempt;
+    private static String plan;
+    private static String attempt;
     public static  int cnt;
 
     @Override
@@ -111,7 +111,18 @@ public class LogEntryActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
         //
-
+        //Re-initialize static edit texts
+        leader_name="N/A";
+        leader_spl_msg="N/A";
+        pseudo_name="N/A";
+        name="N/A";
+        age="N/A";
+        hours="00";
+        mins="00";
+        duration_hours="0";
+        duration_mins="00";
+        plan="N/A";
+        attempt="N/A";
 
         //
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -121,6 +132,7 @@ public class LogEntryActivity extends AppCompatActivity {
         //
         //Shared preferences
         pref = getSharedPreferences("MyPref", 0); // 0 - for private mode
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.submit_caller_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -160,32 +172,33 @@ public class LogEntryActivity extends AppCompatActivity {
                         EditText leader_msg_et = (EditText) findViewById(R.id.sams_leader_msg_val);
                         EditText pseudo_name_et = (EditText) findViewById(R.id.sams_pseudo_name_val);
                         //
-                        //1st tab
-                        if( TextUtils.isEmpty(name_et.getText())){
-                            name="N/A";
-                        }else{
-                            name = name_et.getText().toString();
-                        }
-                        if( TextUtils.isEmpty(age_et.getText())){
-                            age="N/A";
-                        }else{
-                            age = age_et.getText().toString();
-                        }
-                        hours = time_hours_et.getText().toString();
-                        mins = time_mins_et.getText().toString();
-                        duration_hours = duration_hours_et.getText().toString();
-                        duration_mins = duration_mins_et.getText().toString();
-                        if( TextUtils.isEmpty(plan_et.getText())){
-                            plan="N/A";
-                        }else{
-                            plan = plan_et.getText().toString();
-                        }
-                        if( TextUtils.isEmpty(attempt_et.getText())){
-                            attempt="N/A";
-                        }else{
-                            attempt = attempt_et.getText().toString();
-                        }
 
+                        //
+                        //1st tab
+                        if(time_hours_et.hasFocus())
+                            time_hours_et.clearFocus();
+                        if(time_mins_et.hasFocus())
+                            time_mins_et.clearFocus();
+                        if(duration_hours_et.hasFocus())
+                            duration_hours_et.clearFocus();
+                        if(duration_mins_et.hasFocus())
+                            duration_mins_et.clearFocus();
+                        if(plan_et.hasFocus())
+                            plan_et.clearFocus();
+                        if(attempt_et.hasFocus())
+                            attempt_et.clearFocus();
+                        if(age_et.hasFocus())
+                            age_et.clearFocus();
+                        if(name_et.hasFocus())
+                            name_et.clearFocus();
+
+                        //3rd tab
+                        if(sams_leader_name_et.hasFocus())
+                            sams_leader_name_et.clearFocus();
+                        if(pseudo_name_et.hasFocus())
+                            pseudo_name_et.clearFocus();
+                        if(leader_msg_et.hasFocus())
+                            leader_msg_et.clearFocus();
                         //
                         //2nd tab
                         if( TextUtils.isEmpty(gist_et.getText())){
@@ -209,28 +222,13 @@ public class LogEntryActivity extends AppCompatActivity {
                             call_end = call_end_et.getText().toString();
                         }
                         //
-                        //3rd tab
-                        if( TextUtils.isEmpty(sams_leader_name_et.getText())){
-                            leader_name="N/A";
-                        }else{
-                            leader_name = sams_leader_name_et.getText().toString();
-                        }
-                        Log.d(TAG,"leaderm "+sams_leader_name_et.getText());
-                        if( TextUtils.isEmpty(leader_msg_et.getText())){
-                            leader_spl_msg="N/A";
-                        }else{
-                            leader_spl_msg = leader_msg_et.getText().toString();
-                        }
-                        if( TextUtils.isEmpty(pseudo_name_et.getText())){
-                            pseudo_name="N/A";
-                        }else{
-                            pseudo_name = pseudo_name_et.getText().toString();
-                        }
+
                         //
                         cnt = pref.getInt("count",0);
                         cnt++;
                         //
                         //Firebase Database
+                        Log.d(TAG,"temp_et_in");
                         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("log");
                         //LogEntry logEntry = new LogEntry(cnt,timestamp,gist,sams_name,);
                         String time = hours+":"+mins+" "+ampm;
@@ -405,8 +403,117 @@ public class LogEntryActivity extends AppCompatActivity {
                 }
             });
             //
+            //Workaround to solve edit text refresh bug for tab1 and tab3
+            //for tab1
+            final EditText hours_et = (EditText) rootView.findViewById(R.id.cd_time_hours);
+            hours_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean b) {
+                    hours = hours_et.getText().toString();
+                    Log.d(TAG,"temp_et "+hours);
+                }
+            });
+            final EditText mins_et = (EditText) rootView.findViewById(R.id.cd_time_mins);
+            mins_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean b) {
+                    mins = mins_et.getText().toString();
+                }
+            });
+            final EditText hours_duration_et = (EditText) rootView.findViewById(R.id.cd_duration_hours_val);
+            hours_duration_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean b) {
+                    duration_hours= hours_duration_et.getText().toString();
+                }
+            });
+            final EditText mins_duration_et = (EditText) rootView.findViewById(R.id.cd_duration_mins_val);
+            mins_duration_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean b) {
+                    duration_mins= mins_duration_et.getText().toString();
+                }
+            });
+            final EditText name_et = (EditText) rootView.findViewById(R.id.cd_name_val);
+            name_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean b) {
+                    if( TextUtils.isEmpty(name_et.getText())){
+                        name="N/A";
+                    }else{
+                        name = name_et.getText().toString();
+                    }
+                }
+            });
+            final EditText age_et = (EditText) rootView.findViewById(R.id.cd_age_val);
+            age_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean b) {
+                    if( TextUtils.isEmpty(age_et.getText())){
+                        age="N/A";
+                    }else{
+                        age = age_et.getText().toString();
+                    }
+                }
+            });
+            final EditText plan_et = (EditText) rootView.findViewById(R.id.cd_plan_val);
+            plan_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean b) {
+                    if( TextUtils.isEmpty(plan_et.getText())){
+                        plan="N/A";
+                    }else{
+                        plan = plan_et.getText().toString();
+                    }
+                }
+            });
+            final EditText attempt_et = (EditText) rootView.findViewById(R.id.cd_attempt_val);
+            attempt_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean b) {
+                    if( TextUtils.isEmpty(attempt_et.getText())){
+                        attempt="N/A";
+                    }else{
+                        attempt = attempt_et.getText().toString();
+                    }
+                }
+            });
             //
-
+            //for tab3
+            final EditText pseudo_name_et = (EditText) rootView.findViewById(R.id.sams_pseudo_name_val);
+            pseudo_name_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean b) {
+                    if( TextUtils.isEmpty(pseudo_name_et.getText())){
+                        pseudo_name="N/A";
+                    }else{
+                        pseudo_name = pseudo_name_et.getText().toString();
+                    }
+                }
+            });
+            final EditText leader_name_et = (EditText) rootView.findViewById(R.id.sams_leader_name_val);
+            leader_name_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean b) {
+                    if( TextUtils.isEmpty(leader_name_et.getText())){
+                        leader_name="N/A";
+                    }else{
+                        leader_name = leader_name_et.getText().toString();
+                    }
+                }
+            });
+            final EditText leader_msg_et = (EditText) rootView.findViewById(R.id.sams_leader_msg_val);
+            leader_msg_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean b) {
+                    if( TextUtils.isEmpty(leader_msg_et.getText())){
+                        leader_spl_msg="N/A";
+                    }else{
+                        leader_spl_msg = leader_msg_et.getText().toString();
+                    }
+                }
+            });
+            //
             //Use separate logic for each tab
             int tabNumber = getArguments().getInt(ARG_SECTION_NUMBER);
             switch (tabNumber){
@@ -565,6 +672,30 @@ public class LogEntryActivity extends AppCompatActivity {
             case R.id.cd_radio_PU_N:
                 if (checked)
                     PU_referred = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_E:
+                if (checked)
+                    language = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_G:
+                if (checked)
+                    language = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_H:
+                if (checked)
+                    language = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_M:
+                if (checked)
+                    language = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_frequent_caller_Y:
+                if (checked)
+                    frequent_caller = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_frequent_caller_N:
+                if (checked)
+                    frequent_caller = ((RadioButton) view).getText().toString();
                 break;
 
         }
