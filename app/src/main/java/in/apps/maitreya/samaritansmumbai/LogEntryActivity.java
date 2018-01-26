@@ -61,7 +61,7 @@ public class LogEntryActivity extends AppCompatActivity {
     private static SharedPreferences pref;
     private static final String TAG = LogEntryActivity.class.getName();
     private static String timestamp,sams_name;
-    private String gist;
+    private static String gist;
     private String gender="Male";
     private String tel_door="Tel";
     private String new_old="Old";
@@ -77,9 +77,9 @@ public class LogEntryActivity extends AppCompatActivity {
     private static String leader_spl_msg;
     private static String name;
     private static String age;
-    private String feelings_addressed;
-    private String volunteers_response;
-    private String call_end;
+    private static String feelings_addressed;
+    private static String volunteers_response;
+    private static String call_end;
     private static String hours;
     private static String mins;
     private static String ampm;
@@ -90,6 +90,8 @@ public class LogEntryActivity extends AppCompatActivity {
     private static String plan;
     private static String attempt;
     public static  int cnt;
+
+    private static View rView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +125,10 @@ public class LogEntryActivity extends AppCompatActivity {
         duration_mins="00";
         plan="N/A";
         attempt="N/A";
+        gist="N/A";
+        feelings_addressed="N/A";
+        call_end="N/A";
+        volunteers_response="N/A";
 
         //
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -154,23 +160,23 @@ public class LogEntryActivity extends AppCompatActivity {
 
                         //Get values
                         //
-                        EditText name_et = (EditText) findViewById(R.id.cd_name_val);
-                        EditText age_et = (EditText) findViewById(R.id.cd_age_val);
-                        EditText time_hours_et =(EditText) findViewById(R.id.cd_time_hours);
-                        EditText time_mins_et = (EditText) findViewById(R.id.cd_time_mins);
-                        EditText duration_hours_et =(EditText) findViewById(R.id.cd_duration_hours_val);
-                        EditText duration_mins_et = (EditText) findViewById(R.id.cd_duration_mins_val);
-                        EditText plan_et = (EditText) findViewById(R.id.cd_plan_val);
-                        EditText attempt_et = (EditText) findViewById(R.id.cd_attempt_val);
+                        EditText name_et = (EditText) rView.findViewById(R.id.cd_name_val);
+                        EditText age_et = (EditText) rView.findViewById(R.id.cd_age_val);
+                        EditText time_hours_et =(EditText) rView.findViewById(R.id.cd_time_hours);
+                        EditText time_mins_et = (EditText) rView.findViewById(R.id.cd_time_mins);
+                        EditText duration_hours_et =(EditText) rView.findViewById(R.id.cd_duration_hours_val);
+                        EditText duration_mins_et = (EditText) rView.findViewById(R.id.cd_duration_mins_val);
+                        EditText plan_et = (EditText) rView.findViewById(R.id.cd_plan_val);
+                        EditText attempt_et = (EditText) rView.findViewById(R.id.cd_attempt_val);
                         //
-                        EditText gist_et = (EditText) findViewById(R.id.cd_gist_et);
-                        EditText feelings_et = (EditText) findViewById(R.id.cd_feelings_addressed_et);
-                        EditText volunteers_response_et = (EditText) findViewById(R.id.cd_volunteers_response_et);
-                        EditText call_end_et = (EditText) findViewById(R.id.cd_call_end_et);
+                        EditText gist_et = (EditText) rView.findViewById(R.id.cd_gist_et);
+                        EditText feelings_et = (EditText) rView.findViewById(R.id.cd_feelings_addressed_et);
+                        EditText volunteers_response_et = (EditText) rView.findViewById(R.id.cd_volunteers_response_et);
+                        EditText call_end_et = (EditText) rView.findViewById(R.id.cd_call_end_et);
                         //
-                        EditText sams_leader_name_et = (EditText) findViewById(R.id.sams_leader_name_val);
-                        EditText leader_msg_et = (EditText) findViewById(R.id.sams_leader_msg_val);
-                        EditText pseudo_name_et = (EditText) findViewById(R.id.sams_pseudo_name_val);
+                        EditText sams_leader_name_et = (EditText) rView.findViewById(R.id.sams_leader_name_val);
+                        EditText leader_msg_et = (EditText) rView.findViewById(R.id.sams_leader_msg_val);
+                        EditText pseudo_name_et = (EditText) rView.findViewById(R.id.sams_pseudo_name_val);
                         //
 
                         //
@@ -191,44 +197,32 @@ public class LogEntryActivity extends AppCompatActivity {
                             age_et.clearFocus();
                         if(name_et.hasFocus())
                             name_et.clearFocus();
-
+                        //
+                        //2nd tab
+                        if(gist_et.hasFocus())
+                            gist_et.clearFocus();
+                        if(call_end_et.hasFocus())
+                            call_end_et.clearFocus();
+                        if(volunteers_response_et.hasFocus())
+                            volunteers_response_et.clearFocus();
+                        if(feelings_et.hasFocus())
+                            feelings_et.clearFocus();
+                        //
                         //3rd tab
-                        if(sams_leader_name_et.hasFocus())
-                            sams_leader_name_et.clearFocus();
                         if(pseudo_name_et.hasFocus())
                             pseudo_name_et.clearFocus();
+                        if(sams_leader_name_et.hasFocus())
+                            sams_leader_name_et.clearFocus();
                         if(leader_msg_et.hasFocus())
                             leader_msg_et.clearFocus();
                         //
-                        //2nd tab
-                        if( TextUtils.isEmpty(gist_et.getText())){
-                            gist="N/A";
-                        }else{
-                            gist = gist_et.getText().toString();
-                        }
-                        if( TextUtils.isEmpty(feelings_et.getText())){
-                            feelings_addressed="N/A";
-                        }else{
-                            feelings_addressed = feelings_et.getText().toString();
-                        }
-                        if( TextUtils.isEmpty(volunteers_response_et.getText())){
-                            volunteers_response="N/A";
-                        }else{
-                            volunteers_response = volunteers_response_et.getText().toString();
-                        }
-                        if( TextUtils.isEmpty(call_end_et.getText())){
-                            call_end="N/A";
-                        }else{
-                            call_end = call_end_et.getText().toString();
-                        }
-                        //
+                        //Log.d(TAG,"temp_et_in");
 
                         //
                         cnt = pref.getInt("count",0);
                         cnt++;
                         //
                         //Firebase Database
-                        Log.d(TAG,"temp_et_in");
                         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("log");
                         //LogEntry logEntry = new LogEntry(cnt,timestamp,gist,sams_name,);
                         String time = hours+":"+mins+" "+ampm;
@@ -327,7 +321,7 @@ public class LogEntryActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_caller_details, container, false);
-
+            rView =rootView;
             // TextViews and Values
             TextView tv_section_description, tv_cd_date_val, tv_cd_sams_name_val;
 
@@ -373,7 +367,6 @@ public class LogEntryActivity extends AppCompatActivity {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     problem_nature = adapterView.getItemAtPosition(i).toString();
-                    Log.d(TAG,"prob_n "+problem_nature);
                 }
 
                 @Override
@@ -405,12 +398,12 @@ public class LogEntryActivity extends AppCompatActivity {
             //
             //Workaround to solve edit text refresh bug for tab1 and tab3
             //for tab1
+
             final EditText hours_et = (EditText) rootView.findViewById(R.id.cd_time_hours);
             hours_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
                     hours = hours_et.getText().toString();
-                    Log.d(TAG,"temp_et "+hours);
                 }
             });
             final EditText mins_et = (EditText) rootView.findViewById(R.id.cd_time_mins);
@@ -489,6 +482,7 @@ public class LogEntryActivity extends AppCompatActivity {
                     }else{
                         pseudo_name = pseudo_name_et.getText().toString();
                     }
+
                 }
             });
             final EditText leader_name_et = (EditText) rootView.findViewById(R.id.sams_leader_name_val);
@@ -513,7 +507,53 @@ public class LogEntryActivity extends AppCompatActivity {
                     }
                 }
             });
+            //for tab2
+            final EditText gist_et = (EditText) rootView.findViewById(R.id.cd_gist_et);
+            gist_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean b) {
+                    if( TextUtils.isEmpty(gist_et.getText())){
+                        gist="N/A";
+                    }else{
+                        gist = gist_et.getText().toString();
+                    }
+                }
+            });
+            final EditText feelings_addressed_et = (EditText) rootView.findViewById(R.id.cd_feelings_addressed_et);
+            feelings_addressed_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean b) {
+                    if( TextUtils.isEmpty(feelings_addressed_et.getText())){
+                        feelings_addressed="N/A";
+                    }else{
+                        feelings_addressed = feelings_addressed_et.getText().toString();
+                    }
+                }
+            });
+            final EditText volunteers_response_et = (EditText) rootView.findViewById(R.id.cd_volunteers_response_et);
+            volunteers_response_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean b) {
+                    if( TextUtils.isEmpty(volunteers_response_et.getText())){
+                        volunteers_response="N/A";
+                    }else{
+                        volunteers_response = volunteers_response_et.getText().toString();
+                    }
+                }
+            });
+            final EditText call_end_et = (EditText) rootView.findViewById(R.id.cd_call_end_et);
+            call_end_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean b) {
+                    if( TextUtils.isEmpty(call_end_et.getText())){
+                        call_end="N/A";
+                    }else{
+                        call_end = call_end_et.getText().toString();
+                    }
+                }
+            });
             //
+
             //Use separate logic for each tab
             int tabNumber = getArguments().getInt(ARG_SECTION_NUMBER);
             switch (tabNumber){
