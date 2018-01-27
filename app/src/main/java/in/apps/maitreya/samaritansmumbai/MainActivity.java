@@ -16,7 +16,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
-    private Button mButton;
+    private Button addLogButton,viewLogsButton;
     LocationManager locationManager;
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 0;
 
@@ -28,11 +28,13 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_dashboard);
-                    mButton.setVisibility(View.VISIBLE);
+                    addLogButton.setVisibility(View.VISIBLE);
+                    viewLogsButton.setVisibility(View.VISIBLE);
                     return true;
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_notifications);
-                    mButton.setVisibility(View.INVISIBLE);
+                    addLogButton.setVisibility(View.GONE);
+                    viewLogsButton.setVisibility(View.GONE);
                     return true;
             }
             return false;
@@ -46,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mTextMessage = (TextView) findViewById(R.id.message);
-        mButton = (Button) findViewById(R.id.caller_details);
+        addLogButton = (Button) findViewById(R.id.addLog);
+        viewLogsButton = (Button) findViewById(R.id.viewLogs);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         //
@@ -60,5 +63,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-
+    public void viewLogs(View v){
+        Intent intent = new Intent(this,ViewLogsRecyclerActivity.class);
+        startActivity(intent);
+    }
 }

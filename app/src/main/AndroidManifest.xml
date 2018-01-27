@@ -39,6 +39,10 @@
             android:name=".LogEntryActivity"
             android:label="@string/title_activity_caller_details"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ViewLogsRecyclerActivity"
+            android:label="@string/title_activity_view_logs_recycler"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

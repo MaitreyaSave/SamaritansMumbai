@@ -150,7 +150,7 @@ public class StartActivity extends AppCompatActivity {
                 updateUI(currentUser);
 
             } else {
-                Functions.showNetworkDisabledAlertToUser(this);
+                //Functions.showNetworkDisabledAlertToUser(this);
                 createUserButton.setVisibility(View.GONE);
                 logoutButton.setVisibility(View.GONE);
             }

@@ -169,10 +169,10 @@ public class LogEntryActivity extends AppCompatActivity {
                         EditText plan_et = (EditText) rView.findViewById(R.id.cd_plan_val);
                         EditText attempt_et = (EditText) rView.findViewById(R.id.cd_attempt_val);
                         //
-                        EditText gist_et = (EditText) rView.findViewById(R.id.cd_gist_et);
-                        EditText feelings_et = (EditText) rView.findViewById(R.id.cd_feelings_addressed_et);
-                        EditText volunteers_response_et = (EditText) rView.findViewById(R.id.cd_volunteers_response_et);
-                        EditText call_end_et = (EditText) rView.findViewById(R.id.cd_call_end_et);
+                        EditText gist_et = (EditText) findViewById(R.id.cd_gist_et);
+                        EditText feelings_et = (EditText) findViewById(R.id.cd_feelings_addressed_et);
+                        EditText volunteers_response_et = (EditText) findViewById(R.id.cd_volunteers_response_et);
+                        EditText call_end_et = (EditText) findViewById(R.id.cd_call_end_et);
                         //
                         EditText sams_leader_name_et = (EditText) rView.findViewById(R.id.sams_leader_name_val);
                         EditText leader_msg_et = (EditText) rView.findViewById(R.id.sams_leader_msg_val);
