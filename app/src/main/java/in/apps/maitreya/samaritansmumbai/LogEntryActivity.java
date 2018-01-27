@@ -323,14 +323,13 @@ public class LogEntryActivity extends AppCompatActivity {
             View rootView = inflater.inflate(R.layout.fragment_caller_details, container, false);
             rView =rootView;
             // TextViews and Values
-            TextView tv_section_description, tv_cd_date_val, tv_cd_sams_name_val;
+            TextView tv_cd_date_val, tv_cd_sams_name_val;
 
             //Layouts
             LinearLayout tab1,tab2,tab3;
 
             //
-            //Initializes TextViews
-            tv_section_description = (TextView) rootView.findViewById(R.id.section_label);
+
             //
             //Initialize Values
             tv_cd_date_val = (TextView) rootView.findViewById(R.id.cd_date_val);
@@ -558,22 +557,18 @@ public class LogEntryActivity extends AppCompatActivity {
             int tabNumber = getArguments().getInt(ARG_SECTION_NUMBER);
             switch (tabNumber){
                 case 1:
-                    tv_section_description.setText(getString(R.string.tab1_description));
                     tab2.setVisibility(View.GONE);
                     tab3.setVisibility(View.GONE);
                     break;
                 case 2:
-                    tv_section_description.setText(getString(R.string.tab2_description));
                     tab1.setVisibility(View.GONE);
                     tab3.setVisibility(View.GONE);
                     break;
                 case 3:
-                    tv_section_description.setText(getString(R.string.tab3_description));
                     tab1.setVisibility(View.GONE);
                     tab2.setVisibility(View.GONE);
                     break;
                 default:
-                    tv_section_description.setText("");
             }
 
             return rootView;

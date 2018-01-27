@@ -15,18 +15,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
-        <TextView
-            android:id="@+id/section_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/constraintLayout"
-            tools:layout_constraintLeft_creator="1"
-            tools:layout_constraintTop_creator="1" />
 
         <LinearLayout
             android:id="@+id/tab_linear_layout_child1"
@@ -44,7 +32,6 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/small_font"
-                    android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_date"/>
                 <TextView
@@ -52,7 +39,6 @@
                     android:layout_width="wrap_content"
                     android:layout_weight="1"
                     android:textSize="@dimen/small_font"
-                    android:textColor="@color/colorPrimaryDark"
                     android:layout_height="wrap_content"
                     />
             </LinearLayout>
@@ -68,7 +54,6 @@
                     android:layout_weight="2"
                     android:textSize="@dimen/small_font"
                     android:labelFor="@id/cd_time_hours"
-                    android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_time"/>
                 <EditText
@@ -115,7 +100,6 @@
                     android:layout_width="0dp"
                     android:layout_weight="2"
                     android:textSize="@dimen/small_font"
-                    android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_duration"/>
                 <EditText
@@ -125,7 +109,6 @@
                     android:textSize="@dimen/small_font"
                     android:text="@string/cd_risk_0"
                     android:maxLength="1"
-                    android:textColor="@color/colorPrimaryDark"
                     android:layout_height="wrap_content"
                     />
                 <TextView
@@ -134,7 +117,6 @@
                     android:layout_weight="1"
                     android:textSize="@dimen/small_font"
                     android:labelFor="@id/cd_duration_hours_val"
-                    android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_duration_hours"/>
                 <EditText
@@ -144,7 +126,6 @@
                     android:maxLength="2"
                     android:textSize="@dimen/small_font"
                     android:text="@string/double_zero"
-                    android:textColor="@color/colorPrimaryDark"
                     android:layout_height="wrap_content"
                     />
                 <TextView
@@ -153,7 +134,6 @@
                     android:layout_weight="1"
                     android:textSize="@dimen/small_font"
                     android:labelFor="@id/cd_duration_mins_val"
-                    android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_duration_mins"/>
             </LinearLayout>
@@ -168,7 +148,6 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/small_font"
-                    android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_language"/>
                 <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
@@ -220,7 +199,6 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/small_font"
-                    android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_frequent_caller"/>
                 <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
@@ -258,7 +236,6 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/small_font"
-                    android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_male_female"/>
                 <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
@@ -295,7 +272,6 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/small_font"
-                    android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_tel_door"/>
                 <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
@@ -333,7 +309,6 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/small_font"
-                    android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_new_old"/>
                 <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
@@ -371,7 +346,6 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/small_font"
-                    android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_suicide_qn"/>
                 <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
@@ -409,7 +383,6 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/small_font"
-                    android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_risk_level"/>
                 <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
@@ -462,7 +435,6 @@
                     android:layout_weight="1"
                     android:textSize="@dimen/small_font"
                     android:labelFor="@id/cd_name_val"
-                    android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_caller_name"/>
                 <EditText
@@ -472,7 +444,6 @@
                     android:layout_weight="2"
                     android:textSize="@dimen/small_font"
                     android:hint="@string/cd_default_blank"
-                    android:textColor="@color/colorPrimaryDark"
                     android:layout_height="wrap_content"
                     />
             </LinearLayout>
@@ -488,7 +459,6 @@
                     android:layout_weight="1"
                     android:textSize="@dimen/small_font"
                     android:labelFor="@id/cd_age_val"
-                    android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_caller_age"/>
                 <EditText
@@ -498,7 +468,6 @@
                     android:layout_weight="2"
                     android:textSize="@dimen/small_font"
                     android:hint="@string/cd_default_blank"
-                    android:textColor="@color/colorPrimaryDark"
                     android:layout_height="wrap_content"
                     />
             </LinearLayout>
@@ -514,7 +483,6 @@
                     android:layout_weight="1"
                     android:textSize="@dimen/small_font"
                     android:labelFor="@id/cd_plan_val"
-                    android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_plan"/>
                 <EditText
@@ -524,7 +492,6 @@
                     android:layout_weight="2"
                     android:textSize="@dimen/small_font"
                     android:hint="@string/cd_default_blank"
-                    android:textColor="@color/colorPrimaryDark"
                     android:layout_height="wrap_content"
                     />
             </LinearLayout>
@@ -540,7 +507,6 @@
                     android:layout_weight="1"
                     android:textSize="@dimen/small_font"
                     android:labelFor="@id/cd_attempt_val"
-                    android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_attempt"/>
                 <EditText
@@ -550,7 +516,6 @@
                     android:layout_weight="2"
                     android:textSize="@dimen/small_font"
                     android:hint="@string/cd_default_blank"
-                    android:textColor="@color/colorPrimaryDark"
                     android:layout_height="wrap_content"
                     />
             </LinearLayout>
@@ -565,7 +530,6 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/small_font"
-                    android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_caller_support"/>
                 <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
@@ -616,7 +580,6 @@
                     android:id="@+id/cd_occupation"
                     android:layout_width="wrap_content"
                     android:textSize="@dimen/small_font"
-                    android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"
                     android:text="@string/cd_caller_occupation"/>
                 <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
@@ -687,7 +650,6 @@
                         android:labelFor="@id/cd_gist_et"
                         android:textSize="@dimen/small_font"
                         android:text="@string/cd_gist"
-                        android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content" />
 
                     <EditText
@@ -701,7 +663,6 @@
                         android:gravity="top"
                         android:background="@drawable/edit_text_style"
                         android:textSize="@dimen/small_font"
-                        android:textColor="@color/colorPrimaryDark"
                      />
                 </LinearLayout>
             <LinearLayout
@@ -717,7 +678,6 @@
                         android:labelFor="@id/cd_feelings_addressed_et"
                         android:textSize="@dimen/small_font"
                         android:text="@string/cd_feelings"
-                        android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content" />
 
                     <EditText
@@ -731,7 +691,6 @@
                         android:gravity="top"
                         android:background="@drawable/edit_text_style"
                         android:textSize="@dimen/small_font"
-                        android:textColor="@color/colorPrimaryDark"
                         />
                 </LinearLayout>
             <LinearLayout
@@ -747,7 +706,6 @@
                         android:labelFor="@id/cd_volunteers_response_et"
                         android:textSize="@dimen/small_font"
                         android:text="@string/cd_vol_response"
-                        android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content" />
 
                     <EditText
@@ -761,7 +719,6 @@
                         android:gravity="top"
                         android:background="@drawable/edit_text_style"
                         android:textSize="@dimen/small_font"
-                        android:textColor="@color/colorPrimaryDark"
                         />
                 </LinearLayout>
             <LinearLayout
@@ -777,7 +734,6 @@
                         android:labelFor="@id/cd_call_end_et"
                         android:textSize="@dimen/small_font"
                         android:text="@string/cd_call_end"
-                        android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content" />
 
                     <EditText
@@ -791,7 +747,6 @@
                         android:gravity="top"
                         android:background="@drawable/edit_text_style"
                         android:textSize="@dimen/small_font"
-                        android:textColor="@color/colorPrimaryDark"
                         />
                 </LinearLayout>
 
@@ -815,7 +770,6 @@
                         android:layout_weight="1"
                         android:textSize="@dimen/small_font"
                         android:text="@string/cd_sam_name"
-                        android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content" />
 
                     <TextView
@@ -824,7 +778,6 @@
                         android:layout_weight="2"
                         android:textSize="@dimen/small_font"
                         android:text="@string/na"
-                        android:textColor="@color/colorPrimaryDark"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
             <LinearLayout
@@ -839,7 +792,6 @@
                         android:textSize="@dimen/small_font"
                         android:labelFor="@id/sams_pseudo_name_val"
                         android:text="@string/cd_pseudo_name"
-                        android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content" />
 
                     <EditText
@@ -849,7 +801,6 @@
                         android:textSize="@dimen/small_font"
                         android:inputType="textCapWords"
                         android:hint="@string/cd_default_blank"
-                        android:textColor="@color/colorPrimaryDark"
                         android:layout_height="wrap_content" />
             </LinearLayout>
             <LinearLayout
@@ -862,7 +813,6 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:textSize="@dimen/small_font"
-                        android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content"
                         android:text="@string/cd_nature_problem"/>
                     <Spinner
@@ -884,7 +834,6 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:textSize="@dimen/small_font"
-                        android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content"
                         android:text="@string/cd_self_assessment"/>
                     <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
@@ -926,7 +875,6 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:textSize="@dimen/small_font"
-                        android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content"
                         android:text="@string/cd_refer_PU"/>
                     <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
@@ -967,7 +915,6 @@
                         android:textSize="@dimen/small_font"
                         android:labelFor="@id/sams_leader_name_val"
                         android:text="@string/cd_sam_leader"
-                        android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content" />
 
                     <EditText
@@ -976,7 +923,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:inputType="textCapWords"
-                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/small_font" />
 
 
@@ -993,7 +939,6 @@
                         android:textSize="@dimen/small_font"
                         android:labelFor="@id/sams_leader_msg_val"
                         android:text="@string/cd_sam_leader_msg"
-                        android:textColor="@color/colorPrimary"
                         android:layout_height="wrap_content" />
 
                     <EditText
@@ -1003,7 +948,6 @@
                         android:textSize="@dimen/small_font"
                         android:inputType="textMultiLine|textCapSentences"
                         android:padding="10dp"
-                        android:textColor="@color/colorPrimaryDark"
                         android:layout_height="100dp"
                         android:gravity="top"
                         android:background="@drawable/edit_text_style"

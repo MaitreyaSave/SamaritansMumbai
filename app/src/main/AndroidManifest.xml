@@ -42,7 +42,7 @@
         <activity
             android:name=".ViewLogsRecyclerActivity"
             android:label="@string/title_activity_view_logs_recycler"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
