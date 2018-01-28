@@ -148,6 +148,9 @@
     <string name="cd_assess_pushed">Pushed</string>
     <string name="cd_refer_PU">Referred to PU?</string>
 
+    <!-- Strings related to view logs -->
+    <string name="card_title">Title</string>
+
     <!-- Random Strings -->
     <string name="network_location_access">Please make sure your Internet is ON in order to login!</string>
     <string name="na">N/A</string>

@@ -1,10 +1,12 @@
 package in.apps.maitreya.samaritansmumbai;
 
+import java.io.Serializable;
+
 /**
  * Created by Maitreya on 1/21/2018.
  */
 
-public class LogEntry {
+public class LogEntry implements Serializable{
     private String date,gist,sams_name,gender,tel_door,new_old,suicide_qn,risk_level,problem_nature,leader_name,pseudo_name,leader_spl_msg,name,age,support,occupation,self_assessment,PU_referred,feelings_addressed,volunteers_response,call_end,time,duration,language,frequent_caller,plan,attempt;
     private int sr_no;
 
