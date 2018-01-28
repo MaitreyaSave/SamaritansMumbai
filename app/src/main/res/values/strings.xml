@@ -67,7 +67,7 @@
     <string name="cd_new_old">New/Old:</string>
     <string name="cd_new">New</string>
     <string name="cd_old">Old</string>
-    <string name="cd_suicide_qn">Suicide Question?</string>
+    <string name="cd_suicide_qn">Suicide Question:</string>
     <string name="cd_Y">Yes</string>
     <string name="cd_N">No</string>
     <string name="cd_risk_level">Risk Level:</string>
@@ -126,7 +126,7 @@
     <string name="cd_lang_M">M</string>
     <string name="cd_lang_H">H</string>
     <string name="cd_lang_G">G</string>
-    <string name="cd_frequent_caller">Frequent Caller?</string>
+    <string name="cd_frequent_caller">Frequent Caller:</string>
     <string name="cd_plan">Plan:</string>
     <string name="cd_attempt">Attempt:</string>
 
@@ -146,15 +146,17 @@
     <string name="cd_assess_stood">Stood By</string>
     <string name="cd_assess_lead">Lead</string>
     <string name="cd_assess_pushed">Pushed</string>
-    <string name="cd_refer_PU">Referred to PU?</string>
+    <string name="cd_refer_PU">Referred to PU:</string>
 
     <!-- Strings related to view logs -->
-    <string name="card_title">Title</string>
+    <string name="card_sams_name">Samaritan</string>
+    <string name="card_sams_date">Date</string>
+    <string name="card_sr_no">Sr No</string>
 
     <!-- Random Strings -->
     <string name="network_location_access">Please make sure your Internet is ON in order to login!</string>
     <string name="na">N/A</string>
     <string name="title_activity_test">TestActivity</string>
-    <string name="title_activity_view_logs_recycler">ViewLogsRecyclerActivity</string>
+    <string name="title_activity_view_logs_recycler">Logs</string>
 
 </resources>

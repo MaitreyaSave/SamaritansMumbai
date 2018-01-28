@@ -4,12 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -57,9 +57,39 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         //holder.mView.setText(mDataset[position]);
+        TextView cardView_sams_name,cardView_srno,cardView_date,cardView_risk_level,cardView_caller_name,cardView_refer_PU,cardView_new_old,cardView_gender,cardView_suicide_qn,cardView_gist;
+        //
         CardView cardView = (CardView) holder.mView.findViewById(R.id.card_view);
-        TextView title_cardview = (TextView) holder.mView.findViewById(R.id.title_cardview);
-        title_cardview.setText(mDataset.get(position).getPseudo_name());
+        cardView_sams_name = (TextView) holder.mView.findViewById(R.id.cardview_sams_name_tv);
+        cardView_srno = (TextView) holder.mView.findViewById(R.id.cardview_sams_sr_no_val);
+        cardView_date = (TextView) holder.mView.findViewById(R.id.cardview_sams_date_val);
+        cardView_risk_level = (TextView) holder.mView.findViewById(R.id.cardview_risk_level_val);
+        cardView_caller_name = (TextView) holder.mView.findViewById(R.id.cardview_caller_name_val);
+        cardView_refer_PU = (TextView) holder.mView.findViewById(R.id.cardview_refer_PU_val);
+        cardView_new_old = (TextView) holder.mView.findViewById(R.id.cardview_new_old_val);
+        cardView_gender = (TextView) holder.mView.findViewById(R.id.cardview_gender_val);
+        cardView_suicide_qn = (TextView) holder.mView.findViewById(R.id.cardview_suicide_qn_val);
+        cardView_gist = (TextView) holder.mView.findViewById(R.id.cardview_gist_val);
+        //
+        cardView_sams_name.setText(mDataset.get(position).getSams_name());
+        String temp =""+mDataset.get(position).getSr_no();
+        cardView_srno.setText(temp);
+        cardView_date.setText(mDataset.get(position).getDate());
+        temp = "Risk Level: "+mDataset.get(position).getRisk_level();
+        cardView_risk_level.setText(temp);
+        temp = "Suicide Question: "+mDataset.get(position).getSuicide_qn();
+        cardView_suicide_qn.setText(temp);
+        temp = "Referred to PU: "+mDataset.get(position).getPU_referred();
+        cardView_refer_PU.setText(temp);
+        temp = "Gist: "+mDataset.get(position).getGist();
+        cardView_gist.setText(temp);
+        temp = "Caller Name: "+mDataset.get(position).getName();
+        cardView_caller_name.setText(temp);
+        temp = "New/Old: "+mDataset.get(position).getNew_old();
+        cardView_new_old.setText(temp);
+        temp = "Gender: "+mDataset.get(position).getGender();
+        cardView_gender.setText(temp);
+        //
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
