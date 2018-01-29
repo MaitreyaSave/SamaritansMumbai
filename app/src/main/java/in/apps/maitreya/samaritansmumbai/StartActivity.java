@@ -6,15 +6,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -28,12 +25,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
-
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -49,7 +40,7 @@ public class StartActivity extends AppCompatActivity {
     private FloatingActionButton refresh_fab;
     boolean doubleBackToExitPressedOnce = false;
 
-    private static final String TAG = StartActivity.class.getName();
+    //private static final String TAG = StartActivity.class.getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +58,7 @@ public class StartActivity extends AppCompatActivity {
 
         //Shared Preferences
         SharedPreferences pref = getSharedPreferences("MyPref", 0); // 0 - for private mode
-        pref.edit().clear().commit();
+        pref.edit().clear().apply();
 
 
         //Location manager
@@ -108,7 +99,7 @@ public class StartActivity extends AppCompatActivity {
                 ref_parent.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
-                        int count= Integer.parseInt(snapshot.child("count").getValue().toString());
+                        int count= Integer.parseInt(snapshot.child("count").getValue()+"");
                         editor.putInt("count", count); // Storing string
                         editor.apply();
 
@@ -166,7 +157,7 @@ public class StartActivity extends AppCompatActivity {
         userLoggedIn =true;
         loginButton.setText(R.string.login_proceed);
         logoutButton.setVisibility(View.VISIBLE);
-        String hi_user = "Hi "+currentUser.getDisplayName();;
+        String hi_user = "Hi "+currentUser.getDisplayName();
         username.setText(hi_user);
     }
     public void promptUserLogout(View v){

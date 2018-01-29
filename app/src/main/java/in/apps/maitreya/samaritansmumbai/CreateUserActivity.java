@@ -4,8 +4,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -26,8 +24,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class CreateUserActivity extends AppCompatActivity {
 
@@ -113,7 +109,9 @@ public class CreateUserActivity extends AppCompatActivity {
                                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                                 DatabaseReference myRef = database.getReference("users");
 
-                                myRef.child(userId).setValue(user);
+                                if (userId != null) {
+                                    myRef.child(userId).setValue(user);
+                                }
 
                                 // Read from the database
                                 myRef.addValueEventListener(new ValueEventListener() {

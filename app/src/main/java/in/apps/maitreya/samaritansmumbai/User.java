@@ -7,14 +7,12 @@ import java.util.Map;
 
 /**
  * Created by Maitreya on 1/19/2018.
+ *
  */
 
 public class User {
     private String role, email, username, uid;
     private long timestamp;
-    public User(){
-
-    }
     User(String username, String email, String role){
         this.username = username;
         this.email = email;
@@ -25,7 +23,7 @@ public class User {
         return uid;
     }
 
-    public void setUid(String uid) {
+    void setUid(String uid) {
         this.uid = uid;
     }
 
@@ -57,7 +55,7 @@ public class User {
         return timestamp;
     }
 
-    public void setTimestamp(long timestamp) {
+    void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
 

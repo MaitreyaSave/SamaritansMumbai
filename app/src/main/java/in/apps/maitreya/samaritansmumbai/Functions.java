@@ -26,6 +26,7 @@ import static android.content.ContentValues.TAG;
 
 /**
  * Created by Maitreya on 1/19/2018.
+ *
  */
 
 abstract class Functions {
@@ -54,7 +55,7 @@ abstract class Functions {
         alert.show();
         return result[0];
     }
-    static boolean showNetworkDisabledAlertToUser(final Activity a){
+    private static boolean showNetworkDisabledAlertToUser(final Activity a){
         final boolean[] result = {false};
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(a);
         alertDialogBuilder.setTitle("Enable Internet?");
@@ -87,12 +88,7 @@ abstract class Functions {
 
         } else {
             if(isNetworkAvailable(a)){
-                if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                    result = true;
-
-                } else {
-                    result = showGPSDisabledAlertToUser(a);
-                }
+                result = (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)||showGPSDisabledAlertToUser(a));
             }
             else {
                 result = showNetworkDisabledAlertToUser(a);
@@ -104,7 +100,10 @@ abstract class Functions {
     static boolean isNetworkAvailable(Activity a) {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) a.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        NetworkInfo activeNetworkInfo = null;
+        if (connectivityManager != null) {
+            activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        }
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
     static void signIn(String email, String password, final Activity activity, final boolean create_user){

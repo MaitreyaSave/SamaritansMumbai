@@ -58,7 +58,8 @@
             android:backgroundTint="@color/colorPrimaryDark"
             android:foregroundTint="@color/colorPrimaryDark"
             android:onClick="clickRefresh"
-            android:src="@drawable/ic_refresh" />
+            android:src="@drawable/ic_refresh"
+            tools:targetApi="lollipop" />
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
@@ -71,21 +72,24 @@
                 android:layout_gravity="center"
                 android:onClick="promptUserLogin"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                tools:ignore="ButtonStyle" />
             <Button
                 android:id="@+id/logout_button"
                 android:text="@string/logout_main"
                 android:layout_gravity="center"
                 android:onClick="promptUserLogout"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                tools:ignore="ButtonStyle" />
             <Button
                 android:id="@+id/create_user_button"
                 android:text="@string/create_user"
                 android:layout_gravity="center"
                 android:onClick="createUser"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                tools:ignore="ButtonStyle" />
         </LinearLayout>
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

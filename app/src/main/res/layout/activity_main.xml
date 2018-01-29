@@ -43,7 +43,7 @@
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:text="@string/add_log_main"
                 android:onClick="addLogEntry"
-                />
+                tools:ignore="ButtonStyle" />
             <Button
                 android:id="@+id/viewLogs"
                 android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
                 android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:text="@string/view_logs_main"
                 android:onClick="viewLogs"
-                />
+                tools:ignore="ButtonStyle" />
         </LinearLayout>
     </LinearLayout>
 
