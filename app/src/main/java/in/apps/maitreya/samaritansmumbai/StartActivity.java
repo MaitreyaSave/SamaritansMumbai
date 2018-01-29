@@ -66,7 +66,7 @@ public class StartActivity extends AppCompatActivity {
         refresh_fab = (FloatingActionButton) findViewById(R.id.refresh_home_fab);
 
         //Shared Preferences
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        SharedPreferences pref = getSharedPreferences("MyPref", 0); // 0 - for private mode
         pref.edit().clear().commit();
 
 
@@ -81,6 +81,7 @@ public class StartActivity extends AppCompatActivity {
             }
             else {
                 Intent intent = new Intent(this, LoginActivity.class);
+                intent.putExtra("create_user",false);
                 startActivity(intent);
             }
     }
@@ -205,7 +206,9 @@ public class StartActivity extends AppCompatActivity {
         }, 2000);
     }
     public void createUser(View v){
-        Intent intent = new Intent(this,CreateUserActivity.class);
+        //Intent intent = new Intent(this,CreateUserActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.putExtra("create_user",true);
         startActivity(intent);
     }
     @Override

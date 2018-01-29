@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.List;
 
 /**
@@ -20,6 +23,7 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<LogEntry> mDataset;
     private Context ctx;
+    private FirebaseAuth mAuth;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -57,7 +61,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         //holder.mView.setText(mDataset[position]);
-        TextView cardView_sams_name,cardView_srno,cardView_date,cardView_risk_level,cardView_caller_name,cardView_refer_PU,cardView_new_old,cardView_gender,cardView_suicide_qn,cardView_gist;
+        TextView cardView_sams_name,cardView_duration,cardView_srno,cardView_date,cardView_risk_level,cardView_caller_name,cardView_refer_PU,cardView_new_old,cardView_gender,cardView_suicide_qn,cardView_gist;
         //
         CardView cardView = (CardView) holder.mView.findViewById(R.id.card_view);
         cardView_sams_name = (TextView) holder.mView.findViewById(R.id.cardview_sams_name_tv);
@@ -70,6 +74,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         cardView_gender = (TextView) holder.mView.findViewById(R.id.cardview_gender_val);
         cardView_suicide_qn = (TextView) holder.mView.findViewById(R.id.cardview_suicide_qn_val);
         cardView_gist = (TextView) holder.mView.findViewById(R.id.cardview_gist_val);
+        cardView_duration = (TextView) holder.mView.findViewById(R.id.cardview_duration_val);
         //
         cardView_sams_name.setText(mDataset.get(position).getSams_name());
         String temp =""+mDataset.get(position).getSr_no();
@@ -89,6 +94,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         cardView_new_old.setText(temp);
         temp = "Gender: "+mDataset.get(position).getGender();
         cardView_gender.setText(temp);
+        temp = "Duration: "+mDataset.get(position).getDuration();
+        cardView_duration.setText(temp);
         //
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +106,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
             }
         });
+        //
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        if (firebaseUser != null) {
+            String fname = firebaseUser.getDisplayName();
+            if (fname != null && fname.equals(mDataset.get(position).getSams_name())) {
+                cardView.setBackgroundColor(ctx.getResources().getColor(R.color.colorAccent));
+            }
+        }
 
     }
 

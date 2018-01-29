@@ -74,6 +74,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private boolean create_user;
     //Firebase
     private FirebaseAuth mAuth;
     private static final String TAG = LoginActivity.class.getName();
@@ -98,6 +99,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        //get boolean for create user
+        create_user=getIntent().getBooleanExtra("create_user",false);
+        if (create_user){
+            mEmailSignInButton.setText(getResources().getString(R.string.proceed_create_user));
+        }
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,7 +118,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mProgressView = findViewById(R.id.login_progress);
 
 
-
     }
 
     /**
@@ -120,6 +125,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
+
     private void attemptLogin() {
         if (mAuthTask != null) {
             return;
@@ -167,6 +173,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
+
         }
     }
 
@@ -288,7 +295,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             editor.putString("user_pwd", mPassword);
             editor.apply();
             //
-            Functions.signIn(mEmail,mPassword,LoginActivity.this);
+            Functions.signIn(mEmail,mPassword,LoginActivity.this,create_user);
             //
             //
             try {

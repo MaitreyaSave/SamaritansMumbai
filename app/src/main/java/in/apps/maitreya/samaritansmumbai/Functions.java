@@ -107,7 +107,7 @@ abstract class Functions {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
-    static void signIn(String email, String password, final Activity activity){
+    static void signIn(String email, String password, final Activity activity, final boolean create_user){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
@@ -117,7 +117,11 @@ abstract class Functions {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             Toast.makeText(activity.getApplicationContext(), "Authentication successful.",Toast.LENGTH_SHORT).show();
-                            //updateUI(user);
+                            if(create_user){
+                                Intent intent = new Intent(activity.getApplicationContext(),CreateUserActivity.class);
+                                activity.startActivity(intent);
+                            }
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());

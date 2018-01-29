@@ -13,8 +13,7 @@
     <string name="login_main">Log In</string>
 
     <!--Strings related to Main activity -->
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_dashboard">Dashboard</string>
+\    <string name="title_dashboard">Dashboard</string>
 
     <string name="title_notifications">Notifications</string>
 
@@ -24,7 +23,6 @@
 
 
     <!-- Strings related to login -->
-    <string name="title_activity_start">StartActivity</string>
     <string name="title_activity_login">Sign in</string>
     <string name="welcome_main">Welcome to Samaritans Mumbai</string>
     <string name="prompt_email">Email</string>
@@ -33,7 +31,7 @@
 
     <string name="login_proceed">Proceed</string>
     <string name="logout_main">Logout</string>
-    <string name="title_activity_create_user">CreateUserActivity</string>
+    <string name="title_activity_create_user">Create User</string>
 
     <!-- Strings related to creating user -->
     <string name="enter_user_name">Enter User Name</string>
@@ -43,9 +41,9 @@
     <string name="submit_user">Submit</string>
     <string name="radio_admin">admin</string>
     <string name="radio_user">user</string>
+    <string name="proceed_create_user">Proceed to Create User</string>
 
     <!-- Strings related to caller details -->
-    <string name="title_activity_caller_details">CallerDetailsActivity</string>
     <string name="tab_text_1">Basic</string>
     <string name="tab_text_2">Descriptive</string>
     <string name="tab_text_3">Other</string>

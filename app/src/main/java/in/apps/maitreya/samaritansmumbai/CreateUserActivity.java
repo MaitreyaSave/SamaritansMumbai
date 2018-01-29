@@ -85,21 +85,22 @@ public class CreateUserActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
+                            //Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
                             if(firebaseUser!=null) {
+                                //Shared prefs
+                                SharedPreferences pref = getSharedPreferences("MyPref", 0); // 0 - for private mode
+                                String og_email = pref.getString("user_email", "-1");
+                                String og_pwd = pref.getString("user_pwd", "-1");
+                                long ts = Long.parseLong(pref.getString("time_stamp","-1"));
+                                //
                                 //
                                 UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                         .setDisplayName(name).build();
                                 firebaseUser.updateProfile(profileUpdates);
                                 Toast.makeText(CreateUserActivity.this, "Authentication successful.",
                                         Toast.LENGTH_SHORT).show();
-                                //Shared prefs
-                                SharedPreferences pref = getSharedPreferences("MyPref", 0); // 0 - for private mode
-                                String og_name = pref.getString("user_email", "-1");
-                                String og_pwd = pref.getString("user_pwd", "-1");
-                                long ts = Long.parseLong(pref.getString("time_stamp","-1"));
-                                //
+
 
                                 // Database entry
                                 User user = new User(name,email,role);
@@ -132,7 +133,7 @@ public class CreateUserActivity extends AppCompatActivity {
                                 //
 
                                 Functions.signOut(CreateUserActivity.this);
-                                Functions.signIn(og_name,og_pwd,CreateUserActivity.this);
+                                Functions.signIn(og_email,og_pwd,CreateUserActivity.this,false);
                                 //
                             }
                             //updateUI(user);
