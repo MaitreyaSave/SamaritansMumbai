@@ -132,7 +132,7 @@
     <string name="cd_gist">Gist:</string>
     <string name="cd_feelings">Feelings Addressed:</string>
     <string name="cd_vol_response">Volunteers Response:</string>
-    <string name="cd_call_end">How did the call end?</string>
+    <string name="cd_call_end">How did the call end:</string>
 
     <!-- Strings related to other caller details -->
     <string name="cd_sam_name">Samaritan Name:</string>
