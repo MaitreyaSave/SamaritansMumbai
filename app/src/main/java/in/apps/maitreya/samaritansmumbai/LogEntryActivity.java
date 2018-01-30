@@ -55,7 +55,7 @@ public class LogEntryActivity extends AppCompatActivity {
     private String suicide_qn="Yes";
     private String risk_level="0";
     private static String problem_nature;
-    private String support="F";
+    private String caller_support ="F";
     private String occupation="E";
     private String self_assessment="Stood By";
     private String PU_referred="Yes";
@@ -91,12 +91,12 @@ public class LogEntryActivity extends AppCompatActivity {
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         /*
-      The {@link android.support.v4.view.PagerAdapter} that will provide
+      The {@link android.caller_support.v4.view.PagerAdapter} that will provide
       fragments for each of the sections. We use a
       {@link FragmentPagerAdapter} derivative, which will keep every
       loaded fragment in memory. If this becomes too memory intensive, it
       may be best to switch to a
-      {@link android.support.v4.app.FragmentStatePagerAdapter}.
+      {@link android.caller_support.v4.app.FragmentStatePagerAdapter}.
      */
         SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -226,7 +226,7 @@ public class LogEntryActivity extends AppCompatActivity {
                         //LogEntry logEntry = new LogEntry(cnt,timestamp,gist,sams_name,);
                         String time = hours+":"+mins+" "+ampm;
                         String duration = duration_hours+" hours "+duration_mins+" mins";
-                        LogEntry logEntry = new  LogEntry(cnt,timestamp,gist,sams_name,gender,tel_door,new_old,suicide_qn,risk_level,problem_nature,leader_name,pseudo_name,leader_spl_msg,name,age,support,occupation,self_assessment,PU_referred,feelings_addressed,volunteers_response,call_end,time,duration,language,frequent_caller,plan,attempt);
+                        LogEntry logEntry = new  LogEntry(cnt,timestamp,gist,sams_name,gender,tel_door,new_old,suicide_qn,risk_level,problem_nature,leader_name,pseudo_name,leader_spl_msg,name,age, caller_support,occupation,self_assessment,PU_referred,feelings_addressed,volunteers_response,call_end,time,duration,language,frequent_caller,plan,attempt);
                         final String child_sr_no = String.valueOf(cnt);
                         ref.child(child_sr_no).setValue(logEntry);
 
@@ -653,19 +653,19 @@ public class LogEntryActivity extends AppCompatActivity {
                 break;
             case R.id.cd_radio_support_A:
                 if (checked)
-                    support = ((RadioButton) view).getText().toString();
+                    caller_support = ((RadioButton) view).getText().toString();
                 break;
             case R.id.cd_radio_support_F:
                 if (checked)
-                    support = ((RadioButton) view).getText().toString();
+                    caller_support = ((RadioButton) view).getText().toString();
                 break;
             case R.id.cd_radio_support_H:
                 if (checked)
-                    support = ((RadioButton) view).getText().toString();
+                    caller_support = ((RadioButton) view).getText().toString();
                 break;
             case R.id.cd_radio_support_PG:
                 if (checked)
-                    support = ((RadioButton) view).getText().toString();
+                    caller_support = ((RadioButton) view).getText().toString();
                 break;
             case R.id.cd_radio_occupation_B:
                 if (checked)

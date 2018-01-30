@@ -1,9 +1,239 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/activity_horizontal_margin"
     tools:context="in.apps.maitreya.samaritansmumbai.ViewSingleLogActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View style="@style/Divider"
+            android:layout_margin="@dimen/activity_horizontal_margin"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/single_log_sams_name"
+                android:text="@string/cd_sam_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/single_log_srno"
+                android:layout_width="match_parent"
+                android:text="@string/card_sr_no"
+                android:gravity="end"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/single_log_pseudo_name"
+            android:text="@string/cd_pseudo_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:id="@+id/single_log_date"
+            android:text="@string/cd_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/single_log_time"
+                android:text="@string/cd_time"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/single_log_duration"
+                android:text="@string/cd_duration"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/single_log_leader_name"
+            android:text="@string/cd_sam_leader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/single_log_leader_msg"
+            android:text="@string/cd_sam_leader_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/single_log_suicide_qn"
+                android:text="@string/cd_suicide_qn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/single_log_PU_referred"
+                android:text="@string/cd_refer_PU"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/single_log_self_assessment"
+            android:text="@string/cd_self_assessment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-</android.support.constraint.ConstraintLayout>
+        <View style="@style/Divider"
+            android:layout_margin="@dimen/activity_horizontal_margin"/>
+        <TextView
+            android:id="@+id/single_log_caller_name"
+            android:text="@string/cd_caller_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/single_log_age"
+                android:text="@string/cd_caller_age"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/single_log_gender"
+                android:text="@string/cd_male_female"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/single_log_tel_door"
+                android:text="@string/cd_tel_door"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/single_log_old_new"
+                android:text="@string/cd_new_old"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin">
+            <TextView
+                android:id="@+id/single_log_language"
+                android:text="@string/cd_language"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/single_log_frequent_caller"
+                android:text="@string/cd_frequent_caller"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/single_log_support"
+                android:text="@string/cd_caller_support"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/single_log_occupation"
+                android:text="@string/cd_caller_occupation"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/single_log_problem_nature"
+                android:text="@string/cd_nature_problem"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/single_log_risk_level"
+                android:text="@string/cd_risk_level"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/single_log_plan"
+            android:text="@string/cd_plan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/single_log_attempt"
+            android:text="@string/cd_attempt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View style="@style/Divider"
+            android:layout_margin="@dimen/activity_horizontal_margin"/>
+        <TextView
+            android:id="@+id/single_log_gist"
+            android:text="@string/cd_gist"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/single_log_feelings_addressed"
+            android:text="@string/cd_feelings"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/single_log_volunteers_response"
+            android:text="@string/cd_vol_response"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/single_log_call_end"
+            android:text="@string/cd_call_end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View style="@style/Divider"
+            android:layout_margin="@dimen/activity_horizontal_margin"/>
+    </LinearLayout>
+    </ScrollView>
+</android.support.design.widget.CoordinatorLayout>
