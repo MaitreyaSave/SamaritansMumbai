@@ -61,34 +61,53 @@
             android:src="@drawable/ic_refresh"
             tools:targetApi="lollipop" />
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:gravity="center_horizontal"
             android:layout_height="wrap_content">
             <Button
                 android:id="@+id/login_button"
                 android:text="@string/login_main"
-                android:layout_gravity="center"
                 android:onClick="promptUserLogin"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 tools:ignore="ButtonStyle" />
             <Button
                 android:id="@+id/logout_button"
                 android:text="@string/logout_main"
-                android:layout_gravity="center"
                 android:onClick="promptUserLogout"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 tools:ignore="ButtonStyle" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="300dp"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="60dp">
             <Button
                 android:id="@+id/create_user_button"
                 android:text="@string/create_user"
                 android:layout_gravity="center"
                 android:onClick="createUser"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                tools:ignore="ButtonStyle" />
+            <Button
+                android:id="@+id/send_notif_button"
+                android:text="@string/title_activity_send_notification"
+                android:layout_gravity="center"
+                android:onClick="sendNotification"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 tools:ignore="ButtonStyle" />
         </LinearLayout>
     </LinearLayout>

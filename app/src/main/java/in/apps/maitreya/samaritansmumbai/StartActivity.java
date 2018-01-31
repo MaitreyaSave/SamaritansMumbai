@@ -36,7 +36,7 @@ public class StartActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private boolean userLoggedIn =false;
     private TextView username, network_location_access;
-    private Button loginButton,logoutButton,createUserButton;
+    private Button loginButton,logoutButton,createUserButton, sendNotificationButton;
     private FloatingActionButton refresh_fab;
     boolean doubleBackToExitPressedOnce = false;
 
@@ -46,15 +46,16 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mAuth = FirebaseAuth.getInstance();
-        username = (TextView) findViewById(R.id.user_name_tv);
-        network_location_access = (TextView) findViewById(R.id.network_location_access_tv);
-        loginButton = (Button) findViewById(R.id.login_button);
-        logoutButton = (Button) findViewById(R.id.logout_button);
-        createUserButton = (Button) findViewById(R.id.create_user_button);
-        refresh_fab = (FloatingActionButton) findViewById(R.id.refresh_home_fab);
+        username =  findViewById(R.id.user_name_tv);
+        network_location_access = findViewById(R.id.network_location_access_tv);
+        loginButton = findViewById(R.id.login_button);
+        logoutButton = findViewById(R.id.logout_button);
+        createUserButton = findViewById(R.id.create_user_button);
+        sendNotificationButton =  findViewById(R.id.send_notif_button);
+        refresh_fab = findViewById(R.id.refresh_home_fab);
 
         //Shared Preferences
         SharedPreferences pref = getSharedPreferences("MyPref", 0); // 0 - for private mode
@@ -81,8 +82,7 @@ public class StartActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        //checkpermissions
-        //Functions.checkPermissions(this,MY_PERMISSIONS_REQUEST_LOCATION,locationManager)
+        //
         if(Functions.isNetworkAvailable(this)) {
             network_location_access.setVisibility(View.GONE);
             refresh_fab.setVisibility(View.GONE);
@@ -124,10 +124,14 @@ public class StartActivity extends AppCompatActivity {
                         }
                         if(role == null)
                             role = "user";
-                        if (role.equals("admin"))
+                        if (role.equals("admin")) {
                             createUserButton.setVisibility(View.VISIBLE);
-                        else
+                            sendNotificationButton.setVisibility(View.VISIBLE);
+                        }
+                        else {
                             createUserButton.setVisibility(View.GONE);
+                            sendNotificationButton.setVisibility(View.GONE);
+                        }
 
                     }
 
@@ -145,12 +149,14 @@ public class StartActivity extends AppCompatActivity {
                 //Functions.showNetworkDisabledAlertToUser(this);
                 createUserButton.setVisibility(View.GONE);
                 logoutButton.setVisibility(View.GONE);
+                sendNotificationButton.setVisibility(View.GONE);
             }
         }
         else{
             loginButton.setVisibility(View.GONE);
             createUserButton.setVisibility(View.GONE);
             logoutButton.setVisibility(View.GONE);
+            sendNotificationButton.setVisibility(View.GONE);
         }
     }
     public void updateUI(FirebaseUser currentUser){
@@ -196,12 +202,7 @@ public class StartActivity extends AppCompatActivity {
             }
         }, 2000);
     }
-    public void createUser(View v){
-        //Intent intent = new Intent(this,CreateUserActivity.class);
-        Intent intent = new Intent(this, LoginActivity.class);
-        intent.putExtra("create_user",true);
-        startActivity(intent);
-    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull  String permissions[],@NonNull int[] grantResults) {
@@ -226,5 +227,15 @@ public class StartActivity extends AppCompatActivity {
     }
     public void clickRefresh(View v){
         recreate();
+    }
+    public void createUser(View v){
+        //Intent intent = new Intent(this,CreateUserActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.putExtra("create_user",true);
+        startActivity(intent);
+    }
+    public void sendNotification(View v){
+        Intent intent = new Intent(this, SendNotificationActivity.class);
+        startActivity(intent);
     }
 }

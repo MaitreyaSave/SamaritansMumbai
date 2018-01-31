@@ -13,7 +13,8 @@
     <string name="login_main">Log In</string>
 
     <!--Strings related to Main activity -->
-\    <string name="title_dashboard">Dashboard</string>
+    \
+    <string name="title_dashboard">Dashboard</string>
 
     <string name="title_notifications">Notifications</string>
 
@@ -32,6 +33,7 @@
     <string name="login_proceed">Proceed</string>
     <string name="logout_main">Logout</string>
     <string name="title_activity_create_user">Create User</string>
+
 
     <!-- Strings related to creating user -->
     <string name="enter_user_name">Enter User Name</string>
@@ -156,5 +158,6 @@
     <string name="na">N/A</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_view_logs_recycler">Logs</string>
+    <string name="title_activity_send_notification">Send Notification</string>
 
 </resources>

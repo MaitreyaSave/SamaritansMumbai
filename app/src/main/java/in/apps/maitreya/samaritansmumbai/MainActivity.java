@@ -19,13 +19,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.List;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
     private Button addLogButton, viewLogsButton;
     LocationManager locationManager;
+    private FusedLocationProviderClient mFusedLocationClient;
+    private Location mlocation;
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 0;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -55,14 +59,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
-        addLogButton = (Button) findViewById(R.id.addLog);
-        viewLogsButton = (Button) findViewById(R.id.viewLogs);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        mTextMessage = findViewById(R.id.message);
+        addLogButton = findViewById(R.id.addLog);
+        viewLogsButton = findViewById(R.id.viewLogs);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         //
         //Location manager
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        //User Location
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        mFusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                mlocation = location;
+            }
+        });
+        Log.d("test_dis","loc_m "+mlocation);
+        //
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -73,22 +92,32 @@ public class MainActivity extends AppCompatActivity {
             Location source = new Location("S");
             source.setLatitude(19.015046);
             source.setLongitude(72.842617);
+            //
             //source.setLatitude(19.250713);
             //source.setLongitude(72.853800);
 
             //User Location
-            Location location = getLastKnownLocation();
-            //
-            float distance = 0;
-            if (location != null) {
-                distance = location.distanceTo(source);
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
             }
-            Log.d("test_dis","distance "+distance);
-            if(distance<=50) {
+            mFusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    mlocation = location;
+                }
+            });
+            //
+
+            Log.d("test_dis", "distance_loc " + mlocation);
+            float distance = 100;
+            if (mlocation != null) {
+                distance = mlocation.distanceTo(source);
+            }
+            Log.d("test_dis", "distance " + distance);
+            if (distance <= 50) {
                 Intent intent = new Intent(this, LogEntryActivity.class);
                 startActivity(intent);
-            }
-            else{
+            } else {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setTitle("Location Error");
                 alertDialogBuilder.setMessage("You cannot create a Log Entry outside of Samaritans!")
@@ -96,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                         .setPositiveButton("Ok",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
-                                      dialog.cancel();
+                                        dialog.cancel();
                                     }
                                 });
                 AlertDialog alert = alertDialogBuilder.create();
@@ -111,34 +140,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private Location getLastKnownLocation() {
-        locationManager = (LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
-        List<String> providers = null;
-        if (locationManager != null) {
-            providers = locationManager.getProviders(true);
-        }
-        Location bestLocation = null;
-        assert providers != null;
-        for (String provider : providers) {
-            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return null;
-            }
-            Location l = locationManager.getLastKnownLocation(provider);
-            if (l == null) {
-                continue;
-            }
-            if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
-                // Found best last known location: %s", l);
-                bestLocation = l;
-            }
-        }
-        return bestLocation;
-    }
 }
