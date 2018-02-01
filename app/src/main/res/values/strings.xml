@@ -153,6 +153,9 @@
     <string name="card_sams_date">Date</string>
     <string name="card_sr_no">Sr No</string>
 
+    <!-- Strings related to send notification -->
+    <string name="send_notif_title">Title</string>
+    <string name="send_notif_body">Body</string>
     <!-- Random Strings -->
     <string name="network_location_access">Please make sure your Internet is ON in order to login!</string>
     <string name="na">N/A</string>

@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 mlocation = location;
             }
         });
+
         Log.d("test_dis","loc_m "+mlocation);
         //
 
@@ -109,12 +110,12 @@ public class MainActivity extends AppCompatActivity {
             //
 
             Log.d("test_dis", "distance_loc " + mlocation);
-            float distance = 100;
+            float distance = 101;
             if (mlocation != null) {
                 distance = mlocation.distanceTo(source);
             }
             Log.d("test_dis", "distance " + distance);
-            if (distance <= 50) {
+            if (distance <= 100) {
                 Intent intent = new Intent(this, LogEntryActivity.class);
                 startActivity(intent);
             } else {
