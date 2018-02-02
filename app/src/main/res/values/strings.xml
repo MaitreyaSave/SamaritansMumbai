@@ -155,12 +155,13 @@
 
     <!-- Strings related to send notification -->
     <string name="send_notif_title">Title</string>
-    <string name="send_notif_body">Body</string>
+    <string name="send_notif_body">Message</string>
     <!-- Random Strings -->
     <string name="network_location_access">Please make sure your Internet is ON in order to login!</string>
     <string name="na">N/A</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_view_logs_recycler">Logs</string>
     <string name="title_activity_send_notification">Send Notification</string>
+    <string name="title_activity_recieve_notification">New Notification</string>
 
 </resources>
