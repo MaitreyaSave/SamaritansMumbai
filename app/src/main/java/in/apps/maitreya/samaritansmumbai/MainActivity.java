@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -79,8 +80,33 @@ public class MainActivity extends AppCompatActivity {
                 mlocation = location;
             }
         });
+        //
+        locationManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER, 2 * 1000, 10, new LocationListener() {
+                    @Override
+                    public void onLocationChanged(Location location) {
+                        mlocation = location;
+                        Log.d("test_listen","loc "+mlocation);
+                    }
 
-        Log.d("test_dis","loc_m "+mlocation);
+                    @Override
+                    public void onStatusChanged(String s, int i, Bundle bundle) {
+
+                    }
+
+                    @Override
+                    public void onProviderEnabled(String s) {
+
+                    }
+
+                    @Override
+                    public void onProviderDisabled(String s) {
+
+                    }
+                });
+        //
+
+        Log.d("test_dis", "loc_m " + mlocation);
         //
 
     }
@@ -96,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
             //
             //source.setLatitude(19.250713);
             //source.setLongitude(72.853800);
+
 
             //User Location
             if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
