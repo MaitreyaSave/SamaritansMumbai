@@ -12,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -34,7 +35,7 @@ public class StartActivity extends AppCompatActivity {
     //
     //
     private FirebaseAuth mAuth;
-    private boolean userLoggedIn =false;
+    private boolean userLoggedIn =false,notification_call=false;
     private TextView username, network_location_access;
     private Button loginButton,logoutButton,createUserButton, sendNotificationButton;
     private FloatingActionButton refresh_fab;
@@ -57,6 +58,21 @@ public class StartActivity extends AppCompatActivity {
         sendNotificationButton =  findViewById(R.id.send_notif_button);
         refresh_fab = findViewById(R.id.refresh_home_fab);
 
+        //
+        notification_call=getIntent().getBooleanExtra("notif_bool",false);
+        Log.d("notif_bool","bool "+notification_call);
+        Log.d("notif_bool","title "+getIntent().getStringExtra("title"));
+        //
+        if(notification_call){
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("notif_bool",true);
+            intent.putExtra("title", getIntent().getStringExtra("title"));
+            intent.putExtra("message", getIntent().getStringExtra("message"));
+            startActivity(intent);
+        }
+        //
+        //
+
         //Shared Preferences
         SharedPreferences pref = getSharedPreferences("MyPref", 0); // 0 - for private mode
         pref.edit().clear().apply();
@@ -64,6 +80,8 @@ public class StartActivity extends AppCompatActivity {
 
         //Location manager
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+
     }
     public void promptUserLogin(View v){
 
@@ -81,6 +99,8 @@ public class StartActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
+        //
+
         FirebaseUser currentUser = mAuth.getCurrentUser();
         //
         if(Functions.isNetworkAvailable(this)) {
@@ -165,6 +185,7 @@ public class StartActivity extends AppCompatActivity {
         logoutButton.setVisibility(View.VISIBLE);
         String hi_user = "Hi "+currentUser.getDisplayName();
         username.setText(hi_user);
+
     }
     public void promptUserLogout(View v){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(StartActivity.this);

@@ -19,7 +19,7 @@ import java.util.List;
  *
  */
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class LogsAdapter extends RecyclerView.Adapter<LogsAdapter.ViewHolder> {
     private List<LogEntry> mDataset;
     private Context ctx;
 
@@ -36,15 +36,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    MyAdapter(List<LogEntry> myDataset, Context context) {
+    LogsAdapter(List<LogEntry> myDataset, Context context) {
         mDataset = myDataset;
         ctx = context;
     }
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                   int viewType) {
+    public LogsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                     int viewType) {
         // create a new view
         View v =  LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.log_list_row, parent, false);
@@ -61,18 +61,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         //holder.mView.setText(mDataset[position]);
         TextView cardView_sams_name,cardView_duration,cardView_srno,cardView_date,cardView_risk_level,cardView_caller_name,cardView_refer_PU,cardView_new_old,cardView_gender,cardView_suicide_qn,cardView_gist;
         //
-        CardView cardView = (CardView) holder.mView.findViewById(R.id.card_view);
-        cardView_sams_name = (TextView) holder.mView.findViewById(R.id.cardview_sams_name_tv);
-        cardView_srno = (TextView) holder.mView.findViewById(R.id.cardview_sams_sr_no_val);
-        cardView_date = (TextView) holder.mView.findViewById(R.id.cardview_sams_date_val);
-        cardView_risk_level = (TextView) holder.mView.findViewById(R.id.cardview_risk_level_val);
-        cardView_caller_name = (TextView) holder.mView.findViewById(R.id.cardview_caller_name_val);
-        cardView_refer_PU = (TextView) holder.mView.findViewById(R.id.cardview_refer_PU_val);
-        cardView_new_old = (TextView) holder.mView.findViewById(R.id.cardview_new_old_val);
-        cardView_gender = (TextView) holder.mView.findViewById(R.id.cardview_gender_val);
-        cardView_suicide_qn = (TextView) holder.mView.findViewById(R.id.cardview_suicide_qn_val);
-        cardView_gist = (TextView) holder.mView.findViewById(R.id.cardview_gist_val);
-        cardView_duration = (TextView) holder.mView.findViewById(R.id.cardview_duration_val);
+        CardView cardView = holder.mView.findViewById(R.id.card_view);
+        cardView_sams_name = holder.mView.findViewById(R.id.cardview_sams_name_tv);
+        cardView_srno = holder.mView.findViewById(R.id.cardview_sams_sr_no_val);
+        cardView_date = holder.mView.findViewById(R.id.cardview_sams_date_val);
+        cardView_risk_level = holder.mView.findViewById(R.id.cardview_risk_level_val);
+        cardView_caller_name = holder.mView.findViewById(R.id.cardview_caller_name_val);
+        cardView_refer_PU = holder.mView.findViewById(R.id.cardview_refer_PU_val);
+        cardView_new_old = holder.mView.findViewById(R.id.cardview_new_old_val);
+        cardView_gender = holder.mView.findViewById(R.id.cardview_gender_val);
+        cardView_suicide_qn = holder.mView.findViewById(R.id.cardview_suicide_qn_val);
+        cardView_gist = holder.mView.findViewById(R.id.cardview_gist_val);
+        cardView_duration = holder.mView.findViewById(R.id.cardview_duration_val);
         //
         cardView_sams_name.setText(mDataset.get(position).getSams_name());
         String temp =""+mDataset.get(position).getSr_no();

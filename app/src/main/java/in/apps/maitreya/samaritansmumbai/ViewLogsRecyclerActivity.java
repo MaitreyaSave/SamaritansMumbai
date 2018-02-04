@@ -47,13 +47,15 @@ public class ViewLogsRecyclerActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         //
         logEntries = new ArrayList<>();
         //
-        mAdapter = new MyAdapter(logEntries, this);
+        mAdapter = new LogsAdapter(logEntries, this);
         mRecyclerView.setAdapter(mAdapter);
         //
 
@@ -63,7 +65,7 @@ public class ViewLogsRecyclerActivity extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 LogEntry entry = dataSnapshot.getValue(LogEntry.class);
                 logEntries.add(entry);
-                mAdapter = new MyAdapter(logEntries,ViewLogsRecyclerActivity.this);
+                mAdapter = new LogsAdapter(logEntries,ViewLogsRecyclerActivity.this);
                 mRecyclerView.setAdapter(mAdapter);
                 Log.d("ChildAdded","check_test "+logEntries.size());
             }

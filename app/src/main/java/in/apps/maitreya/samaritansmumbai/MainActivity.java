@@ -14,20 +14,34 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+    //
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private List<AdminMessage> adminMessages;
+    //
     private TextView mTextMessage;
-    private Button addLogButton, viewLogsButton;
+    private LinearLayout dash_LL, notif_LL;
     LocationManager locationManager;
     private FusedLocationProviderClient mFusedLocationClient;
     private Location mlocation;
@@ -41,13 +55,13 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_dashboard);
-                    addLogButton.setVisibility(View.VISIBLE);
-                    viewLogsButton.setVisibility(View.VISIBLE);
+                    dash_LL.setVisibility(View.VISIBLE);
+                    notif_LL.setVisibility(View.GONE);
                     return true;
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_notifications);
-                    addLogButton.setVisibility(View.GONE);
-                    viewLogsButton.setVisibility(View.GONE);
+                    dash_LL.setVisibility(View.GONE);
+                    notif_LL.setVisibility(View.VISIBLE);
                     return true;
             }
             return false;
@@ -61,14 +75,73 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mTextMessage = findViewById(R.id.message);
-        addLogButton = findViewById(R.id.addLog);
-        viewLogsButton = findViewById(R.id.viewLogs);
+        //
+        dash_LL = findViewById(R.id.main_ll_dash);
+        notif_LL = findViewById(R.id.main_ll_notif);
+        notif_LL.setVisibility(View.GONE);
+        //
+
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         //
         //Location manager
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        //
+        //Recycler view
+        mRecyclerView = findViewById(R.id.recycler_view_notifications);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        //
+        adminMessages = new ArrayList<>();
+        //
+        mAdapter = new NotificationsAdapter(adminMessages, this);
+        mRecyclerView.setAdapter(mAdapter);
+        //
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("messages/");
+        ref.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                AdminMessage adminMessage = dataSnapshot.getValue(AdminMessage.class);
+                adminMessages.add(adminMessage);
+                mAdapter = new NotificationsAdapter(adminMessages,MainActivity.this);
+                mRecyclerView.setAdapter(mAdapter);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                AdminMessage adminMessage = dataSnapshot.getValue(AdminMessage.class);
+                adminMessages.remove(adminMessage);
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        //
+        //
 
         //User Location
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -86,7 +159,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onLocationChanged(Location location) {
                         mlocation = location;
-                        Log.d("test_listen","loc "+mlocation);
                     }
 
                     @Override
@@ -108,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d("test_dis", "loc_m " + mlocation);
         //
+
 
     }
 

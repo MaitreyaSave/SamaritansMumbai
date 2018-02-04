@@ -51,6 +51,7 @@ public class FCMService extends FirebaseMessagingService {
      //     */
     private void sendNotification(String notificationTitle, String notificationBody, String dataTitle, String dataMessage) {
         Intent intent = new Intent(this, ReceiveNotificationActivity.class);
+        intent.putExtra("notif_bool",true);
         intent.putExtra("title", dataTitle);
         intent.putExtra("message", dataMessage);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -58,7 +59,7 @@ public class FCMService extends FirebaseMessagingService {
                 PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this,"3")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(notificationTitle)
                 .setContentText(notificationBody)

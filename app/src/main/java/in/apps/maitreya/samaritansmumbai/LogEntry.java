@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Created by Maitreya on 1/21/2018.
+ *
  */
 
 public class LogEntry implements Serializable{
@@ -44,7 +45,7 @@ public class LogEntry implements Serializable{
         this.plan=plan;
         this.attempt=attempt;
     }
-    public String getDate() {
+    String getDate() {
         return date;
     }
 
@@ -52,7 +53,7 @@ public class LogEntry implements Serializable{
         this.date = date;
     }
 
-    public String getGist() {
+    String getGist() {
         return gist;
     }
 
@@ -60,7 +61,7 @@ public class LogEntry implements Serializable{
         this.gist = gist;
     }
 
-    public String getSams_name() {
+    String getSams_name() {
         return sams_name;
     }
 
@@ -68,7 +69,7 @@ public class LogEntry implements Serializable{
         this.sams_name = sams_name;
     }
 
-    public int getSr_no() {
+    int getSr_no() {
         return sr_no;
     }
 
@@ -76,7 +77,7 @@ public class LogEntry implements Serializable{
         this.sr_no = sr_no;
     }
 
-    public String getGender() {
+    String getGender() {
         return gender;
     }
 
@@ -84,7 +85,7 @@ public class LogEntry implements Serializable{
         this.gender = gender;
     }
 
-    public String getTel_door() {
+    String getTel_door() {
         return tel_door;
     }
 
@@ -92,7 +93,7 @@ public class LogEntry implements Serializable{
         this.tel_door = tel_door;
     }
 
-    public String getNew_old() {
+    String getNew_old() {
         return new_old;
     }
 
@@ -100,7 +101,7 @@ public class LogEntry implements Serializable{
         this.new_old = new_old;
     }
 
-    public String getSuicide_qn() {
+    String getSuicide_qn() {
         return suicide_qn;
     }
 
@@ -108,7 +109,7 @@ public class LogEntry implements Serializable{
         this.suicide_qn = suicide_qn;
     }
 
-    public String getRisk_level() {
+    String getRisk_level() {
         return risk_level;
     }
 
@@ -116,7 +117,7 @@ public class LogEntry implements Serializable{
         this.risk_level = risk_level;
     }
 
-    public String getProblem_nature() {
+    String getProblem_nature() {
         return problem_nature;
     }
 
@@ -124,7 +125,7 @@ public class LogEntry implements Serializable{
         this.problem_nature = problem_nature;
     }
 
-    public String getLeader_name() {
+    String getLeader_name() {
         return leader_name;
     }
 
@@ -132,7 +133,7 @@ public class LogEntry implements Serializable{
         this.leader_name = leader_name;
     }
 
-    public String getPseudo_name() {
+    String getPseudo_name() {
         return pseudo_name;
     }
 
@@ -140,7 +141,7 @@ public class LogEntry implements Serializable{
         this.pseudo_name = pseudo_name;
     }
 
-    public String getLeader_spl_msg() {
+    String getLeader_spl_msg() {
         return leader_spl_msg;
     }
 
@@ -156,7 +157,7 @@ public class LogEntry implements Serializable{
         this.name = name;
     }
 
-    public String getAge() {
+    String getAge() {
         return age;
     }
 
@@ -172,7 +173,7 @@ public class LogEntry implements Serializable{
         this.support = support;
     }
 
-    public String getOccupation() {
+    String getOccupation() {
         return occupation;
     }
 
@@ -180,7 +181,7 @@ public class LogEntry implements Serializable{
         this.occupation = occupation;
     }
 
-    public String getSelf_assessment() {
+    String getSelf_assessment() {
         return self_assessment;
     }
 
@@ -188,7 +189,7 @@ public class LogEntry implements Serializable{
         this.self_assessment = self_assessment;
     }
 
-    public String getPU_referred() {
+    String getPU_referred() {
         return PU_referred;
     }
 
@@ -196,7 +197,7 @@ public class LogEntry implements Serializable{
         this.PU_referred = PU_referred;
     }
 
-    public String getFeelings_addressed() {
+    String getFeelings_addressed() {
         return feelings_addressed;
     }
 
@@ -204,7 +205,7 @@ public class LogEntry implements Serializable{
         this.feelings_addressed = feelings_addressed;
     }
 
-    public String getVolunteers_response() {
+    String getVolunteers_response() {
         return volunteers_response;
     }
 
@@ -212,7 +213,7 @@ public class LogEntry implements Serializable{
         this.volunteers_response = volunteers_response;
     }
 
-    public String getCall_end() {
+    String getCall_end() {
         return call_end;
     }
 
@@ -228,7 +229,7 @@ public class LogEntry implements Serializable{
         this.time = time;
     }
 
-    public String getDuration() {
+    String getDuration() {
         return duration;
     }
 
@@ -236,7 +237,7 @@ public class LogEntry implements Serializable{
         this.duration = duration;
     }
 
-    public String getLanguage() {
+    String getLanguage() {
         return language;
     }
 
@@ -244,7 +245,7 @@ public class LogEntry implements Serializable{
         this.language = language;
     }
 
-    public String getFrequent_caller() {
+    String getFrequent_caller() {
         return frequent_caller;
     }
 
@@ -252,7 +253,7 @@ public class LogEntry implements Serializable{
         this.frequent_caller = frequent_caller;
     }
 
-    public String getPlan() {
+    String getPlan() {
         return plan;
     }
 
@@ -260,7 +261,7 @@ public class LogEntry implements Serializable{
         this.plan = plan;
     }
 
-    public String getAttempt() {
+    String getAttempt() {
         return attempt;
     }
 
