@@ -50,7 +50,7 @@ public class FCMService extends FirebaseMessagingService {
      //     * Create and show a simple notification containing the received FCM message.
      //     */
     private void sendNotification(String notificationTitle, String notificationBody, String dataTitle, String dataMessage) {
-        Intent intent = new Intent(this, ReceiveNotificationActivity.class);
+        Intent intent = new Intent(this, StartActivity.class);
         intent.putExtra("notif_bool",true);
         intent.putExtra("title", dataTitle);
         intent.putExtra("message", dataMessage);

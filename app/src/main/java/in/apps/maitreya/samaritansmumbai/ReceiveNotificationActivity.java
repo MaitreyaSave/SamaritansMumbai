@@ -33,8 +33,6 @@ public class ReceiveNotificationActivity extends AppCompatActivity {
         String title = getIntent().getStringExtra("title");
         String message = getIntent().getStringExtra("message");
 
-        Toast.makeText(this, "bool "+getIntent().getBooleanExtra("notif_bool",false), Toast.LENGTH_SHORT).show();
-
         title_tv.setText(title);
         message_tv.setText(message);
 

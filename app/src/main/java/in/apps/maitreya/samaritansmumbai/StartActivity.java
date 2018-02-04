@@ -59,10 +59,9 @@ public class StartActivity extends AppCompatActivity {
         refresh_fab = findViewById(R.id.refresh_home_fab);
 
         //
-        notification_call=getIntent().getBooleanExtra("notif_bool",false);
-        Log.d("notif_bool","bool "+notification_call);
-        Log.d("notif_bool","title "+getIntent().getStringExtra("title"));
         //
+        notification_call=getIntent().getBooleanExtra("notif_bool",false);
+        Log.d("notif_t","notif "+notification_call);
         if(notification_call){
             Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("notif_bool",true);
@@ -70,7 +69,6 @@ public class StartActivity extends AppCompatActivity {
             intent.putExtra("message", getIntent().getStringExtra("message"));
             startActivity(intent);
         }
-        //
         //
 
         //Shared Preferences
@@ -165,11 +163,14 @@ public class StartActivity extends AppCompatActivity {
                 //
                 updateUI(currentUser);
 
+                //
+
             } else {
                 //Functions.showNetworkDisabledAlertToUser(this);
                 createUserButton.setVisibility(View.GONE);
                 logoutButton.setVisibility(View.GONE);
                 sendNotificationButton.setVisibility(View.GONE);
+                notification_call=false;
             }
         }
         else{

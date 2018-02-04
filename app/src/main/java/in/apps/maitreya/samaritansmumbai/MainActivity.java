@@ -36,6 +36,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     //
+    private boolean notification_call=false;
+    //
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private List<AdminMessage> adminMessages;
@@ -142,7 +144,15 @@ public class MainActivity extends AppCompatActivity {
         });
         //
         //
-
+        notification_call=getIntent().getBooleanExtra("notif_bool",false);
+        //
+        if(notification_call){
+            Intent intent = new Intent(this, ReceiveNotificationActivity.class);
+            intent.putExtra("title", getIntent().getStringExtra("title"));
+            intent.putExtra("message", getIntent().getStringExtra("message"));
+            startActivity(intent);
+        }
+        //
         //User Location
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
@@ -240,5 +250,4 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ViewLogsRecyclerActivity.class);
         startActivity(intent);
     }
-
 }
