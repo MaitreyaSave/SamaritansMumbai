@@ -1,4 +1,4 @@
-package in.apps.maitreya.samaritansmumbai;
+package in.apps.maitreya.samaritansmumbai.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,13 +11,17 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import in.apps.maitreya.samaritansmumbai.R;
+import in.apps.maitreya.samaritansmumbai.activities.ReceiveNotificationActivity;
+import in.apps.maitreya.samaritansmumbai.classes.NotificationMessage;
+
 /**
  * Created by Maitreya on 2/4/2018.
  *
  */
 
 public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdapter.ViewHolder>{
-    private List<AdminMessage> mDataset;
+    private List<NotificationMessage> mDataset;
     private Context ctx;
 
     // Provide a reference to the views for each data item
@@ -33,7 +37,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    NotificationsAdapter(List<AdminMessage> myDataset, Context context) {
+    public NotificationsAdapter(List<NotificationMessage> myDataset, Context context) {
         mDataset = myDataset;
         ctx = context;
     }
@@ -63,7 +67,7 @@ public class NotificationsAdapter extends RecyclerView.Adapter<NotificationsAdap
         notification_title = holder.mView.findViewById(R.id.card_view_notification_title);
 
         notification_title.setText(mDataset.get(position).getTitle());
-
+        //
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

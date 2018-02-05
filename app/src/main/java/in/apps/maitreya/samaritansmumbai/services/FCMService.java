@@ -1,4 +1,4 @@
-package in.apps.maitreya.samaritansmumbai;
+package in.apps.maitreya.samaritansmumbai.services;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -11,6 +11,9 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import in.apps.maitreya.samaritansmumbai.R;
+import in.apps.maitreya.samaritansmumbai.activities.StartActivity;
 
 /**
  * Created by Maitreya on 2/2/2018.
@@ -60,7 +63,7 @@ public class FCMService extends FirebaseMessagingService {
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this,"3")
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.ic_notification_logo)
                 .setContentTitle(notificationTitle)
                 .setContentText(notificationBody)
                 .setAutoCancel(true)

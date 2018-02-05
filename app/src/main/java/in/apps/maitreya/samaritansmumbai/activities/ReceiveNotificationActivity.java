@@ -1,4 +1,4 @@
-package in.apps.maitreya.samaritansmumbai;
+package in.apps.maitreya.samaritansmumbai.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import in.apps.maitreya.samaritansmumbai.R;
 
 public class ReceiveNotificationActivity extends AppCompatActivity {
     TextView title_tv,message_tv;

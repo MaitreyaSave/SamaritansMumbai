@@ -1,4 +1,4 @@
-package in.apps.maitreya.samaritansmumbai;
+package in.apps.maitreya.samaritansmumbai.classes;
 
 import android.app.Activity;
 import android.content.Context;
@@ -22,6 +22,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import in.apps.maitreya.samaritansmumbai.activities.CreateUserActivity;
+
 import static android.content.ContentValues.TAG;
 
 /**
@@ -29,8 +31,8 @@ import static android.content.ContentValues.TAG;
  *
  */
 
-abstract class Functions {
-    static boolean showGPSDisabledAlertToUser(final Activity a) {
+public abstract class Functions {
+    public static boolean showGPSDisabledAlertToUser(final Activity a) {
         final boolean[] result = {false};
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(a);
         alertDialogBuilder.setTitle("Enable GPS?");
@@ -80,7 +82,7 @@ abstract class Functions {
         return result[0];
     }
     @RequiresApi(api = Build.VERSION_CODES.M)
-    static boolean checkPermissions(Activity a, int permissionsRequest, LocationManager locationManager) {
+    public static boolean checkPermissions(Activity a, int permissionsRequest, LocationManager locationManager) {
         boolean result = false;
         if (ActivityCompat.checkSelfPermission(a, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             a.requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
@@ -97,7 +99,7 @@ abstract class Functions {
         return result;
     }
 
-    static boolean isNetworkAvailable(Activity a) {
+    public static boolean isNetworkAvailable(Activity a) {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) a.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = null;
@@ -106,7 +108,7 @@ abstract class Functions {
         }
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
-    static void signIn(String email, String password, final Activity activity, final boolean create_user){
+    public static void signIn(String email, String password, final Activity activity, final boolean create_user){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
@@ -134,7 +136,7 @@ abstract class Functions {
                 });
     }
 
-    static void signOut(Activity activity){
+    public static void signOut(Activity activity){
         FirebaseAuth.getInstance().signOut();
         activity.finish();
         activity.startActivity(activity.getIntent());

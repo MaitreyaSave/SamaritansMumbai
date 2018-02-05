@@ -1,4 +1,4 @@
-package in.apps.maitreya.samaritansmumbai;
+package in.apps.maitreya.samaritansmumbai.classes;
 
 import com.google.firebase.database.Exclude;
 
@@ -13,7 +13,7 @@ import java.util.Map;
 public class User {
     private String role, email, username, uid;
     private long timestamp;
-    User(String username, String email, String role){
+    public User(String username, String email, String role){
         this.username = username;
         this.email = email;
         this.role = role;
@@ -23,7 +23,7 @@ public class User {
         return uid;
     }
 
-    void setUid(String uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 
@@ -55,7 +55,7 @@ public class User {
         return timestamp;
     }
 
-    void setTimestamp(long timestamp) {
+    public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
 

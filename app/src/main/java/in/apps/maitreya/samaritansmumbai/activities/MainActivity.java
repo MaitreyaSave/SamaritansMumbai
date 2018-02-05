@@ -1,4 +1,4 @@
-package in.apps.maitreya.samaritansmumbai;
+package in.apps.maitreya.samaritansmumbai.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -34,13 +34,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.apps.maitreya.samaritansmumbai.R;
+import in.apps.maitreya.samaritansmumbai.adapters.NotificationsAdapter;
+import in.apps.maitreya.samaritansmumbai.classes.Functions;
+import in.apps.maitreya.samaritansmumbai.classes.NotificationMessage;
+
 public class MainActivity extends AppCompatActivity {
-    //
-    private boolean notification_call=false;
     //
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private List<AdminMessage> adminMessages;
+    private List<NotificationMessage> notificationMessages;
     //
     private TextView mTextMessage;
     private LinearLayout dash_LL, notif_LL;
@@ -105,9 +108,9 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         //
-        adminMessages = new ArrayList<>();
+        notificationMessages = new ArrayList<>();
         //
-        mAdapter = new NotificationsAdapter(adminMessages, this);
+        mAdapter = new NotificationsAdapter(notificationMessages, this);
         mRecyclerView.setAdapter(mAdapter);
         //
 
@@ -115,9 +118,9 @@ public class MainActivity extends AppCompatActivity {
         ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                AdminMessage adminMessage = dataSnapshot.getValue(AdminMessage.class);
-                adminMessages.add(adminMessage);
-                mAdapter = new NotificationsAdapter(adminMessages,MainActivity.this);
+                NotificationMessage notificationMessage = dataSnapshot.getValue(NotificationMessage.class);
+                notificationMessages.add(notificationMessage);
+                mAdapter = new NotificationsAdapter(notificationMessages,MainActivity.this);
                 mRecyclerView.setAdapter(mAdapter);
             }
 
@@ -128,8 +131,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                AdminMessage adminMessage = dataSnapshot.getValue(AdminMessage.class);
-                adminMessages.remove(adminMessage);
+                NotificationMessage notificationMessage = dataSnapshot.getValue(NotificationMessage.class);
+                notificationMessages.remove(notificationMessage);
             }
 
             @Override
@@ -144,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         });
         //
         //
-        notification_call=getIntent().getBooleanExtra("notif_bool",false);
+        boolean notification_call = getIntent().getBooleanExtra("notif_bool", false);
         //
         if(notification_call){
             Intent intent = new Intent(this, ReceiveNotificationActivity.class);

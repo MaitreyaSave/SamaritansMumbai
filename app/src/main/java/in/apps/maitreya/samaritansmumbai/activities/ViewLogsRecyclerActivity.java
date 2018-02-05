@@ -1,4 +1,4 @@
-package in.apps.maitreya.samaritansmumbai;
+package in.apps.maitreya.samaritansmumbai.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +16,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import in.apps.maitreya.samaritansmumbai.R;
+import in.apps.maitreya.samaritansmumbai.adapters.LogsAdapter;
+import in.apps.maitreya.samaritansmumbai.classes.LogEntry;
 
 public class ViewLogsRecyclerActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;

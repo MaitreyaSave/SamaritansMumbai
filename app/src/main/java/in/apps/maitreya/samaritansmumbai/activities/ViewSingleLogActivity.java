@@ -1,8 +1,11 @@
-package in.apps.maitreya.samaritansmumbai;
+package in.apps.maitreya.samaritansmumbai.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+
+import in.apps.maitreya.samaritansmumbai.R;
+import in.apps.maitreya.samaritansmumbai.classes.LogEntry;
 
 public class ViewSingleLogActivity extends AppCompatActivity {
     TextView sams_name,date,sams_pseudo_name,sr_no,time,duration,leader_name,leader_msg,suicide_qn,refer_PU,self_assessment,caller_name,age,gender,tel_door,new_old,language,frequent_caller,caller_support,occupation,problem_nature,risk_level,plan,attempt,gist,feelings_addressed,volunteers_response,call_end;
@@ -14,34 +17,34 @@ public class ViewSingleLogActivity extends AppCompatActivity {
         LogEntry logEntry = (LogEntry) getIntent().getSerializableExtra("LogEntry");
         //
         //Initialize text views
-        sams_name = (TextView) findViewById(R.id.single_log_sams_name);
-        date = (TextView) findViewById(R.id.single_log_date);
-        sams_pseudo_name = (TextView) findViewById(R.id.single_log_pseudo_name);
-        sr_no = (TextView) findViewById(R.id.single_log_srno);
-        time = (TextView) findViewById(R.id.single_log_time);
-        duration = (TextView) findViewById(R.id.single_log_duration);
-        leader_name = (TextView) findViewById(R.id.single_log_leader_name);
-        leader_msg = (TextView) findViewById(R.id.single_log_leader_msg);
-        suicide_qn = (TextView) findViewById(R.id.single_log_suicide_qn);
-        refer_PU = (TextView) findViewById(R.id.single_log_PU_referred);
-        self_assessment = (TextView) findViewById(R.id.single_log_self_assessment);
-        caller_name = (TextView) findViewById(R.id.single_log_caller_name);
-        age = (TextView) findViewById(R.id.single_log_age);
-        gender = (TextView) findViewById(R.id.single_log_gender);
-        new_old = (TextView) findViewById(R.id.single_log_old_new);
-        frequent_caller = (TextView) findViewById(R.id.single_log_frequent_caller);
-        tel_door = (TextView) findViewById(R.id.single_log_tel_door);
-        language = (TextView) findViewById(R.id.single_log_language);
-        occupation = (TextView) findViewById(R.id.single_log_occupation);
-        caller_support = (TextView) findViewById(R.id.single_log_support);
-        problem_nature = (TextView) findViewById(R.id.single_log_problem_nature);
-        risk_level = (TextView) findViewById(R.id.single_log_risk_level);
-        attempt = (TextView) findViewById(R.id.single_log_attempt);
-        plan = (TextView) findViewById(R.id.single_log_plan);
-        gist = (TextView) findViewById(R.id.single_log_gist);
-        feelings_addressed = (TextView) findViewById(R.id.single_log_feelings_addressed);
-        volunteers_response = (TextView) findViewById(R.id.single_log_volunteers_response);
-        call_end = (TextView) findViewById(R.id.single_log_call_end);
+        sams_name = findViewById(R.id.single_log_sams_name);
+        date = findViewById(R.id.single_log_date);
+        sams_pseudo_name = findViewById(R.id.single_log_pseudo_name);
+        sr_no = findViewById(R.id.single_log_srno);
+        time = findViewById(R.id.single_log_time);
+        duration = findViewById(R.id.single_log_duration);
+        leader_name = findViewById(R.id.single_log_leader_name);
+        leader_msg = findViewById(R.id.single_log_leader_msg);
+        suicide_qn = findViewById(R.id.single_log_suicide_qn);
+        refer_PU = findViewById(R.id.single_log_PU_referred);
+        self_assessment = findViewById(R.id.single_log_self_assessment);
+        caller_name = findViewById(R.id.single_log_caller_name);
+        age = findViewById(R.id.single_log_age);
+        gender = findViewById(R.id.single_log_gender);
+        new_old = findViewById(R.id.single_log_old_new);
+        frequent_caller = findViewById(R.id.single_log_frequent_caller);
+        tel_door = findViewById(R.id.single_log_tel_door);
+        language = findViewById(R.id.single_log_language);
+        occupation = findViewById(R.id.single_log_occupation);
+        caller_support = findViewById(R.id.single_log_support);
+        problem_nature = findViewById(R.id.single_log_problem_nature);
+        risk_level = findViewById(R.id.single_log_risk_level);
+        attempt = findViewById(R.id.single_log_attempt);
+        plan = findViewById(R.id.single_log_plan);
+        gist = findViewById(R.id.single_log_gist);
+        feelings_addressed = findViewById(R.id.single_log_feelings_addressed);
+        volunteers_response = findViewById(R.id.single_log_volunteers_response);
+        call_end = findViewById(R.id.single_log_call_end);
 
         //
         //set values to text views

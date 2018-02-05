@@ -1,7 +1,8 @@
-package in.apps.maitreya.samaritansmumbai;
+package in.apps.maitreya.samaritansmumbai.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,7 +12,11 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.messaging.FirebaseMessaging;
+
+import in.apps.maitreya.samaritansmumbai.R;
+import in.apps.maitreya.samaritansmumbai.classes.NotificationMessage;
 
 public class SendNotificationActivity extends AppCompatActivity {
     private EditText title, message;
@@ -57,7 +62,8 @@ public class SendNotificationActivity extends AppCompatActivity {
         //Toast.makeText(this, "Subscribed to Topic: Notifications", Toast.LENGTH_SHORT).show();
     }
     public void sendMessage() {
-        myRef.push().setValue(new AdminMessage(title.getText().toString(), message.getText().toString()));
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        myRef.push().setValue(new NotificationMessage(title.getText().toString(), message.getText().toString(),pref.getString("time_stamp","-1")));
         Toast.makeText(this, "Message Sent", Toast.LENGTH_SHORT).show();
     }
 

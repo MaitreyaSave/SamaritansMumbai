@@ -1,4 +1,4 @@
-package in.apps.maitreya.samaritansmumbai;
+package in.apps.maitreya.samaritansmumbai.activities;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -41,6 +41,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import in.apps.maitreya.samaritansmumbai.R;
+import in.apps.maitreya.samaritansmumbai.classes.LogEntry;
 
 public class LogEntryActivity extends AppCompatActivity {
 
@@ -104,10 +107,10 @@ public class LogEntryActivity extends AppCompatActivity {
         /*
       The {@link ViewPager} that will host the section contents.
      */
-        ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
+        ViewPager mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        final TabLayout tabLayout = findViewById(R.id.tabs);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
@@ -139,7 +142,7 @@ public class LogEntryActivity extends AppCompatActivity {
         pref = getSharedPreferences("MyPref", 0); // 0 - for private mode
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.submit_caller_fab);
+        FloatingActionButton fab = findViewById(R.id.submit_caller_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -159,23 +162,23 @@ public class LogEntryActivity extends AppCompatActivity {
 
                         //Get values
                         //
-                        EditText name_et = (EditText) rView.findViewById(R.id.cd_name_val);
-                        EditText age_et = (EditText) rView.findViewById(R.id.cd_age_val);
-                        EditText time_hours_et =(EditText) rView.findViewById(R.id.cd_time_hours);
-                        EditText time_mins_et = (EditText) rView.findViewById(R.id.cd_time_mins);
-                        EditText duration_hours_et =(EditText) rView.findViewById(R.id.cd_duration_hours_val);
-                        EditText duration_mins_et = (EditText) rView.findViewById(R.id.cd_duration_mins_val);
-                        EditText plan_et = (EditText) rView.findViewById(R.id.cd_plan_val);
-                        EditText attempt_et = (EditText) rView.findViewById(R.id.cd_attempt_val);
+                        EditText name_et = rView.findViewById(R.id.cd_name_val);
+                        EditText age_et = rView.findViewById(R.id.cd_age_val);
+                        EditText time_hours_et = rView.findViewById(R.id.cd_time_hours);
+                        EditText time_mins_et = rView.findViewById(R.id.cd_time_mins);
+                        EditText duration_hours_et = rView.findViewById(R.id.cd_duration_hours_val);
+                        EditText duration_mins_et = rView.findViewById(R.id.cd_duration_mins_val);
+                        EditText plan_et = rView.findViewById(R.id.cd_plan_val);
+                        EditText attempt_et = rView.findViewById(R.id.cd_attempt_val);
                         //
-                        EditText gist_et = (EditText) findViewById(R.id.cd_gist_et);
-                        EditText feelings_et = (EditText) findViewById(R.id.cd_feelings_addressed_et);
-                        EditText volunteers_response_et = (EditText) findViewById(R.id.cd_volunteers_response_et);
-                        EditText call_end_et = (EditText) findViewById(R.id.cd_call_end_et);
+                        EditText gist_et = findViewById(R.id.cd_gist_et);
+                        EditText feelings_et = findViewById(R.id.cd_feelings_addressed_et);
+                        EditText volunteers_response_et = findViewById(R.id.cd_volunteers_response_et);
+                        EditText call_end_et = findViewById(R.id.cd_call_end_et);
                         //
-                        EditText sams_leader_name_et = (EditText) rView.findViewById(R.id.sams_leader_name_val);
-                        EditText leader_msg_et = (EditText) rView.findViewById(R.id.sams_leader_msg_val);
-                        EditText pseudo_name_et = (EditText) rView.findViewById(R.id.sams_pseudo_name_val);
+                        EditText sams_leader_name_et = rView.findViewById(R.id.sams_leader_name_val);
+                        EditText leader_msg_et = rView.findViewById(R.id.sams_leader_msg_val);
+                        EditText pseudo_name_et = rView.findViewById(R.id.sams_pseudo_name_val);
                         //
 
                         //
@@ -331,14 +334,14 @@ public class LogEntryActivity extends AppCompatActivity {
 
             //
             //Initialize Values
-            tv_cd_date_val = (TextView) rootView.findViewById(R.id.cd_date_val);
-            tv_cd_sams_name_val = (TextView) rootView.findViewById(R.id.sams_name_tv_val);
+            tv_cd_date_val = rootView.findViewById(R.id.cd_date_val);
+            tv_cd_sams_name_val = rootView.findViewById(R.id.sams_name_tv_val);
 
             //
             //Initializes Layouts
-            tab1 = (LinearLayout) rootView.findViewById(R.id.tab_linear_layout_child1);
-            tab2 = (LinearLayout) rootView.findViewById(R.id.tab_linear_layout_child2);
-            tab3 = (LinearLayout) rootView.findViewById(R.id.tab_linear_layout_child3);
+            tab1 = rootView.findViewById(R.id.tab_linear_layout_child1);
+            tab2 = rootView.findViewById(R.id.tab_linear_layout_child2);
+            tab3 = rootView.findViewById(R.id.tab_linear_layout_child3);
 
             //Shared Preferences time stamp
             String timestamp_long=pref.getString("time_stamp", "-1");
@@ -353,7 +356,7 @@ public class LogEntryActivity extends AppCompatActivity {
 
             //
             //Spinner for Nature of Problem
-            Spinner spinner = (Spinner) rootView.findViewById(R.id.spinner_cd_problem_nature_val);
+            Spinner spinner = rootView.findViewById(R.id.spinner_cd_problem_nature_val);
             // Create an ArrayAdapter using the string array and a default spinner layout
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
                     R.array.nature_array, android.R.layout.simple_spinner_item);
@@ -376,7 +379,7 @@ public class LogEntryActivity extends AppCompatActivity {
             //Spinner for Time
             //
             //AMPM
-            Spinner spinner_ampm = (Spinner) rootView.findViewById(R.id.spinner_cd_ampm);
+            Spinner spinner_ampm = rootView.findViewById(R.id.spinner_cd_ampm);
             ArrayAdapter<CharSequence> adapter_ampm = ArrayAdapter.createFromResource(getContext(),
                     R.array.am_pm_array, android.R.layout.simple_spinner_item);
             adapter_ampm.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -397,35 +400,35 @@ public class LogEntryActivity extends AppCompatActivity {
             //Workaround to solve edit text refresh bug for tab1 and tab3
             //for tab1
 
-            final EditText hours_et = (EditText) rootView.findViewById(R.id.cd_time_hours);
+            final EditText hours_et = rootView.findViewById(R.id.cd_time_hours);
             hours_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
                     hours = hours_et.getText().toString();
                 }
             });
-            final EditText mins_et = (EditText) rootView.findViewById(R.id.cd_time_mins);
+            final EditText mins_et = rootView.findViewById(R.id.cd_time_mins);
             mins_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
                     mins = mins_et.getText().toString();
                 }
             });
-            final EditText hours_duration_et = (EditText) rootView.findViewById(R.id.cd_duration_hours_val);
+            final EditText hours_duration_et = rootView.findViewById(R.id.cd_duration_hours_val);
             hours_duration_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
                     duration_hours= hours_duration_et.getText().toString();
                 }
             });
-            final EditText mins_duration_et = (EditText) rootView.findViewById(R.id.cd_duration_mins_val);
+            final EditText mins_duration_et = rootView.findViewById(R.id.cd_duration_mins_val);
             mins_duration_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
                     duration_mins= mins_duration_et.getText().toString();
                 }
             });
-            final EditText name_et = (EditText) rootView.findViewById(R.id.cd_name_val);
+            final EditText name_et = rootView.findViewById(R.id.cd_name_val);
             name_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
@@ -436,7 +439,7 @@ public class LogEntryActivity extends AppCompatActivity {
                     }
                 }
             });
-            final EditText age_et = (EditText) rootView.findViewById(R.id.cd_age_val);
+            final EditText age_et = rootView.findViewById(R.id.cd_age_val);
             age_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
@@ -447,7 +450,7 @@ public class LogEntryActivity extends AppCompatActivity {
                     }
                 }
             });
-            final EditText plan_et = (EditText) rootView.findViewById(R.id.cd_plan_val);
+            final EditText plan_et = rootView.findViewById(R.id.cd_plan_val);
             plan_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
@@ -458,7 +461,7 @@ public class LogEntryActivity extends AppCompatActivity {
                     }
                 }
             });
-            final EditText attempt_et = (EditText) rootView.findViewById(R.id.cd_attempt_val);
+            final EditText attempt_et = rootView.findViewById(R.id.cd_attempt_val);
             attempt_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
@@ -471,7 +474,7 @@ public class LogEntryActivity extends AppCompatActivity {
             });
             //
             //for tab3
-            final EditText pseudo_name_et = (EditText) rootView.findViewById(R.id.sams_pseudo_name_val);
+            final EditText pseudo_name_et = rootView.findViewById(R.id.sams_pseudo_name_val);
             pseudo_name_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
@@ -483,7 +486,7 @@ public class LogEntryActivity extends AppCompatActivity {
 
                 }
             });
-            final EditText leader_name_et = (EditText) rootView.findViewById(R.id.sams_leader_name_val);
+            final EditText leader_name_et = rootView.findViewById(R.id.sams_leader_name_val);
             leader_name_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
@@ -494,7 +497,7 @@ public class LogEntryActivity extends AppCompatActivity {
                     }
                 }
             });
-            final EditText leader_msg_et = (EditText) rootView.findViewById(R.id.sams_leader_msg_val);
+            final EditText leader_msg_et = rootView.findViewById(R.id.sams_leader_msg_val);
             leader_msg_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
@@ -506,7 +509,7 @@ public class LogEntryActivity extends AppCompatActivity {
                 }
             });
             //for tab2
-            final EditText gist_et = (EditText) rootView.findViewById(R.id.cd_gist_et);
+            final EditText gist_et = rootView.findViewById(R.id.cd_gist_et);
             gist_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
@@ -517,7 +520,7 @@ public class LogEntryActivity extends AppCompatActivity {
                     }
                 }
             });
-            final EditText feelings_addressed_et = (EditText) rootView.findViewById(R.id.cd_feelings_addressed_et);
+            final EditText feelings_addressed_et = rootView.findViewById(R.id.cd_feelings_addressed_et);
             feelings_addressed_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
@@ -528,7 +531,7 @@ public class LogEntryActivity extends AppCompatActivity {
                     }
                 }
             });
-            final EditText volunteers_response_et = (EditText) rootView.findViewById(R.id.cd_volunteers_response_et);
+            final EditText volunteers_response_et = rootView.findViewById(R.id.cd_volunteers_response_et);
             volunteers_response_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
@@ -539,7 +542,7 @@ public class LogEntryActivity extends AppCompatActivity {
                     }
                 }
             });
-            final EditText call_end_et = (EditText) rootView.findViewById(R.id.cd_call_end_et);
+            final EditText call_end_et = rootView.findViewById(R.id.cd_call_end_et);
             call_end_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {

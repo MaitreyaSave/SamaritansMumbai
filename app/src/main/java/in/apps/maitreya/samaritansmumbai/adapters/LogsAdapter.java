@@ -1,4 +1,4 @@
-package in.apps.maitreya.samaritansmumbai;
+package in.apps.maitreya.samaritansmumbai.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
+
+import in.apps.maitreya.samaritansmumbai.R;
+import in.apps.maitreya.samaritansmumbai.activities.ViewSingleLogActivity;
+import in.apps.maitreya.samaritansmumbai.classes.LogEntry;
 
 /**
  * Created by Maitreya on 1/28/2018.
@@ -36,7 +40,7 @@ public class LogsAdapter extends RecyclerView.Adapter<LogsAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    LogsAdapter(List<LogEntry> myDataset, Context context) {
+    public LogsAdapter(List<LogEntry> myDataset, Context context) {
         mDataset = myDataset;
         ctx = context;
     }

@@ -1,4 +1,4 @@
-package in.apps.maitreya.samaritansmumbai;
+package in.apps.maitreya.samaritansmumbai.activities;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,6 +24,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import in.apps.maitreya.samaritansmumbai.classes.Functions;
+import in.apps.maitreya.samaritansmumbai.R;
+import in.apps.maitreya.samaritansmumbai.classes.User;
+
 
 public class CreateUserActivity extends AppCompatActivity {
 
@@ -37,12 +41,12 @@ public class CreateUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //
-        userEmail = (EditText) findViewById(R.id.create_user_email);
-        userName = (EditText) findViewById(R.id.create_user_name);
-        userPassword = (EditText) findViewById(R.id.create_user_password);
+        userEmail = findViewById(R.id.create_user_email);
+        userName = findViewById(R.id.create_user_name);
+        userPassword = findViewById(R.id.create_user_password);
 
         //Firebase
         mAuth = FirebaseAuth.getInstance();
