@@ -30,31 +30,62 @@
         <LinearLayout
             android:id="@+id/main_ll_dash"
             android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center"
+            android:orientation="vertical"
             android:layout_height="wrap_content">
-            <Button
-                android:id="@+id/addLog"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:text="@string/add_log_main"
-                android:onClick="addLogEntry"
-                tools:ignore="ButtonStyle" />
-            <Button
-                android:id="@+id/viewLogs"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
-                android:text="@string/view_logs_main"
-                android:onClick="viewLogs"
-                tools:ignore="ButtonStyle" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/addLog"
+                    android:layout_width="100dp"
+                    android:layout_height="70dp"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:text="@string/add_log_main"
+                    android:onClick="addLogEntry"
+                    tools:ignore="ButtonStyle" />
+                <Button
+                    android:id="@+id/viewLogs"
+                    android:layout_width="100dp"
+                    android:layout_height="70dp"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:text="@string/view_logs_main"
+                    android:onClick="viewLogs"
+                    tools:ignore="ButtonStyle" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/viewCallerProfiles"
+                    android:layout_width="100dp"
+                    android:layout_height="70dp"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:text="@string/view_caller_profiles"
+                    android:onClick="viewCallerProfiles"
+                    tools:ignore="ButtonStyle" />
+                <Button
+                    android:id="@+id/requestSub"
+                    android:layout_width="100dp"
+                    android:layout_height="70dp"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:text="@string/request_sub"
+                    android:onClick="requestSub"
+                    tools:ignore="ButtonStyle" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout

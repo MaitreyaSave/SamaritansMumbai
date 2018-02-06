@@ -79,6 +79,8 @@ public class LogEntryActivity extends AppCompatActivity {
     private String frequent_caller ="Yes";
     private static String plan;
     private static String attempt;
+    private static String secondary_nature ="N/A";
+
     public static  int cnt;
 
     @SuppressLint("StaticFieldLeak")
@@ -179,6 +181,7 @@ public class LogEntryActivity extends AppCompatActivity {
                         EditText sams_leader_name_et = rView.findViewById(R.id.sams_leader_name_val);
                         EditText leader_msg_et = rView.findViewById(R.id.sams_leader_msg_val);
                         EditText pseudo_name_et = rView.findViewById(R.id.sams_pseudo_name_val);
+                        EditText secondary_nature_et = rView.findViewById(R.id.cd_problem_nature_secondary_val);
                         //
 
                         //
@@ -217,6 +220,8 @@ public class LogEntryActivity extends AppCompatActivity {
                             sams_leader_name_et.clearFocus();
                         if(leader_msg_et.hasFocus())
                             leader_msg_et.clearFocus();
+                        if(secondary_nature_et.hasFocus())
+                            secondary_nature_et.clearFocus();
                         //
                         //Log.d(TAG,"temp_et_in");
 
@@ -229,7 +234,7 @@ public class LogEntryActivity extends AppCompatActivity {
                         //LogEntry logEntry = new LogEntry(cnt,timestamp,gist,sams_name,);
                         String time = hours+":"+mins+" "+ampm;
                         String duration = duration_hours+" hours "+duration_mins+" mins";
-                        LogEntry logEntry = new  LogEntry(cnt,timestamp,gist,sams_name,gender,tel_door,new_old,suicide_qn,risk_level,problem_nature,leader_name,pseudo_name,leader_spl_msg,name,age, caller_support,occupation,self_assessment,PU_referred,feelings_addressed,volunteers_response,call_end,time,duration,language,frequent_caller,plan,attempt);
+                        LogEntry logEntry = new  LogEntry(cnt,timestamp,gist,sams_name,gender,tel_door,new_old,suicide_qn,risk_level,problem_nature,leader_name,pseudo_name,leader_spl_msg,name,age, caller_support,occupation,self_assessment,PU_referred,feelings_addressed,volunteers_response,call_end,time,duration,language,frequent_caller,plan,attempt,secondary_nature);
                         final String child_sr_no = String.valueOf(cnt);
                         ref.child(child_sr_no).setValue(logEntry);
 
@@ -329,14 +334,10 @@ public class LogEntryActivity extends AppCompatActivity {
 
             //Layouts
             LinearLayout tab1,tab2,tab3;
-
-            //
-
             //
             //Initialize Values
             tv_cd_date_val = rootView.findViewById(R.id.cd_date_val);
             tv_cd_sams_name_val = rootView.findViewById(R.id.sams_name_tv_val);
-
             //
             //Initializes Layouts
             tab1 = rootView.findViewById(R.id.tab_linear_layout_child1);
@@ -508,6 +509,17 @@ public class LogEntryActivity extends AppCompatActivity {
                     }
                 }
             });
+            final EditText secondary_nature_et = rootView.findViewById(R.id.cd_problem_nature_secondary_val);
+            secondary_nature_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean b) {
+                    if( TextUtils.isEmpty(secondary_nature_et.getText())){
+                        secondary_nature="N/A";
+                    }else{
+                        secondary_nature = secondary_nature_et.getText().toString();
+                    }
+                }
+            });
             //for tab2
             final EditText gist_et = rootView.findViewById(R.id.cd_gist_et);
             gist_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -637,6 +649,10 @@ public class LogEntryActivity extends AppCompatActivity {
             case R.id.cd_radio_old:
                 if (checked)
                     new_old = ((RadioButton) view).getText().toString();
+                break;
+            case R.id.cd_radio_riskNA:
+                if (checked)
+                    risk_level = ((RadioButton) view).getText().toString();
                 break;
             case R.id.cd_radio_risk0:
                 if (checked)

@@ -21,7 +21,8 @@
     <!-- Strings related to Dashboard -->
     <string name="add_log_main">Add Log</string>
     <string name="view_logs_main">View Logs</string>
-
+    <string name="view_caller_profiles">Caller\nProfiles</string>
+    <string name="request_sub">Request Sub</string>
 
     <!-- Strings related to login -->
     <string name="title_activity_login">Sign in</string>
@@ -75,7 +76,7 @@
     <string name="cd_risk_1">1</string>
     <string name="cd_risk_2">2</string>
     <string name="cd_risk_3">3</string>
-    <string name="cd_nature_problem">Nature of Problem:</string>
+
     <string-array name="nature_array">
         <item>N/A</item>
         <item>1</item>
@@ -147,6 +148,10 @@
     <string name="cd_assess_lead">Lead</string>
     <string name="cd_assess_pushed">Pushed</string>
     <string name="cd_refer_PU">Referred to PU:</string>
+    <string name="cd_nature_problem">Nature of Problem:\n(Primary)</string>
+    <string name="cd_nature_problem_secondary">Nature of Problem:\n(Secondary)</string>
+    <string name="cd_nature_problem_secondary_view_single">(Secondary)</string>
+    <string name="cd_nature_problem_secondary_hint">comma separated</string>
 
     <!-- Strings related to view logs -->
     <string name="card_sams_name">Samaritan</string>

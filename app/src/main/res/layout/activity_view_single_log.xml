@@ -180,7 +180,7 @@
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
@@ -197,6 +197,12 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
+        <TextView
+            android:id="@+id/single_log_problem_nature_secondary"
+            android:text="@string/cd_nature_problem_secondary_view_single"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/single_log_plan"
             android:text="@string/cd_plan"

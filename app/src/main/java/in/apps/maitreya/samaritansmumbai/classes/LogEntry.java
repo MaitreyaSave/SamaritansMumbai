@@ -8,14 +8,14 @@ import java.io.Serializable;
  */
 
 public class LogEntry implements Serializable{
-    private String date,gist,sams_name,gender,tel_door,new_old,suicide_qn,risk_level,problem_nature,leader_name,pseudo_name,leader_spl_msg,name,age,support,occupation,self_assessment,PU_referred,feelings_addressed,volunteers_response,call_end,time,duration,language,frequent_caller,plan,attempt;
+    private String date,gist,sams_name,gender,tel_door,new_old,suicide_qn,risk_level,problem_nature,leader_name,pseudo_name,leader_spl_msg,name,age,support,occupation,self_assessment,PU_referred,feelings_addressed,volunteers_response,call_end,time,duration,language,frequent_caller,plan,attempt,problem_nature_secondary;
     private int sr_no;
 
     public LogEntry(){
         sr_no = -1;
     }
 
-    public LogEntry(int sr_no,String date,String gist,String sams_name, String gender,String tel_door,String new_old,String suicide_qn,String risk_level,String problem_nature, String leader_name, String pseudo_name, String leader_spl_msg, String name, String age, String support, String occupation, String self_assessment,String PU_referred, String feelings_addressed, String volunteers_response, String call_end, String time, String duration, String language, String frequent_caller, String plan, String attempt){
+    public LogEntry(int sr_no,String date,String gist,String sams_name, String gender,String tel_door,String new_old,String suicide_qn,String risk_level,String problem_nature, String leader_name, String pseudo_name, String leader_spl_msg, String name, String age, String support, String occupation, String self_assessment,String PU_referred, String feelings_addressed, String volunteers_response, String call_end, String time, String duration, String language, String frequent_caller, String plan, String attempt, String problem_nature_secondary){
         this.sr_no=sr_no;
         this.date=date;
         this.sams_name=sams_name;
@@ -44,7 +44,17 @@ public class LogEntry implements Serializable{
         this.frequent_caller=frequent_caller;
         this.plan=plan;
         this.attempt=attempt;
+        this.problem_nature_secondary=problem_nature_secondary;
     }
+
+    public String getProblem_nature_secondary() {
+        return problem_nature_secondary;
+    }
+
+    public void setProblem_nature_secondary(String problem_nature_secondary) {
+        this.problem_nature_secondary = problem_nature_secondary;
+    }
+
     public String getDate() {
         return date;
     }

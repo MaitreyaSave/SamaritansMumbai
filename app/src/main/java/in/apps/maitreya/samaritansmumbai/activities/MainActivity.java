@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -222,13 +223,12 @@ public class MainActivity extends AppCompatActivity {
             });
             //
 
-            Log.d("test_dis", "distance_loc " + mlocation);
             float distance = 101;
             if (mlocation != null) {
                 distance = mlocation.distanceTo(source);
             }
-            Log.d("test_dis", "distance " + distance);
-            if (distance <= 100) {
+            Toast.makeText(this, "distance "+distance, Toast.LENGTH_SHORT).show();
+            if (distance > 200) {
                 Intent intent = new Intent(this, LogEntryActivity.class);
                 startActivity(intent);
             } else {
@@ -252,5 +252,13 @@ public class MainActivity extends AppCompatActivity {
     public void viewLogs(View v) {
         Intent intent = new Intent(this, ViewLogsRecyclerActivity.class);
         startActivity(intent);
+    }
+
+    public void requestSub(View v){
+
+    }
+
+    public void viewCallerProfiles(View v){
+
     }
 }
