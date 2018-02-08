@@ -1,5 +1,6 @@
 package in.apps.maitreya.samaritansmumbai.activities;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -23,9 +24,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -49,8 +47,34 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextMessage;
     private LinearLayout dash_LL, notif_LL;
     LocationManager locationManager;
-    private FusedLocationProviderClient mFusedLocationClient;
     private Location mlocation;
+    private int LOCATION_UPDATE_MIN_TIME = 500, LOCATION_UPDATE_MIN_DISTANCE = 0;
+    private LocationListener mLocationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            if (location != null) {
+                Log.d("test_dis", "Location is " + location);
+                locationManager.removeUpdates(mLocationListener);
+            } else {
+                Log.d("test_dis", "Location is null");
+            }
+        }
+
+        @Override
+        public void onStatusChanged(String s, int i, Bundle bundle) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String s) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String s) {
+
+        }
+    };
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 0;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -90,10 +114,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         //
-        //Location manager
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
+        getLocation();
         //
         //Recycler view
         mRecyclerView = findViewById(R.id.recycler_view_notifications);
@@ -121,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 NotificationMessage notificationMessage = dataSnapshot.getValue(NotificationMessage.class);
                 notificationMessages.add(notificationMessage);
-                mAdapter = new NotificationsAdapter(notificationMessages,MainActivity.this);
+                mAdapter = new NotificationsAdapter(notificationMessages, MainActivity.this);
                 mRecyclerView.setAdapter(mAdapter);
             }
 
@@ -150,52 +171,51 @@ public class MainActivity extends AppCompatActivity {
         //
         boolean notification_call = getIntent().getBooleanExtra("notif_bool", false);
         //
-        if(notification_call){
+        if (notification_call) {
             Intent intent = new Intent(this, ReceiveNotificationActivity.class);
             intent.putExtra("title", getIntent().getStringExtra("title"));
             intent.putExtra("message", getIntent().getStringExtra("message"));
             startActivity(intent);
         }
         //
+
+
+        //
+
+    }
+
+    public void getLocation() {
+        //Location manager
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         //User Location
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
+        boolean isGPSEnabled = false,isNetworkEnabled = false;
+        if (locationManager != null) {
+            isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         }
-        mFusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                mlocation = location;
+
+        if (!(isGPSEnabled || isNetworkEnabled))
+            Toast.makeText(this, "Please enable GPS to add logs", Toast.LENGTH_SHORT).show();
+        else {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
             }
-        });
+            if (isNetworkEnabled) {
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+                        LOCATION_UPDATE_MIN_TIME, LOCATION_UPDATE_MIN_DISTANCE, mLocationListener);
+                mlocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            }
+
+            if (isGPSEnabled) {
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                        LOCATION_UPDATE_MIN_TIME, LOCATION_UPDATE_MIN_DISTANCE, mLocationListener);
+                mlocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            }
+        }
         //
-        locationManager.requestLocationUpdates(
-                LocationManager.GPS_PROVIDER, 2 * 1000, 10, new LocationListener() {
-                    @Override
-                    public void onLocationChanged(Location location) {
-                        mlocation = location;
-                    }
-
-                    @Override
-                    public void onStatusChanged(String s, int i, Bundle bundle) {
-
-                    }
-
-                    @Override
-                    public void onProviderEnabled(String s) {
-
-                    }
-
-                    @Override
-                    public void onProviderDisabled(String s) {
-
-                    }
-                });
-        //
-
+        mlocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         Log.d("test_dis", "loc_m " + mlocation);
         //
-
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -212,9 +232,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             //User Location
-            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                return;
-            }
+            getLocation();
 
             float distance = 101;
             if (mlocation != null) {
