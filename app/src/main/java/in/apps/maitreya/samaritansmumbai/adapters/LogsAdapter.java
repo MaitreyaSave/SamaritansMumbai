@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -109,12 +110,17 @@ public class LogsAdapter extends RecyclerView.Adapter<LogsAdapter.ViewHolder> {
             }
         });
         //
+        Log.d("test_recycler","pos "+position);
+        Log.d("test_recycler1","name "+mDataset.get(position).getSams_name());
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
         if (firebaseUser != null) {
             String fname = firebaseUser.getDisplayName();
             if (fname != null && fname.equals(mDataset.get(position).getSams_name())) {
                 cardView.setBackgroundColor(ctx.getResources().getColor(R.color.colorAccent));
+            }
+            else {
+                cardView.setBackgroundColor(ctx.getResources().getColor(R.color.white));
             }
         }
 

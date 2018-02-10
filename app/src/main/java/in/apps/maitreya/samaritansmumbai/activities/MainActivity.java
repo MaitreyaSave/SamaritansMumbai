@@ -114,7 +114,8 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         //
-        getLocation();
+        //Location manager
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         //
         //Recycler view
         mRecyclerView = findViewById(R.id.recycler_view_notifications);
@@ -185,8 +186,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getLocation() {
-        //Location manager
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
         //User Location
         boolean isGPSEnabled = false,isNetworkEnabled = false;
         if (locationManager != null) {
