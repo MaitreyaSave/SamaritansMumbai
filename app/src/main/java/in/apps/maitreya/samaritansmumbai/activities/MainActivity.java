@@ -3,6 +3,7 @@ package in.apps.maitreya.samaritansmumbai.activities;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -24,21 +25,37 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import in.apps.maitreya.samaritansmumbai.R;
 import in.apps.maitreya.samaritansmumbai.adapters.NotificationsAdapter;
+import in.apps.maitreya.samaritansmumbai.classes.AttendaceLog;
 import in.apps.maitreya.samaritansmumbai.classes.Functions;
 import in.apps.maitreya.samaritansmumbai.classes.NotificationMessage;
 
 public class MainActivity extends AppCompatActivity {
+    //
+    private static boolean isCheckedIn = false;
+    FirebaseDatabase database;
+    DatabaseReference myRef;
+    private static int countOccurrences=0;
+    FirebaseUser currentUser;
+    SharedPreferences pref;
+    AttendaceLog attendaceLog;
     //
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -48,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout dash_LL, notif_LL;
     LocationManager locationManager;
     private Location mlocation;
-    private int LOCATION_UPDATE_MIN_TIME = 500, LOCATION_UPDATE_MIN_DISTANCE = 0;
     private LocationListener mLocationListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
@@ -105,6 +121,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mTextMessage = findViewById(R.id.message);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+        pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
         //
         dash_LL = findViewById(R.id.main_ll_dash);
         notif_LL = findViewById(R.id.main_ll_notif);
@@ -200,6 +219,8 @@ public class MainActivity extends AppCompatActivity {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
+            int LOCATION_UPDATE_MIN_TIME = 500;
+            int LOCATION_UPDATE_MIN_DISTANCE = 0;
             if (isNetworkEnabled) {
                 locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
                         LOCATION_UPDATE_MIN_TIME, LOCATION_UPDATE_MIN_DISTANCE, mLocationListener);
@@ -217,9 +238,9 @@ public class MainActivity extends AppCompatActivity {
         Log.d("test_dis", "loc_m " + mlocation);
         //
     }
-
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public void addLogEntry(View v) {
+    public boolean checkDistance(){
+        boolean checkBool = false;
         if (Functions.checkPermissions(this, MY_PERMISSIONS_REQUEST_LOCATION, locationManager)) {
 
             //Samaritans Location
@@ -238,8 +259,17 @@ public class MainActivity extends AppCompatActivity {
             if (mlocation != null) {
                 distance = mlocation.distanceTo(source);
             }
-            Toast.makeText(this, "distance "+distance, Toast.LENGTH_SHORT).show();
-            if (distance > 200) {
+
+            checkBool = (distance > 200);
+        }
+        return checkBool;
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void addLogEntry(View v) {
+
+            if (checkDistance()) {
                 Intent intent = new Intent(this, LogEntryActivity.class);
                 startActivity(intent);
             } else {
@@ -256,8 +286,6 @@ public class MainActivity extends AppCompatActivity {
                 AlertDialog alert = alertDialogBuilder.create();
                 alert.show();
             }
-
-        }
     }
 
     public void viewLogs(View v) {
@@ -271,5 +299,102 @@ public class MainActivity extends AppCompatActivity {
 
     public void viewCallerProfiles(View v){
 
+    }
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void checkIn(View v){
+        if (checkDistance()) {
+            if(isCheckedIn){
+                Toast.makeText(this, "Already checked-in", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            isCheckedIn = true;
+
+            String timestamp_long = pref.getString("time_stamp","-1");
+            //date
+            long ts = Long.parseLong(timestamp_long);
+            Date date = new Date(ts);
+            //time-in
+            SimpleDateFormat df2 = new SimpleDateFormat("h:mm a", Locale.UK);
+            String time_in_string = df2.format(date);
+
+            Log.d("timestamp_val","check_in "+timestamp_long);
+
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putString("check_in", time_in_string); // Storing string
+            editor.apply();
+
+            countOccurrences=0;
+            Toast.makeText(this, "checked-in", Toast.LENGTH_SHORT).show();
+
+        } else {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle("Location Error");
+            alertDialogBuilder.setMessage("You cannot check-in outside of Samaritans!")
+                    .setCancelable(false)
+                    .setPositiveButton("Ok",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+            AlertDialog alert = alertDialogBuilder.create();
+            alert.show();
+        }
+    }
+    public void checkOut(View v){
+        if(isCheckedIn){
+            isCheckedIn = false;
+            //
+            database = FirebaseDatabase.getInstance();
+            myRef = database.getReference("attendance");
+            //name
+            String uname="N/A";
+            if (currentUser != null) {
+                uname=currentUser.getDisplayName();
+            }
+            //
+            //time-in
+            final String time_in_string = pref.getString("check_in","-1");
+            //shift
+            final String shift= pref.getString("shift","-1");
+            //
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users/"+currentUser.getUid()+"/");
+            ref.child("timestamp").setValue(ServerValue.TIMESTAMP);
+            final String finalUname = uname;
+            ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    if(countOccurrences<1) {
+                        Long timestamp = (Long) snapshot.child("timestamp").getValue();
+                        if (timestamp != null) {
+                            Log.d("timestamp_val", "updated main " + timestamp);
+                            //time-out
+                            Date date = new Date(timestamp);
+                            SimpleDateFormat df1 = new SimpleDateFormat("h:mm a", Locale.UK);
+                            String time_out_string = df1.format(date);
+                            //date
+                            SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yyyy", Locale.UK);
+                            String date_string = df2.format(date);
+
+                            attendaceLog = new AttendaceLog(finalUname, date_string, shift, time_in_string, time_out_string);
+                            //
+                            myRef.push().setValue(attendaceLog);
+                            countOccurrences++;
+                        }
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+            //
+            Toast.makeText(this, "checked-out", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(this, "Cannot check-out without checking-in", Toast.LENGTH_SHORT).show();
+        }
     }
 }

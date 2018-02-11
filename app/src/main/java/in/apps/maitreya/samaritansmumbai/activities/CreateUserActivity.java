@@ -8,8 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,7 +37,7 @@ public class CreateUserActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private static final String TAG = CreateUserActivity.class.getName();
     private EditText userEmail, userName, userPassword;
-    private String role;
+    private String role,shift_day,shift_time;
     boolean doubleBackToExitPressedOnce = false;
 
     @Override
@@ -53,6 +56,48 @@ public class CreateUserActivity extends AppCompatActivity {
 
         //Default value of radio button
         role = "user";
+
+        //
+        //Spinner for Shift Day
+        Spinner spinner = findViewById(R.id.spinner_cu_shift_day_val);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.shift_day_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                shift_day = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        //Spinner for Shift Time
+        Spinner spinner1 = findViewById(R.id.spinner_cu_shift_time_val);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
+                R.array.shift_time_array, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner1.setAdapter(adapter1);
+        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                shift_time = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
     }
     public void onRadioButtonClicked(View view) {
@@ -103,7 +148,7 @@ public class CreateUserActivity extends AppCompatActivity {
 
 
                                 // Database entry
-                                User user = new User(name,email,role);
+                                User user = new User(name,email,role,shift_day,shift_time);
                                 String userId = FirebaseAuth.getInstance().getUid();
                                 user.setUid(userId);
                                 user.setTimestamp(ts);

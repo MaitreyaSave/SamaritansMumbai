@@ -23,6 +23,8 @@
     <string name="view_logs_main">View Logs</string>
     <string name="view_caller_profiles">Caller\nProfiles</string>
     <string name="request_sub">Request Sub</string>
+    <string name="check_in">Check-In</string>
+    <string name="check_out">Check-Out</string>
 
     <!-- Strings related to login -->
     <string name="title_activity_login">Sign in</string>
@@ -44,6 +46,23 @@
     <string name="submit_user">Submit</string>
     <string name="radio_admin">admin</string>
     <string name="radio_user">user</string>
+    <string name="shift_day">Shift Day</string>
+    <string-array name="shift_day_array">
+        <item>N/A</item>
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
+    <string name="shift_time">Shift Time</string>
+    <string-array name="shift_time_array">
+        <item>N/A</item>
+        <item>3 to 6 pm</item>
+        <item>6 to 9 pm</item>
+    </string-array>
     <string name="proceed_create_user">Proceed to Create User</string>
 
     <!-- Strings related to caller details -->

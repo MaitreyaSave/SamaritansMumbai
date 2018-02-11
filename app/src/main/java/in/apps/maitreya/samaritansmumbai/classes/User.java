@@ -11,12 +11,30 @@ import java.util.Map;
  */
 
 public class User {
-    private String role, email, username, uid;
+    private String role, email, username, uid, shift_day,shift_time;
     private long timestamp;
-    public User(String username, String email, String role){
+    public User(String username, String email, String role, String shift_day, String shift_time){
         this.username = username;
         this.email = email;
         this.role = role;
+        this.shift_day=shift_day;
+        this.shift_time=shift_time;
+    }
+
+    public String getShift_day() {
+        return shift_day;
+    }
+
+    public void setShift_day(String shift_day) {
+        this.shift_day = shift_day;
+    }
+
+    public String getShift_time() {
+        return shift_time;
+    }
+
+    public void setShift_time(String shift_time) {
+        this.shift_time = shift_time;
     }
 
     public String getUid() {

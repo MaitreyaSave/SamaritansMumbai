@@ -138,8 +138,11 @@ public class StartActivity extends AppCompatActivity {
                     public void onDataChange(DataSnapshot snapshot) {
                         Long ts = (Long) snapshot.child("timestamp").getValue();
                         String role = (String)snapshot.child("role").getValue();
+                        String shift = (String)snapshot.child("shift_time").getValue();
 
                         if (ts != null) {
+                            Log.d("timestamp_val","updated "+ts);
+                            editor.putString("shift", shift); // Storing string
                             editor.putString("time_stamp", ts.toString()); // Storing string
                             editor.apply();
                         }
