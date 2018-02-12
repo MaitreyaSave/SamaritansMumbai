@@ -198,10 +198,23 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
         //
-
+        long lastCheckIn = pref.getLong("last_check_in_timestamp",-1);
+        long currentTime = Long.parseLong(pref.getString("time_stamp","-1"));
+        countOccurrences = pref.getInt("countCheckin",-1);
+        Log.d("time_difference","last "+lastCheckIn+" current "+currentTime+"\ndiff "+(currentTime-lastCheckIn)/1000);
+        if(currentTime-lastCheckIn>8*60*60*1000){
+            countOccurrences=0;
+            setCheckInCountSP();
+            Log.d("time_difference","true "+(currentTime-lastCheckIn)/1000);
+        }
 
         //
 
+    }
+    public void setCheckInCountSP() {
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt("countCheckin",countOccurrences);
+        editor.apply();
     }
 
     public void getLocation() {
@@ -247,10 +260,6 @@ public class MainActivity extends AppCompatActivity {
             Location source = new Location("S");
             source.setLatitude(19.015046);
             source.setLongitude(72.842617);
-            //
-            //source.setLatitude(19.250713);
-            //source.setLongitude(72.853800);
-
 
             //User Location
             getLocation();
@@ -302,43 +311,67 @@ public class MainActivity extends AppCompatActivity {
     }
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void checkIn(View v){
-        if (checkDistance()) {
-            if(isCheckedIn){
-                Toast.makeText(this, "Already checked-in", Toast.LENGTH_SHORT).show();
-                return;
+        if(countOccurrences==0) {
+            if (checkDistance()) {
+                if (isCheckedIn) {
+                    Toast.makeText(this, "Already checked-in", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                isCheckedIn = true;
+
+                //
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users/" + currentUser.getUid() + "/");
+                ref.child("timestamp").setValue(ServerValue.TIMESTAMP);
+                ref.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        if (countOccurrences == 0) {
+                            Long timestamp = (Long) snapshot.child("timestamp").getValue();
+                            if (timestamp != null) {
+                                Log.d("timestamp_val", "updated main " + timestamp);
+                                //time-in
+                                Date date = new Date(timestamp);
+                                SimpleDateFormat df1 = new SimpleDateFormat("h:mm a", Locale.UK);
+                                String time_in_string = df1.format(date);
+
+                                countOccurrences++;
+
+                                SharedPreferences.Editor editor = pref.edit();
+                                editor.putString("check_in", time_in_string); // Storing string
+                                editor.putLong("last_check_in_timestamp",timestamp);
+                                editor.putInt("countCheckin",countOccurrences);
+                                editor.apply();
+
+
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+                //
+                Toast.makeText(this, "checked-in", Toast.LENGTH_SHORT).show();
+
+            } else {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("Location Error");
+                alertDialogBuilder.setMessage("You cannot check-in outside of Samaritans!")
+                        .setCancelable(false)
+                        .setPositiveButton("Ok",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+                AlertDialog alert = alertDialogBuilder.create();
+                alert.show();
             }
-            isCheckedIn = true;
-
-            String timestamp_long = pref.getString("time_stamp","-1");
-            //date
-            long ts = Long.parseLong(timestamp_long);
-            Date date = new Date(ts);
-            //time-in
-            SimpleDateFormat df2 = new SimpleDateFormat("h:mm a", Locale.UK);
-            String time_in_string = df2.format(date);
-
-            Log.d("timestamp_val","check_in "+timestamp_long);
-
-            SharedPreferences.Editor editor = pref.edit();
-            editor.putString("check_in", time_in_string); // Storing string
-            editor.apply();
-
-            countOccurrences=0;
-            Toast.makeText(this, "checked-in", Toast.LENGTH_SHORT).show();
-
-        } else {
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setTitle("Location Error");
-            alertDialogBuilder.setMessage("You cannot check-in outside of Samaritans!")
-                    .setCancelable(false)
-                    .setPositiveButton("Ok",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.cancel();
-                                }
-                            });
-            AlertDialog alert = alertDialogBuilder.create();
-            alert.show();
+        } else{
+            Toast.makeText(this, "Cannot check-in more than once a day!", Toast.LENGTH_SHORT).show();
         }
     }
     public void checkOut(View v){
@@ -352,7 +385,6 @@ public class MainActivity extends AppCompatActivity {
             if (currentUser != null) {
                 uname=currentUser.getDisplayName();
             }
-            //
             //time-in
             final String time_in_string = pref.getString("check_in","-1");
             //shift
@@ -361,10 +393,11 @@ public class MainActivity extends AppCompatActivity {
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users/"+currentUser.getUid()+"/");
             ref.child("timestamp").setValue(ServerValue.TIMESTAMP);
             final String finalUname = uname;
+            countOccurrences = pref.getInt("countCheckin",-1);
             ref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
-                    if(countOccurrences<1) {
+                    if(countOccurrences==1) {
                         Long timestamp = (Long) snapshot.child("timestamp").getValue();
                         if (timestamp != null) {
                             Log.d("timestamp_val", "updated main " + timestamp);
@@ -380,6 +413,7 @@ public class MainActivity extends AppCompatActivity {
                             //
                             myRef.push().setValue(attendaceLog);
                             countOccurrences++;
+                            setCheckInCountSP();
                         }
                     }
 

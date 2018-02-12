@@ -75,8 +75,8 @@ public class StartActivity extends AppCompatActivity {
         //
 
         //Shared Preferences
-        SharedPreferences pref = getSharedPreferences("MyPref", 0); // 0 - for private mode
-        pref.edit().clear().apply();
+        //SharedPreferences pref = getSharedPreferences("MyPref", 0); // 0 - for private mode
+        //pref.edit().clear().apply();
 
 
         //Location manager
