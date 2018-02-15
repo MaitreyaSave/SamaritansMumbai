@@ -21,6 +21,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
     FirebaseUser currentUser;
     SharedPreferences pref;
     AttendaceLog attendaceLog;
+    //
+    Button checkinButton,checkoutButton;
     //
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -198,17 +201,27 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
         //
+        checkinButton = findViewById(R.id.checkIn);
+        checkoutButton = findViewById(R.id.checkOut);
+        //
         long lastCheckIn = pref.getLong("last_check_in_timestamp",-1);
         long currentTime = Long.parseLong(pref.getString("time_stamp","-1"));
         countOccurrences = pref.getInt("countCheckin",-1);
-        Log.d("time_difference","last "+lastCheckIn+" current "+currentTime+"\ndiff "+(currentTime-lastCheckIn)/1000);
-        if(currentTime-lastCheckIn>8*60*60*1000){
+        Log.d("time_difference","last "+lastCheckIn+" current "+currentTime+"\ndiff "+(currentTime-lastCheckIn)/60000);
+        if(currentTime-lastCheckIn>5*60*1000){
             countOccurrences=0;
             setCheckInCountSP();
             Log.d("time_difference","true "+(currentTime-lastCheckIn)/1000);
         }
-
-        //
+        if(countOccurrences==0||countOccurrences>1){
+            checkinButton.setEnabled(true);
+            checkoutButton.setEnabled(false);
+        }
+        else{
+            isCheckedIn=true;
+            checkinButton.setEnabled(false);
+            checkoutButton.setEnabled(true);
+        }
 
     }
     public void setCheckInCountSP() {
@@ -269,7 +282,7 @@ public class MainActivity extends AppCompatActivity {
                 distance = mlocation.distanceTo(source);
             }
 
-            checkBool = (distance > 200);
+            checkBool = (distance < 200);
         }
         return checkBool;
     }
@@ -325,7 +338,7 @@ public class MainActivity extends AppCompatActivity {
                 ref.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
-                        if (countOccurrences == 0) {
+                        if (countOccurrences == 0&&isCheckedIn) {
                             Long timestamp = (Long) snapshot.child("timestamp").getValue();
                             if (timestamp != null) {
                                 Log.d("timestamp_val", "updated main " + timestamp);
@@ -355,6 +368,8 @@ public class MainActivity extends AppCompatActivity {
                 });
                 //
                 Toast.makeText(this, "checked-in", Toast.LENGTH_SHORT).show();
+                checkinButton.setEnabled(false);
+                checkoutButton.setEnabled(true);
 
             } else {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -397,7 +412,7 @@ public class MainActivity extends AppCompatActivity {
             ref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
-                    if(countOccurrences==1) {
+                    if(countOccurrences==1&&!isCheckedIn) {
                         Long timestamp = (Long) snapshot.child("timestamp").getValue();
                         if (timestamp != null) {
                             Log.d("timestamp_val", "updated main " + timestamp);
@@ -426,6 +441,8 @@ public class MainActivity extends AppCompatActivity {
             });
             //
             Toast.makeText(this, "checked-out", Toast.LENGTH_SHORT).show();
+            checkinButton.setEnabled(true);
+            checkoutButton.setEnabled(false);
         }
         else {
             Toast.makeText(this, "Cannot check-out without checking-in", Toast.LENGTH_SHORT).show();
