@@ -40,7 +40,7 @@ public class StartActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private boolean userLoggedIn =false,notification_call=false;
     private TextView username, network_location_access;
-    private Button loginButton,logoutButton,createUserButton, sendNotificationButton;
+    private Button loginButton,logoutButton,createUserButton, sendNotificationButton, addCallerProfileButton;
     private FloatingActionButton refresh_fab;
     boolean doubleBackToExitPressedOnce = false;
 
@@ -59,6 +59,7 @@ public class StartActivity extends AppCompatActivity {
         logoutButton = findViewById(R.id.logout_button);
         createUserButton = findViewById(R.id.create_user_button);
         sendNotificationButton =  findViewById(R.id.send_notif_button);
+        addCallerProfileButton = findViewById(R.id.add_caller_profile_button);
         refresh_fab = findViewById(R.id.refresh_home_fab);
 
         //
@@ -151,10 +152,12 @@ public class StartActivity extends AppCompatActivity {
                         if (role.equals("admin")) {
                             createUserButton.setVisibility(View.VISIBLE);
                             sendNotificationButton.setVisibility(View.VISIBLE);
+                            addCallerProfileButton.setVisibility(View.VISIBLE);
                         }
                         else {
                             createUserButton.setVisibility(View.GONE);
                             sendNotificationButton.setVisibility(View.GONE);
+                            addCallerProfileButton.setVisibility(View.GONE);
                         }
 
                     }
@@ -176,6 +179,7 @@ public class StartActivity extends AppCompatActivity {
                 createUserButton.setVisibility(View.GONE);
                 logoutButton.setVisibility(View.GONE);
                 sendNotificationButton.setVisibility(View.GONE);
+                addCallerProfileButton.setVisibility(View.GONE);
                 notification_call=false;
             }
         }
@@ -184,6 +188,8 @@ public class StartActivity extends AppCompatActivity {
             createUserButton.setVisibility(View.GONE);
             logoutButton.setVisibility(View.GONE);
             sendNotificationButton.setVisibility(View.GONE);
+            addCallerProfileButton.setVisibility(View.GONE);
+
         }
     }
     public void updateUI(FirebaseUser currentUser){
@@ -264,6 +270,10 @@ public class StartActivity extends AppCompatActivity {
     }
     public void sendNotification(View v){
         Intent intent = new Intent(this, SendNotificationActivity.class);
+        startActivity(intent);
+    }
+    public void createCallerProfile(View v){
+        Intent intent = new Intent(this, CreateCallerProfileActivity.class);
         startActivity(intent);
     }
 }

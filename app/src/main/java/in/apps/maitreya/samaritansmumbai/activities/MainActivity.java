@@ -207,7 +207,13 @@ public class MainActivity extends AppCompatActivity {
         long lastCheckIn = pref.getLong("last_check_in_timestamp",-1);
         long currentTime = Long.parseLong(pref.getString("time_stamp","-1"));
         countOccurrences = pref.getInt("countCheckin",-1);
-        Log.d("time_difference","last "+lastCheckIn+" current "+currentTime+"\ndiff "+(currentTime-lastCheckIn)/60000);
+        Date date = new Date(lastCheckIn);
+        SimpleDateFormat df1 = new SimpleDateFormat("h:mm a", Locale.UK);
+        String lastCheckIn_string = df1.format(date);
+        date = new Date(currentTime);
+        df1 = new SimpleDateFormat("h:mm a", Locale.UK);
+        String currentTime_string = df1.format(date);
+        Log.d("time_difference","last "+lastCheckIn_string+" current "+currentTime_string+"\ndiff "+(currentTime-lastCheckIn)/60000);
         if(currentTime-lastCheckIn>5*60*1000){
             countOccurrences=0;
             setCheckInCountSP();
@@ -281,8 +287,8 @@ public class MainActivity extends AppCompatActivity {
             if (mlocation != null) {
                 distance = mlocation.distanceTo(source);
             }
-
-            checkBool = (distance < 200);
+            Log.d("test_dis","d "+distance);
+            checkBool = (distance > 200);
         }
         return checkBool;
     }
@@ -320,7 +326,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void viewCallerProfiles(View v){
-
+        Intent intent = new Intent(this, ViewCallerProfilesRecyclerActivity.class);
+        startActivity(intent);
     }
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void checkIn(View v){

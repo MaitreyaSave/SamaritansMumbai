@@ -31,7 +31,6 @@
     <string name="welcome_main">Welcome to Samaritans Mumbai</string>
     <string name="prompt_email">Email</string>
     <string name="error_invalid_email">This email address is invalid</string>
-    <string name="create_user">Create User</string>
 
     <string name="login_proceed">Proceed</string>
     <string name="logout_main">Logout</string>
@@ -39,6 +38,7 @@
 
 
     <!-- Strings related to creating user -->
+    <string name="create_user">Create User</string>
     <string name="enter_user_name">Enter User Name</string>
     <string name="enter_user_email">Enter User Email</string>
     <string name="enter_user_password">Enter User Password</string>
@@ -178,14 +178,23 @@
     <string name="card_sr_no">Sr No</string>
 
     <!-- Strings related to send notification -->
+    <string name="title_activity_send_notification">Send Notification</string>
     <string name="send_notif_title">Title</string>
     <string name="send_notif_body">Message</string>
+
+    <!-- Strings related to caller profile -->
+    <string name="title_activity_caller_profile">Caller Profiles</string>
+    <string name="title_activity_create_caller_profile">Create Caller Profile</string>
+    <string name="caller_profile_name">Caller Name</string>
+    <string name="caller_profile_age">Caller Age</string>
+    <string name="caller_profile_common_identifiers">Common Identifiers</string>
+
     <!-- Random Strings -->
     <string name="network_location_access">Please make sure your Internet is ON in order to login!</string>
     <string name="na">N/A</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_view_logs_recycler">Logs</string>
-    <string name="title_activity_send_notification">Send Notification</string>
     <string name="title_activity_recieve_notification">New Notification</string>
+
 
 </resources>
