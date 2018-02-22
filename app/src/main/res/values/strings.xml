@@ -185,9 +185,15 @@
     <!-- Strings related to caller profile -->
     <string name="title_activity_caller_profile">Caller Profiles</string>
     <string name="title_activity_create_caller_profile">Create Caller Profile</string>
-    <string name="caller_profile_name">Caller Name</string>
-    <string name="caller_profile_age">Caller Age</string>
+    <string name="caller_profile_name">Name</string>
+    <string name="caller_profile_age">Age</string>
     <string name="caller_profile_common_identifiers">Common Identifiers</string>
+    <string name="caller_profile_support_system">Support System (parents, wife, etc.)</string>
+    <string name="caller_profile_occupation">Occupation</string>
+    <string name="caller_profile_health_issues">Health Issues (mental and physical)</string>
+    <string name="caller_profile_frequency">Frequency of calls(per week)</string>
+    <string name="caller_profile_suicide_attempts">Suicide attempts, if any (number and details)</string>
+    <string name="caller_profile_gist">Gist of calls/issues so far</string>
 
     <!-- Random Strings -->
     <string name="network_location_access">Please make sure your Internet is ON in order to login!</string>
@@ -195,6 +201,5 @@
     <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_view_logs_recycler">Logs</string>
     <string name="title_activity_recieve_notification">New Notification</string>
-
 
 </resources>

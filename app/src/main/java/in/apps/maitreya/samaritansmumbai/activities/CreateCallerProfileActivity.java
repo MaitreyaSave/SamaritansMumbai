@@ -19,7 +19,7 @@ import in.apps.maitreya.samaritansmumbai.classes.CallerProfile;
 public class CreateCallerProfileActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
-    private EditText callerProfileName, callerProfileAge, callerProfileCommonIdentifiers;
+    private EditText callerProfileName, callerProfileAge, callerProfileCommonIdentifiers, callerProfileSupportSystem, callerProfileOccupation, callerProfileHealthIssues, callerProfileFrequency, callerProfileSuicideAttempts, callerProfileGist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +34,16 @@ public class CreateCallerProfileActivity extends AppCompatActivity {
                 String name = callerProfileName.getText().toString();
                 String age = callerProfileAge.getText().toString();
                 String commonIdentifiers = callerProfileCommonIdentifiers.getText().toString();
+                String supportSystem = callerProfileSupportSystem.getText().toString();
+                String occupation = callerProfileOccupation.getText().toString();
+                String healthIssues = callerProfileHealthIssues.getText().toString();
+                String frequency = callerProfileFrequency.getText().toString();
+                String suicideAttempts = callerProfileSuicideAttempts.getText().toString();
+                String gist = callerProfileGist.getText().toString();
                 //
                 DatabaseReference myRef = database.getReference("caller_profiles");
                 //
-                CallerProfile callerProfile = new CallerProfile(name,age,commonIdentifiers,"N/A","N/A","N/A","N/A","N/A","N/A");
+                CallerProfile callerProfile = new CallerProfile(name,age,commonIdentifiers,supportSystem,occupation,healthIssues,frequency,suicideAttempts,gist);
                 myRef.child(name).setValue(callerProfile);
                 //
                 Toast.makeText(CreateCallerProfileActivity.this, "done", Toast.LENGTH_SHORT).show();
@@ -48,6 +54,12 @@ public class CreateCallerProfileActivity extends AppCompatActivity {
         callerProfileName = findViewById(R.id.create_caller_profile_name);
         callerProfileAge = findViewById(R.id.create_caller_profile_age);
         callerProfileCommonIdentifiers = findViewById(R.id.create_caller_profile_common_identifiers);
+        callerProfileOccupation =findViewById(R.id.create_caller_profile_occupation);
+        callerProfileHealthIssues = findViewById(R.id.create_caller_profile_health_issues);
+        callerProfileSupportSystem = findViewById(R.id.create_caller_profile_support_systems);
+        callerProfileFrequency = findViewById(R.id.create_caller_profile_frequency);
+        callerProfileSuicideAttempts = findViewById(R.id.create_caller_profile_suicide_attempts);
+        callerProfileGist = findViewById(R.id.create_caller_profile_gist);
 
         //
         //Firebase

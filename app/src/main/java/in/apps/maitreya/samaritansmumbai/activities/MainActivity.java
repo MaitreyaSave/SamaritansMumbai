@@ -53,12 +53,14 @@ public class MainActivity extends AppCompatActivity {
     private static boolean isCheckedIn = false;
     FirebaseDatabase database;
     DatabaseReference myRef;
-    private static int countOccurrences=0;
+    private static int countOccurrences = 0;
     FirebaseUser currentUser;
     SharedPreferences pref;
     AttendaceLog attendaceLog;
     //
-    Button checkinButton,checkoutButton;
+    Button checkinButton, checkoutButton;
+    int LOCATION_UPDATE_MIN_TIME = 500;
+    int LOCATION_UPDATE_MIN_DISTANCE = 0;
     //
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -136,8 +138,6 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         //
-        //Location manager
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         //
         //Recycler view
         mRecyclerView = findViewById(R.id.recycler_view_notifications);
@@ -229,6 +229,14 @@ public class MainActivity extends AppCompatActivity {
             checkoutButton.setEnabled(true);
         }
 
+        //Location manager
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                LOCATION_UPDATE_MIN_TIME, LOCATION_UPDATE_MIN_DISTANCE, mLocationListener);
+        mlocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
     }
     public void setCheckInCountSP() {
         SharedPreferences.Editor editor = pref.edit();
@@ -251,8 +259,7 @@ public class MainActivity extends AppCompatActivity {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
-            int LOCATION_UPDATE_MIN_TIME = 500;
-            int LOCATION_UPDATE_MIN_DISTANCE = 0;
+
             if (isNetworkEnabled) {
                 locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
                         LOCATION_UPDATE_MIN_TIME, LOCATION_UPDATE_MIN_DISTANCE, mLocationListener);
@@ -288,7 +295,7 @@ public class MainActivity extends AppCompatActivity {
                 distance = mlocation.distanceTo(source);
             }
             Log.d("test_dis","d "+distance);
-            checkBool = (distance > 200);
+            checkBool = (distance < 200);
         }
         return checkBool;
     }

@@ -1,5 +1,6 @@
 package in.apps.maitreya.samaritansmumbai.classes;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  *
  */
 
-public class CallerProfile {
+public class CallerProfile implements Serializable{
     private String name,age,common_identifiers,support_system,occupation,health_issues,call_frequency,suicide_attempts,call_gist;
     private List<Call_Log> call_logs;
 

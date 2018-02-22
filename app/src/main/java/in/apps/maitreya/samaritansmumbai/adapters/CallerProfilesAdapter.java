@@ -14,6 +14,8 @@ import java.util.List;
 
 import in.apps.maitreya.samaritansmumbai.R;
 import in.apps.maitreya.samaritansmumbai.activities.ReceiveNotificationActivity;
+import in.apps.maitreya.samaritansmumbai.activities.ViewSingleCallerProfileActivity;
+import in.apps.maitreya.samaritansmumbai.activities.ViewSingleLogActivity;
 import in.apps.maitreya.samaritansmumbai.classes.CallerProfile;
 import in.apps.maitreya.samaritansmumbai.classes.NotificationMessage;
 
@@ -73,14 +75,9 @@ public class CallerProfilesAdapter extends RecyclerView.Adapter<NotificationsAda
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*
-                Intent intent = new Intent(ctx,ReceiveNotificationActivity.class);
-                intent.putExtra("title", mDataset.get(holder.getAdapterPosition()).getTitle());
-                intent.putExtra("message", mDataset.get(holder.getAdapterPosition()).getMessage());
+                Intent intent = new Intent(ctx,ViewSingleCallerProfileActivity.class);
+                intent.putExtra("CallerProfile", mDataset.get(holder.getAdapterPosition()));
                 ctx.startActivity(intent);
-                */
-                Toast.makeText(ctx, "click", Toast.LENGTH_SHORT).show();
-
             }
         });
 
