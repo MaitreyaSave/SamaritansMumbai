@@ -194,6 +194,7 @@
     <string name="caller_profile_frequency">Frequency of calls(per week)</string>
     <string name="caller_profile_suicide_attempts">Suicide attempts, if any (number and details)</string>
     <string name="caller_profile_gist">Gist of calls/issues so far</string>
+    <string name="caller_profile_new_info">New information/progress of the caller</string>
 
     <!-- Random Strings -->
     <string name="network_location_access">Please make sure your Internet is ON in order to login!</string>
@@ -201,5 +202,6 @@
     <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_view_logs_recycler">Logs</string>
     <string name="title_activity_recieve_notification">New Notification</string>
+    <string name="title_activity_update_caller_profile">UpdateCallerProfile</string>
 
 </resources>

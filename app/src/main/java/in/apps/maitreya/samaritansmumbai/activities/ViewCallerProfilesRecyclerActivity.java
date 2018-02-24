@@ -47,7 +47,9 @@ public class ViewCallerProfilesRecyclerActivity extends AppCompatActivity {
         //
         callerProfiles = new ArrayList<>();
         //
+        boolean update = getIntent().getBooleanExtra("update_CP",false);
         mAdapter = new CallerProfilesAdapter(callerProfiles, this);
+
         mRecyclerView.setAdapter(mAdapter);
         //
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("caller_profiles/");

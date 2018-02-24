@@ -1,7 +1,9 @@
 package in.apps.maitreya.samaritansmumbai.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import java.util.List;
 
 import in.apps.maitreya.samaritansmumbai.R;
 import in.apps.maitreya.samaritansmumbai.activities.ReceiveNotificationActivity;
+import in.apps.maitreya.samaritansmumbai.activities.UpdateCallerProfile;
 import in.apps.maitreya.samaritansmumbai.activities.ViewSingleCallerProfileActivity;
 import in.apps.maitreya.samaritansmumbai.activities.ViewSingleLogActivity;
 import in.apps.maitreya.samaritansmumbai.classes.CallerProfile;
@@ -75,7 +78,23 @@ public class CallerProfilesAdapter extends RecyclerView.Adapter<NotificationsAda
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ctx,ViewSingleCallerProfileActivity.class);
+                //
+                SharedPreferences pref = ctx.getSharedPreferences("MyPref", 0); // 0 - for private mode
+                boolean update_CP = pref.getBoolean("update_CP",false);
+                //
+                Intent intent;
+                if(update_CP){
+                    //
+                    SharedPreferences.Editor editor= pref.edit();
+                    editor.putBoolean("update_CP",false);
+                    editor.apply();
+                    //
+                    intent = new Intent(ctx, UpdateCallerProfile.class);
+                    ((Activity)ctx).finish();
+                }
+                else {
+                    intent = new Intent(ctx, ViewSingleCallerProfileActivity.class);
+                }
                 intent.putExtra("CallerProfile", mDataset.get(holder.getAdapterPosition()));
                 ctx.startActivity(intent);
             }

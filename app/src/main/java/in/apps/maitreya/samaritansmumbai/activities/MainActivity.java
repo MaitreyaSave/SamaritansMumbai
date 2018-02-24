@@ -295,7 +295,7 @@ public class MainActivity extends AppCompatActivity {
                 distance = mlocation.distanceTo(source);
             }
             Log.d("test_dis","d "+distance);
-            checkBool = (distance < 200);
+            checkBool = (distance > 200);
         }
         return checkBool;
     }

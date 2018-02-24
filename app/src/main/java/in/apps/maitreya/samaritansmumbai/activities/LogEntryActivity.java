@@ -3,6 +3,7 @@ package in.apps.maitreya.samaritansmumbai.activities;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -649,6 +650,26 @@ public class LogEntryActivity extends AppCompatActivity {
             case R.id.cd_radio_old:
                 if (checked)
                     new_old = ((RadioButton) view).getText().toString();
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(LogEntryActivity.this);
+                    alertDialog.setTitle("Old Caller");
+                    alertDialog.setMessage("Is this caller present in Caller Profile? If yes, please update Caller Profile details");
+                    alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+                    alertDialog.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(LogEntryActivity.this,ViewCallerProfilesRecyclerActivity.class);
+                            SharedPreferences.Editor editor =pref.edit();
+                            editor.putBoolean("update_CP",true);
+                            editor.apply();
+                            startActivity(intent);
+                        }
+                    });
+                    alertDialog.show();
                 break;
             case R.id.cd_radio_riskNA:
                 if (checked)

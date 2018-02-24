@@ -1,11 +1,13 @@
 package in.apps.maitreya.samaritansmumbai.classes;
 
+import java.io.Serializable;
+
 /**
  * Created by Maitreya on 2/18/2018.
  *
  */
 
-public class Call_Log {
+public class Call_Log implements Serializable{
     private String date,new_info,ref_no;
 
     public Call_Log(){

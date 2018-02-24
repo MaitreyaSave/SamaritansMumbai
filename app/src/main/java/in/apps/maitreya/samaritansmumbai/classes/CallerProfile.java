@@ -28,6 +28,10 @@ public class CallerProfile implements Serializable{
         this.call_gist = call_gist;
     }
 
+    public void setCall_logs(List<Call_Log> call_logs) {
+        this.call_logs = call_logs;
+    }
+
     public List<Call_Log> getCall_logs() {
         return call_logs;
     }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="in.apps.maitreya.samaritansmumbai.activities.CreateCallerProfileActivity">
+    tools:context="in.apps.maitreya.samaritansmumbai.activities.UpdateCallerProfile">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -12,14 +12,13 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_create_caller_profile"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
-
     <ScrollView
         android:layout_marginTop="50dp"
         android:layout_width="match_parent"
@@ -30,77 +29,88 @@
             android:padding="10dp"
             android:orientation="vertical">
             <EditText
-                android:id="@+id/create_caller_profile_name"
+                android:id="@+id/update_caller_profile_name"
                 android:layout_width="match_parent"
                 android:layout_margin="10dp"
                 android:hint="@string/caller_profile_name"
-                android:inputType="textCapWords"
+                android:enabled="false"
+                android:inputType="none"
                 android:layout_height="wrap_content" />
             <EditText
-                android:id="@+id/create_caller_profile_age"
+                android:id="@+id/update_caller_profile_new_info"
+                android:layout_width="match_parent"
+                android:layout_margin="10dp"
+                android:inputType="textMultiLine"
+                android:background="@drawable/edit_text_style"
+                android:hint="@string/caller_profile_new_info"
+                android:gravity="top"
+                android:padding="10dp"
+                android:layout_height="100dp" />
+            <EditText
+                android:id="@+id/update_caller_profile_age"
                 android:layout_width="match_parent"
                 android:layout_margin="10dp"
                 android:inputType="number"
                 android:hint="@string/caller_profile_age"
                 android:layout_height="wrap_content" />
             <EditText
-                android:id="@+id/create_caller_profile_common_identifiers"
+                android:id="@+id/update_caller_profile_common_identifiers"
                 android:layout_width="match_parent"
                 android:layout_margin="10dp"
                 android:inputType="textCapSentences"
                 android:hint="@string/caller_profile_common_identifiers"
                 android:layout_height="wrap_content" />
             <EditText
-                android:id="@+id/create_caller_profile_support_systems"
+                android:id="@+id/update_caller_profile_support_systems"
                 android:layout_width="match_parent"
                 android:layout_margin="10dp"
                 android:inputType="textCapSentences"
                 android:hint="@string/caller_profile_support_system"
                 android:layout_height="wrap_content" />
             <EditText
-                android:id="@+id/create_caller_profile_occupation"
+                android:id="@+id/update_caller_profile_occupation"
                 android:layout_width="match_parent"
                 android:layout_margin="10dp"
                 android:inputType="textCapSentences"
                 android:hint="@string/caller_profile_occupation"
                 android:layout_height="wrap_content" />
             <EditText
-                android:id="@+id/create_caller_profile_health_issues"
+                android:id="@+id/update_caller_profile_health_issues"
                 android:layout_width="match_parent"
                 android:layout_margin="10dp"
                 android:inputType="textCapSentences"
                 android:hint="@string/caller_profile_health_issues"
                 android:layout_height="wrap_content" />
             <EditText
-                android:id="@+id/create_caller_profile_frequency"
+                android:id="@+id/update_caller_profile_frequency"
                 android:layout_width="match_parent"
                 android:layout_margin="10dp"
                 android:inputType="textCapSentences"
                 android:hint="@string/caller_profile_frequency"
                 android:layout_height="wrap_content" />
             <EditText
-                android:id="@+id/create_caller_profile_suicide_attempts"
+                android:id="@+id/update_caller_profile_suicide_attempts"
                 android:layout_width="match_parent"
                 android:layout_margin="10dp"
                 android:inputType="textCapSentences"
                 android:hint="@string/caller_profile_suicide_attempts"
                 android:layout_height="wrap_content" />
             <EditText
-                android:id="@+id/create_caller_profile_gist"
+                android:id="@+id/update_caller_profile_gist"
                 android:layout_width="match_parent"
                 android:layout_margin="10dp"
                 android:inputType="textCapSentences"
                 android:hint="@string/caller_profile_gist"
                 android:layout_height="wrap_content" />
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp" />
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
 
         </LinearLayout>
     </ScrollView>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/submit_caller_profile_fab"
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

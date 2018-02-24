@@ -1,16 +1,13 @@
 package in.apps.maitreya.samaritansmumbai.activities;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.TextView;
 
 import in.apps.maitreya.samaritansmumbai.R;
 import in.apps.maitreya.samaritansmumbai.classes.CallerProfile;
-import in.apps.maitreya.samaritansmumbai.classes.LogEntry;
 
 public class ViewSingleCallerProfileActivity extends AppCompatActivity {
     TextView cp_name,cp_age,cp_occupation,cp_common_identifiers,cp_health_issues,cp_frequency,cp_suicide_attempts,cp_gist,cp_support_system;
