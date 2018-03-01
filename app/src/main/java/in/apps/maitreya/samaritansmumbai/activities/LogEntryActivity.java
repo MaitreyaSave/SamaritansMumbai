@@ -161,8 +161,6 @@ public class LogEntryActivity extends AppCompatActivity {
                 alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        //
-
                         //Get values
                         //
                         EditText name_et = rView.findViewById(R.id.cd_name_val);
@@ -187,55 +185,55 @@ public class LogEntryActivity extends AppCompatActivity {
 
                         //
                         //1st tab
-                        if(time_hours_et.hasFocus())
+                        if (time_hours_et.hasFocus())
                             time_hours_et.clearFocus();
-                        if(time_mins_et.hasFocus())
+                        if (time_mins_et.hasFocus())
                             time_mins_et.clearFocus();
-                        if(duration_hours_et.hasFocus())
+                        if (duration_hours_et.hasFocus())
                             duration_hours_et.clearFocus();
-                        if(duration_mins_et.hasFocus())
+                        if (duration_mins_et.hasFocus())
                             duration_mins_et.clearFocus();
-                        if(plan_et.hasFocus())
+                        if (plan_et.hasFocus())
                             plan_et.clearFocus();
-                        if(attempt_et.hasFocus())
+                        if (attempt_et.hasFocus())
                             attempt_et.clearFocus();
-                        if(age_et.hasFocus())
+                        if (age_et.hasFocus())
                             age_et.clearFocus();
-                        if(name_et.hasFocus())
+                        if (name_et.hasFocus())
                             name_et.clearFocus();
                         //
                         //2nd tab
-                        if(gist_et.hasFocus())
+                        if (gist_et.hasFocus())
                             gist_et.clearFocus();
-                        if(call_end_et.hasFocus())
+                        if (call_end_et.hasFocus())
                             call_end_et.clearFocus();
-                        if(volunteers_response_et.hasFocus())
+                        if (volunteers_response_et.hasFocus())
                             volunteers_response_et.clearFocus();
-                        if(feelings_et.hasFocus())
+                        if (feelings_et.hasFocus())
                             feelings_et.clearFocus();
                         //
                         //3rd tab
-                        if(pseudo_name_et.hasFocus())
+                        if (pseudo_name_et.hasFocus())
                             pseudo_name_et.clearFocus();
-                        if(sams_leader_name_et.hasFocus())
+                        if (sams_leader_name_et.hasFocus())
                             sams_leader_name_et.clearFocus();
-                        if(leader_msg_et.hasFocus())
+                        if (leader_msg_et.hasFocus())
                             leader_msg_et.clearFocus();
-                        if(secondary_nature_et.hasFocus())
+                        if (secondary_nature_et.hasFocus())
                             secondary_nature_et.clearFocus();
                         //
                         //Log.d(TAG,"temp_et_in");
 
                         //
-                        cnt = pref.getInt("count",0);
+                        cnt = pref.getInt("count", 0);
                         cnt++;
                         //
                         //Firebase Database
                         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("log");
                         //LogEntry logEntry = new LogEntry(cnt,timestamp,gist,sams_name,);
-                        String time = hours+":"+mins+" "+ampm;
-                        String duration = duration_hours+" hours "+duration_mins+" mins";
-                        LogEntry logEntry = new  LogEntry(cnt,timestamp,gist,sams_name,gender,tel_door,new_old,suicide_qn,risk_level,problem_nature,leader_name,pseudo_name,leader_spl_msg,name,age, caller_support,occupation,self_assessment,PU_referred,feelings_addressed,volunteers_response,call_end,time,duration,language,frequent_caller,plan,attempt,secondary_nature);
+                        String time = hours + ":" + mins + " " + ampm;
+                        String duration = duration_hours + " hours " + duration_mins + " mins";
+                        LogEntry logEntry = new LogEntry(cnt, timestamp, gist, sams_name, gender, tel_door, new_old, suicide_qn, risk_level, problem_nature, leader_name, pseudo_name, leader_spl_msg, name, age, caller_support, occupation, self_assessment, PU_referred, feelings_addressed, volunteers_response, call_end, time, duration, language, frequent_caller, plan, attempt, secondary_nature);
                         final String child_sr_no = String.valueOf(cnt);
                         ref.child(child_sr_no).setValue(logEntry);
 
@@ -248,7 +246,7 @@ public class LogEntryActivity extends AppCompatActivity {
                                     @Override
                                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                        Log.d(TAG,"server cnt "+cnt);
+                                        Log.d(TAG, "server cnt " + cnt);
                                     }
 
                                     @Override
