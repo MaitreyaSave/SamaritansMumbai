@@ -29,6 +29,7 @@ public class FCMService extends FirebaseMessagingService {
         /* There are two types of messages data messages and notification messages. Data messages are handled here in onMessageReceived whether the app is in the foreground or background. Data messages are the type traditionally used with GCM. Notification messages are only received here in onMessageReceived when the app is in the foreground. When the app is in the background an automatically generated notification is displayed. */
         String notificationTitle = null, notificationBody = null;
         String dataTitle = null, dataMessage = null;
+        Log.d("TAG_notif","test");
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
@@ -75,6 +76,9 @@ public class FCMService extends FirebaseMessagingService {
 
         if (notificationManager != null) {
             notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+            Log.d("TAG_notif","not null");
         }
+        Log.d("TAG_notif","test");
+
     }
 }

@@ -295,7 +295,7 @@ public class MainActivity extends AppCompatActivity {
                 distance = mlocation.distanceTo(source);
             }
             Log.d("test_dis","d "+distance);
-            checkBool = (distance > 200);
+            checkBool = (distance < 200);
         }
         return checkBool;
     }
@@ -329,7 +329,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void requestSub(View v){
-
+        //do nothing
     }
 
     public void viewCallerProfiles(View v){

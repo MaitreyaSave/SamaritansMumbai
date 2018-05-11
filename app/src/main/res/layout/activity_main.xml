@@ -84,6 +84,7 @@
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:text="@string/request_sub"
                     android:onClick="requestSub"
+                    android:visibility="invisible"
                     tools:ignore="ButtonStyle" />
             </LinearLayout>
             <LinearLayout
