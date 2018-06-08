@@ -12,23 +12,16 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,16 +30,12 @@ import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import in.apps.maitreya.samaritansmumbai.R;
-import in.apps.maitreya.samaritansmumbai.adapters.NotificationsAdapter;
 import in.apps.maitreya.samaritansmumbai.classes.AttendaceLog;
 import in.apps.maitreya.samaritansmumbai.classes.Functions;
-import in.apps.maitreya.samaritansmumbai.classes.NotificationMessage;
 
 public class MainActivity extends AppCompatActivity {
     //
@@ -62,12 +51,7 @@ public class MainActivity extends AppCompatActivity {
     int LOCATION_UPDATE_MIN_TIME = 500;
     int LOCATION_UPDATE_MIN_DISTANCE = 0;
     //
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private List<NotificationMessage> notificationMessages;
-    //
-    private TextView mTextMessage;
-    private LinearLayout dash_LL, notif_LL;
+
     LocationManager locationManager;
     private Location mlocation;
     private LocationListener mLocationListener = new LocationListener() {
@@ -98,109 +82,17 @@ public class MainActivity extends AppCompatActivity {
     };
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 0;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    dash_LL.setVisibility(View.VISIBLE);
-                    notif_LL.setVisibility(View.GONE);
-                    return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
-                    dash_LL.setVisibility(View.GONE);
-                    notif_LL.setVisibility(View.VISIBLE);
-                    return true;
-            }
-            return false;
-        }
-
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextMessage = findViewById(R.id.message);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
         //
-        dash_LL = findViewById(R.id.main_ll_dash);
-        notif_LL = findViewById(R.id.main_ll_notif);
-        notif_LL.setVisibility(View.GONE);
-        //
 
-        BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        //
-        //
-        //Recycler view
-        mRecyclerView = findViewById(R.id.recycler_view_notifications);
 
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        mRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
-        mLayoutManager.setReverseLayout(true);
-        mLayoutManager.setStackFromEnd(true);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        //
-        notificationMessages = new ArrayList<>();
-        //
-        mAdapter = new NotificationsAdapter(notificationMessages, this);
-        mRecyclerView.setAdapter(mAdapter);
-        //
-
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("messages/");
-        ref.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                NotificationMessage notificationMessage = dataSnapshot.getValue(NotificationMessage.class);
-                notificationMessages.add(notificationMessage);
-                mAdapter = new NotificationsAdapter(notificationMessages, MainActivity.this);
-                mRecyclerView.setAdapter(mAdapter);
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-                NotificationMessage notificationMessage = dataSnapshot.getValue(NotificationMessage.class);
-                notificationMessages.remove(notificationMessage);
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        //
-        //
-        boolean notification_call = getIntent().getBooleanExtra("notif_bool", false);
-        //
-        if (notification_call) {
-            Intent intent = new Intent(this, ReceiveNotificationActivity.class);
-            intent.putExtra("title", getIntent().getStringExtra("title"));
-            intent.putExtra("message", getIntent().getStringExtra("message"));
-            startActivity(intent);
-        }
-        //
         checkinButton = findViewById(R.id.checkIn);
         checkoutButton = findViewById(R.id.checkOut);
         //
@@ -351,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
                 ref.child("timestamp").setValue(ServerValue.TIMESTAMP);
                 ref.addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot snapshot) {
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (countOccurrences == 0&&isCheckedIn) {
                             Long timestamp = (Long) snapshot.child("timestamp").getValue();
                             if (timestamp != null) {
@@ -376,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
                 });
@@ -425,7 +317,7 @@ public class MainActivity extends AppCompatActivity {
             countOccurrences = pref.getInt("countCheckin",-1);
             ref.addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onDataChange(DataSnapshot snapshot) {
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(countOccurrences==1&&!isCheckedIn) {
                         Long timestamp = (Long) snapshot.child("timestamp").getValue();
                         if (timestamp != null) {
@@ -449,7 +341,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onCancelled(DatabaseError databaseError) {
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
             });

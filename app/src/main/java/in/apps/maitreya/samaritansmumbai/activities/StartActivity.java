@@ -38,9 +38,9 @@ public class StartActivity extends AppCompatActivity {
     //
     //
     private FirebaseAuth mAuth;
-    private boolean userLoggedIn =false,notification_call=false;
+    private boolean userLoggedIn =false;
     private TextView username, network_location_access;
-    private Button loginButton,logoutButton,createUserButton, sendNotificationButton, addCallerProfileButton;
+    private Button loginButton,logoutButton,createUserButton, addCallerProfileButton;
     private FloatingActionButton refresh_fab;
     boolean doubleBackToExitPressedOnce = false;
 
@@ -58,22 +58,11 @@ public class StartActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.login_button);
         logoutButton = findViewById(R.id.logout_button);
         createUserButton = findViewById(R.id.create_user_button);
-        sendNotificationButton =  findViewById(R.id.send_notif_button);
         addCallerProfileButton = findViewById(R.id.add_caller_profile_button);
         refresh_fab = findViewById(R.id.refresh_home_fab);
 
         //
-        //
-        notification_call=getIntent().getBooleanExtra("notif_bool",false);
-        Log.d("notif_t","notif "+notification_call);
-        if(notification_call){
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.putExtra("notif_bool",true);
-            intent.putExtra("title", getIntent().getStringExtra("title"));
-            intent.putExtra("message", getIntent().getStringExtra("message"));
-            startActivity(intent);
-        }
-        //
+
 
         //Shared Preferences
         //SharedPreferences pref = getSharedPreferences("MyPref", 0); // 0 - for private mode
@@ -120,7 +109,7 @@ public class StartActivity extends AppCompatActivity {
                 DatabaseReference ref_parent = FirebaseDatabase.getInstance().getReference();
                 ref_parent.addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot snapshot) {
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
                         int count= Integer.parseInt(snapshot.child("count").getValue()+"");
                         editor.putInt("count", count); // Storing string
                         editor.apply();
@@ -128,7 +117,7 @@ public class StartActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
                 });
@@ -136,7 +125,7 @@ public class StartActivity extends AppCompatActivity {
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users/"+user_uid+"/");
                 ref.addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onDataChange(DataSnapshot snapshot) {
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Long ts = (Long) snapshot.child("timestamp").getValue();
                         String role = (String)snapshot.child("role").getValue();
                         String shift = (String)snapshot.child("shift_time").getValue();
@@ -151,19 +140,17 @@ public class StartActivity extends AppCompatActivity {
                             role = "user";
                         if (role.equals("admin")) {
                             createUserButton.setVisibility(View.VISIBLE);
-                            sendNotificationButton.setVisibility(View.VISIBLE);
                             addCallerProfileButton.setVisibility(View.VISIBLE);
                         }
                         else {
                             createUserButton.setVisibility(View.GONE);
-                            sendNotificationButton.setVisibility(View.GONE);
                             addCallerProfileButton.setVisibility(View.GONE);
                         }
 
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
                 });
@@ -178,16 +165,13 @@ public class StartActivity extends AppCompatActivity {
                 //Functions.showNetworkDisabledAlertToUser(this);
                 createUserButton.setVisibility(View.GONE);
                 logoutButton.setVisibility(View.GONE);
-                sendNotificationButton.setVisibility(View.GONE);
                 addCallerProfileButton.setVisibility(View.GONE);
-                notification_call=false;
             }
         }
         else{
             loginButton.setVisibility(View.GONE);
             createUserButton.setVisibility(View.GONE);
             logoutButton.setVisibility(View.GONE);
-            sendNotificationButton.setVisibility(View.GONE);
             addCallerProfileButton.setVisibility(View.GONE);
 
         }
@@ -268,10 +252,7 @@ public class StartActivity extends AppCompatActivity {
         intent.putExtra("create_user",true);
         startActivity(intent);
     }
-    public void sendNotification(View v){
-        Intent intent = new Intent(this, SendNotificationActivity.class);
-        startActivity(intent);
-    }
+
     public void createCallerProfile(View v){
         Intent intent = new Intent(this, CreateCallerProfileActivity.class);
         startActivity(intent);

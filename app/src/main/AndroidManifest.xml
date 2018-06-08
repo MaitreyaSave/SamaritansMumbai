@@ -48,23 +48,7 @@
             android:label="@string/title_activity_view_logs_recycler"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.ViewSingleLogActivity" />
-        <activity
-            android:name=".activities.SendNotificationActivity"
-            android:label="@string/title_activity_send_notification"
-            android:theme="@style/AppTheme.NoActionBar" />
 
-        <service
-            android:name=".services.FCMService"
-            android:permission="android.permission.INTERNET">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-
-        <activity
-            android:name=".activities.ReceiveNotificationActivity"
-            android:label="@string/title_activity_recieve_notification"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.ViewCallerProfilesRecyclerActivity"
             android:label="@string/title_activity_caller_profile"
