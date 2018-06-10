@@ -149,8 +149,8 @@ public class CreateUserActivity extends AppCompatActivity {
 
                                 // Database entry
                                 User user = new User(name,email,role,shift_day,shift_time);
-                                String userId = FirebaseAuth.getInstance().getUid();
-                                user.setUid(userId);
+                                //String userId = FirebaseAuth.getInstance().getUid();
+                                //user.setUid(userId);
                                 user.setTimestamp(ts);
                                 //
 
@@ -158,21 +158,23 @@ public class CreateUserActivity extends AppCompatActivity {
                                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                                 DatabaseReference myRef = database.getReference("users");
 
-                                if (userId != null) {
+                                /*if (userId != null) {
                                     myRef.child(userId).setValue(user);
-                                }
+                                }*/
+                                String uname = user.getUsername();
+                                myRef.child(uname).setValue(user);
 
                                 // Read from the database
                                 myRef.addValueEventListener(new ValueEventListener() {
                                     @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         // This method is called once with the initial value and again
                                         // whenever data at this location is updated.
                                         Toast.makeText(CreateUserActivity.this, "Database Updated!", Toast.LENGTH_SHORT).show();
                                     }
 
                                     @Override
-                                    public void onCancelled(DatabaseError error) {
+                                    public void onCancelled(@NonNull DatabaseError error) {
                                         // Failed to read value
                                         Log.w(TAG, "Failed to read value.", error.toException());
                                     }

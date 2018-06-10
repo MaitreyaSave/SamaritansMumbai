@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         df1 = new SimpleDateFormat("h:mm a", Locale.UK);
         String currentTime_string = df1.format(date);
         Log.d("time_difference","last "+lastCheckIn_string+" current "+currentTime_string+"\ndiff "+(currentTime-lastCheckIn)/60000);
-        if(currentTime-lastCheckIn>5*60*1000){
+        if(currentTime-lastCheckIn>1000){
             countOccurrences=0;
             setCheckInCountSP();
             Log.d("time_difference","true "+(currentTime-lastCheckIn)/1000);
@@ -182,14 +182,14 @@ public class MainActivity extends AppCompatActivity {
             //User Location
             getLocation();
 
-            float distance = 101;
+            float distance = 201;
             if (mlocation != null) {
                 distance = mlocation.distanceTo(source);
             }
             Log.d("test_dis","d "+distance);
             checkBool = (distance < 200);
         }
-        return checkBool;
+        return !checkBool;
     }
 
 
@@ -239,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
                 isCheckedIn = true;
 
                 //
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users/" + currentUser.getUid() + "/");
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users/" + currentUser.getDisplayName() + "/");
                 ref.child("timestamp").setValue(ServerValue.TIMESTAMP);
                 ref.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -300,18 +300,20 @@ public class MainActivity extends AppCompatActivity {
             isCheckedIn = false;
             //
             database = FirebaseDatabase.getInstance();
-            myRef = database.getReference("attendance");
             //name
             String uname="N/A";
             if (currentUser != null) {
                 uname=currentUser.getDisplayName();
             }
+            myRef = database.getReference("attendance/"+uname+"/");
+
             //time-in
             final String time_in_string = pref.getString("check_in","-1");
             //shift
             final String shift= pref.getString("shift","-1");
             //
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users/"+currentUser.getUid()+"/");
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users/"+uname+"/");
+            final DatabaseReference ref_count = FirebaseDatabase.getInstance().getReference("users/"+uname+"/countA/");
             ref.child("timestamp").setValue(ServerValue.TIMESTAMP);
             final String finalUname = uname;
             countOccurrences = pref.getInt("countCheckin",-1);
@@ -320,6 +322,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(countOccurrences==1&&!isCheckedIn) {
                         Long timestamp = (Long) snapshot.child("timestamp").getValue();
+                        long countA = (long) snapshot.child("countA").getValue();
                         if (timestamp != null) {
                             Log.d("timestamp_val", "updated main " + timestamp);
                             //time-out
@@ -332,9 +335,18 @@ public class MainActivity extends AppCompatActivity {
 
                             attendaceLog = new AttendaceLog(finalUname, date_string, shift, time_in_string, time_out_string);
                             //
-                            myRef.push().setValue(attendaceLog);
+                            countA++;
+                            String cntString = countA+"";
+                            myRef.child(cntString).setValue(attendaceLog);
                             countOccurrences++;
+
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putLong("countA",countA);
+                            editor.apply();
                             setCheckInCountSP();
+                            //
+                            ref_count.setValue(countA);
+                            //
                         }
                     }
 
@@ -349,6 +361,10 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "checked-out", Toast.LENGTH_SHORT).show();
             checkinButton.setEnabled(true);
             checkoutButton.setEnabled(false);
+            //
+            //Long countA = pref.getLong("countA",-1);
+            //ref.child("countA").setValue(countA);
+            //
         }
         else {
             Toast.makeText(this, "Cannot check-out without checking-in", Toast.LENGTH_SHORT).show();

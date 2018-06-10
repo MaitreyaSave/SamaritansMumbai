@@ -104,7 +104,7 @@ public class StartActivity extends AppCompatActivity {
                 //Shared Preferences
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
                 final SharedPreferences.Editor editor = pref.edit();
-                String user_uid = currentUser.getUid();
+                String user_name = currentUser.getDisplayName();
                 //
                 DatabaseReference ref_parent = FirebaseDatabase.getInstance().getReference();
                 ref_parent.addValueEventListener(new ValueEventListener() {
@@ -122,7 +122,7 @@ public class StartActivity extends AppCompatActivity {
                     }
                 });
                 //
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users/"+user_uid+"/");
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users/"+user_name+"/");
                 ref.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {

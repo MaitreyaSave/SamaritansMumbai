@@ -9,4 +9,6 @@
     <color name="black">#000000</color>
     <color name="old_accent">#FF2B2B</color>
     <color name="white">#ffffff</color>
+
+    <color name="light_green">#99ff99</color>
 </resources>

@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class User {
     private String role, email, username, uid, shift_day,shift_time;
+    private int countA;
     private long timestamp;
     public User(String username, String email, String role, String shift_day, String shift_time){
         this.username = username;
@@ -19,6 +20,15 @@ public class User {
         this.role = role;
         this.shift_day=shift_day;
         this.shift_time=shift_time;
+        countA=0;
+    }
+
+    public int getCountA() {
+        return countA;
+    }
+
+    public void setCountA(int countA) {
+        this.countA = countA;
     }
 
     public String getShift_day() {

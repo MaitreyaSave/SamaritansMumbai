@@ -2,6 +2,7 @@ package in.apps.maitreya.samaritansmumbai.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -47,8 +48,9 @@ public class LogsAdapter extends RecyclerView.Adapter<LogsAdapter.ViewHolder> {
     }
 
     // Create new views (invoked by the layout manager)
+    @NonNull
     @Override
-    public LogsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+    public LogsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
                                                      int viewType) {
         // create a new view
         View v =  LayoutInflater.from(parent.getContext())
@@ -60,7 +62,7 @@ public class LogsAdapter extends RecyclerView.Adapter<LogsAdapter.ViewHolder> {
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         //holder.mView.setText(mDataset[position]);
@@ -117,7 +119,7 @@ public class LogsAdapter extends RecyclerView.Adapter<LogsAdapter.ViewHolder> {
         if (firebaseUser != null) {
             String fname = firebaseUser.getDisplayName();
             if (fname != null && fname.equals(mDataset.get(position).getSams_name())) {
-                cardView.setBackgroundColor(ctx.getResources().getColor(R.color.colorAccent));
+                cardView.setBackgroundColor(ctx.getResources().getColor(R.color.light_green));
             }
             else {
                 cardView.setBackgroundColor(ctx.getResources().getColor(R.color.white));
