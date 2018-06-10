@@ -203,5 +203,6 @@
     <string name="title_activity_view_logs_recycler">Logs</string>
     <string name="title_activity_recieve_notification">New Notification</string>
     <string name="title_activity_update_caller_profile">UpdateCallerProfile</string>
+    <string name="title_activity_select_sub">Select User</string>
 
 </resources>

@@ -48,7 +48,6 @@
             android:label="@string/title_activity_view_logs_recycler"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.ViewSingleLogActivity" />
-
         <activity
             android:name=".activities.ViewCallerProfilesRecyclerActivity"
             android:label="@string/title_activity_caller_profile"
@@ -64,6 +63,10 @@
         <activity
             android:name=".activities.UpdateCallerProfile"
             android:label="@string/title_activity_update_caller_profile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.SelectSubRecyclerActivity"
+            android:label="@string/title_activity_select_sub"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 

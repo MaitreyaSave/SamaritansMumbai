@@ -42,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private static boolean isCheckedIn = false;
     FirebaseDatabase database;
     DatabaseReference myRef;
-    private static int countOccurrences = 0;
+    private static int countOccurrences = 0, requestCodeMain=0;
+    private static String subVolunteer="N/A";
     FirebaseUser currentUser;
     SharedPreferences pref;
     AttendaceLog attendaceLog;
@@ -237,7 +238,30 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 isCheckedIn = true;
+                //
+                //Create a prompt for user to input sub
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("Subbing Prompt");
+                alertDialogBuilder.setMessage("Are you subbing for someon?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        subVolunteer="ok";
+                                        Intent intent = new Intent(getApplicationContext(), SelectSubRecyclerActivity.class);
+                                        startActivityForResult(intent,requestCodeMain);
+                                        dialog.cancel();
+                                    }
+                                })
+                        .setNegativeButton("No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
 
+                AlertDialog alert = alertDialogBuilder.create();
+                alert.show();
                 //
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users/" + currentUser.getDisplayName() + "/");
                 ref.child("timestamp").setValue(ServerValue.TIMESTAMP);
@@ -273,7 +297,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 //
-                Toast.makeText(this, "checked-in", Toast.LENGTH_SHORT).show();
+
                 checkinButton.setEnabled(false);
                 checkoutButton.setEnabled(true);
 
@@ -334,15 +358,13 @@ public class MainActivity extends AppCompatActivity {
                             String date_string = df2.format(date);
 
                             attendaceLog = new AttendaceLog(finalUname, date_string, shift, time_in_string, time_out_string);
+                            attendaceLog.setSub(subVolunteer);
                             //
                             countA++;
                             String cntString = countA+"";
                             myRef.child(cntString).setValue(attendaceLog);
                             countOccurrences++;
 
-                            SharedPreferences.Editor editor = pref.edit();
-                            editor.putLong("countA",countA);
-                            editor.apply();
                             setCheckInCountSP();
                             //
                             ref_count.setValue(countA);
@@ -362,12 +384,24 @@ public class MainActivity extends AppCompatActivity {
             checkinButton.setEnabled(true);
             checkoutButton.setEnabled(false);
             //
-            //Long countA = pref.getLong("countA",-1);
-            //ref.child("countA").setValue(countA);
-            //
+
         }
         else {
             Toast.makeText(this, "Cannot check-out without checking-in", Toast.LENGTH_SHORT).show();
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == requestCodeMain) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                // The user picked a contact.
+                // The Intent's data Uri identifies which contact was selected.
+                subVolunteer=data.getStringExtra("subuser");
+                Toast.makeText(this, "Checked in for "+subVolunteer, Toast.LENGTH_SHORT).show();
+                // Do something with the contact here (bigger example below)
+            }
         }
     }
 }

@@ -14,6 +14,11 @@ public class User {
     private String role, email, username, uid, shift_day,shift_time;
     private int countA;
     private long timestamp;
+
+    public User() {
+        countA=0;
+    }
+
     public User(String username, String email, String role, String shift_day, String shift_time){
         this.username = username;
         this.email = email;

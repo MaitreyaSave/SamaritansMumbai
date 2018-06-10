@@ -6,7 +6,7 @@ package in.apps.maitreya.samaritansmumbai.classes;
  */
 
 public class AttendaceLog {
-    private String user_name,date,shift,time_in,time_out;
+    private String user_name,date,shift,time_in,time_out, sub;
 
     public AttendaceLog(){
 
@@ -18,6 +18,15 @@ public class AttendaceLog {
         this.shift=shift;
         this.time_in=time_in;
         this.time_out=time_out;
+        sub="N/A";
+    }
+
+    public String getSub() {
+        return sub;
+    }
+
+    public void setSub(String sub) {
+        this.sub = sub;
     }
 
     public String getUser_name() {

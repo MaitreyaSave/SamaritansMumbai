@@ -7,7 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -19,33 +19,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.apps.maitreya.samaritansmumbai.R;
-import in.apps.maitreya.samaritansmumbai.adapters.LogsAdapter;
-import in.apps.maitreya.samaritansmumbai.classes.LogEntry;
+import in.apps.maitreya.samaritansmumbai.adapters.UsersAdapter;
+import in.apps.maitreya.samaritansmumbai.classes.User;
 
-public class ViewLogsRecyclerActivity extends AppCompatActivity {
+public class SelectSubRecyclerActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private List<LogEntry> logEntries;
+    private List<User> users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_logs_recycler);
+        setContentView(R.layout.activity_select_sub_recycler);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        //
-        toolbar.setNavigationIcon(R.drawable.ic_back_arrow);
         setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        //
 
         //
         //Recycler view
-        mRecyclerView = findViewById(R.id.recycler_view);
+        mRecyclerView = findViewById(R.id.recycler_view_select_subUser);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -53,26 +44,26 @@ public class ViewLogsRecyclerActivity extends AppCompatActivity {
 
         // use a linear layout manager
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
-        mLayoutManager.setReverseLayout(true);
-        mLayoutManager.setStackFromEnd(true);
+        //mLayoutManager.setReverseLayout(true);
+        //mLayoutManager.setStackFromEnd(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         //
-        logEntries = new ArrayList<>();
+        users = new ArrayList<>();
         //
-        mAdapter = new LogsAdapter(logEntries, this);
+        mAdapter = new UsersAdapter(users, this);
         mRecyclerView.setAdapter(mAdapter);
         //
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("log/");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users/");
         ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
-                LogEntry entry = dataSnapshot.getValue(LogEntry.class);
-                logEntries.add(entry);
-                mAdapter = new LogsAdapter(logEntries,ViewLogsRecyclerActivity.this);
+                User user = dataSnapshot.getValue(User.class);
+                users.add(user);
+                mAdapter = new UsersAdapter(users,SelectSubRecyclerActivity.this);
                 mRecyclerView.setAdapter(mAdapter);
-                Log.d("ChildAdded","check_test "+logEntries.size());
+                Log.d("ChildAdded","check_test "+ users.size());
             }
 
             @Override
@@ -82,8 +73,8 @@ public class ViewLogsRecyclerActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                LogEntry entry = dataSnapshot.getValue(LogEntry.class);
-                logEntries.remove(entry);
+                User user = dataSnapshot.getValue(User.class);
+                users.remove(user);
             }
 
             @Override
@@ -97,12 +88,7 @@ public class ViewLogsRecyclerActivity extends AppCompatActivity {
             }
         });
         //
+        //
     }
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
-
 
 }
