@@ -188,9 +188,9 @@ public class MainActivity extends AppCompatActivity {
                 distance = mlocation.distanceTo(source);
             }
             Log.d("test_dis","d "+distance);
-            checkBool = (distance < 200);
+            checkBool = (distance > 200);
         }
-        return !checkBool;
+        return checkBool;
     }
 
 
@@ -242,12 +242,11 @@ public class MainActivity extends AppCompatActivity {
                 //Create a prompt for user to input sub
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setTitle("Subbing Prompt");
-                alertDialogBuilder.setMessage("Are you subbing for someon?")
+                alertDialogBuilder.setMessage("Are you subbing for someone?")
                         .setCancelable(false)
                         .setPositiveButton("Yes",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
-                                        subVolunteer="ok";
                                         Intent intent = new Intent(getApplicationContext(), SelectSubRecyclerActivity.class);
                                         startActivityForResult(intent,requestCodeMain);
                                         dialog.cancel();
@@ -396,8 +395,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == requestCodeMain) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                // The user picked a contact.
-                // The Intent's data Uri identifies which contact was selected.
+                // Extract name of volunteer for whom user is substituting
                 subVolunteer=data.getStringExtra("subuser");
                 Toast.makeText(this, "Checked in for "+subVolunteer, Toast.LENGTH_SHORT).show();
                 // Do something with the contact here (bigger example below)

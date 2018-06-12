@@ -14,8 +14,8 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar_caller_profile_single"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
@@ -48,54 +48,84 @@
                     android:layout_weight="1"
                     android:text="@string/caller_profile_age"
                     android:layout_height="wrap_content" />
-        </LinearLayout>
-        <View style="@style/Divider"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"/>
-        <TextView
-            android:id="@+id/single_cp_common_identifiers"
-            android:text="@string/caller_profile_common_identifiers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/single_cp_support_system"
-            android:text="@string/caller_profile_support_system"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            </LinearLayout>
             <View style="@style/Divider"
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:layout_marginBottom="@dimen/activity_horizontal_margin"/>
-        <TextView
-            android:id="@+id/single_cp_occupation"
-            android:text="@string/caller_profile_occupation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/single_cp_heealth_issues"
-            android:text="@string/caller_profile_health_issues"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/single_cp_common_identifiers"
+                android:text="@string/caller_profile_common_identifiers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/single_cp_support_system"
+                android:text="@string/caller_profile_support_system"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
             <View style="@style/Divider"
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:layout_marginBottom="@dimen/activity_horizontal_margin"/>
-        <TextView
-            android:id="@+id/single_cp_frequency"
-            android:text="@string/caller_profile_frequency"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/single_cp_suicide_attempts"
-            android:text="@string/caller_profile_suicide_attempts"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/single_cp_occupation"
+                android:text="@string/caller_profile_occupation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/single_cp_heealth_issues"
+                android:text="@string/caller_profile_health_issues"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
             <View style="@style/Divider"
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:layout_marginBottom="@dimen/activity_horizontal_margin"/>
-        <TextView
-            android:id="@+id/single_cp_gist"
-            android:text="@string/caller_profile_gist"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/single_cp_frequency"
+                android:text="@string/caller_profile_frequency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/single_cp_suicide_attempts"
+                android:text="@string/caller_profile_suicide_attempts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <View style="@style/Divider"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"/>
+            <TextView
+                android:id="@+id/single_cp_gist"
+                android:text="@string/caller_profile_gist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <View style="@style/Divider"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"/>
+            <TextView
+                android:id="@+id/list_new_info"
+                android:text="@string/caller_profile_gist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/new_info_ref"
+                    android:layout_width="0dp"
+                    android:textAlignment="center"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/new_info_date"
+                    android:layout_width="wrap_content"
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/new_info_details"
+                    android:layout_marginStart="10dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

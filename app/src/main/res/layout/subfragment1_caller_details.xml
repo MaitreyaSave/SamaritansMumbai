@@ -72,14 +72,12 @@
                 android:id="@+id/spinner_cd_ampm"
                 android:layout_width="wrap_content"
                 android:dropDownWidth="fill_parent"
-                android:background="@android:drawable/btn_dropdown"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/cd_time_buffer"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:textSize="@dimen/small_font"
-                android:labelFor="@id/cd_time_mins"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
@@ -434,7 +432,6 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:textSize="@dimen/small_font"
-                android:labelFor="@id/cd_name_val"
                 android:layout_height="wrap_content"
                 android:text="@string/cd_caller_name"/>
             <EditText
@@ -458,7 +455,6 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:textSize="@dimen/small_font"
-                android:labelFor="@id/cd_age_val"
                 android:layout_height="wrap_content"
                 android:text="@string/cd_caller_age"/>
             <EditText
@@ -482,7 +478,6 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:textSize="@dimen/small_font"
-                android:labelFor="@id/cd_plan_val"
                 android:layout_height="wrap_content"
                 android:text="@string/cd_plan"/>
             <EditText
@@ -506,7 +501,6 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:textSize="@dimen/small_font"
-                android:labelFor="@id/cd_attempt_val"
                 android:layout_height="wrap_content"
                 android:text="@string/cd_attempt"/>
             <EditText

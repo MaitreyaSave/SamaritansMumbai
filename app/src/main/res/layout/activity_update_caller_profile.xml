@@ -14,8 +14,8 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
@@ -46,62 +46,102 @@
                 android:gravity="top"
                 android:padding="10dp"
                 android:layout_height="100dp" />
-            <EditText
-                android:id="@+id/update_caller_profile_age"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/tupdate_caller_profile_age_layout"
                 android:layout_width="match_parent"
-                android:layout_margin="10dp"
-                android:inputType="number"
-                android:hint="@string/caller_profile_age"
-                android:layout_height="wrap_content" />
-            <EditText
-                android:id="@+id/update_caller_profile_common_identifiers"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/update_caller_profile_age"
+                    android:layout_width="match_parent"
+                    android:layout_margin="10dp"
+                    android:inputType="number"
+                    android:hint="@string/caller_profile_age"
+                    android:layout_height="wrap_content" />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/update_caller_profile_common_identifiers_layout"
                 android:layout_width="match_parent"
-                android:layout_margin="10dp"
-                android:inputType="textCapSentences"
-                android:hint="@string/caller_profile_common_identifiers"
-                android:layout_height="wrap_content" />
-            <EditText
-                android:id="@+id/update_caller_profile_support_systems"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/update_caller_profile_common_identifiers"
+                    android:layout_width="match_parent"
+                    android:layout_margin="10dp"
+                    android:inputType="textCapSentences"
+                    android:hint="@string/caller_profile_common_identifiers"
+                    android:layout_height="wrap_content" />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/update_caller_profile_support_systems_layout"
                 android:layout_width="match_parent"
-                android:layout_margin="10dp"
-                android:inputType="textCapSentences"
-                android:hint="@string/caller_profile_support_system"
-                android:layout_height="wrap_content" />
-            <EditText
-                android:id="@+id/update_caller_profile_occupation"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/update_caller_profile_support_systems"
+                    android:layout_width="match_parent"
+                    android:layout_margin="10dp"
+                    android:inputType="textCapSentences"
+                    android:hint="@string/caller_profile_support_system"
+                    android:layout_height="wrap_content" />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/update_caller_profile_occupation_layout"
                 android:layout_width="match_parent"
-                android:layout_margin="10dp"
-                android:inputType="textCapSentences"
-                android:hint="@string/caller_profile_occupation"
-                android:layout_height="wrap_content" />
-            <EditText
-                android:id="@+id/update_caller_profile_health_issues"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/update_caller_profile_occupation"
+                    android:layout_width="match_parent"
+                    android:layout_margin="10dp"
+                    android:inputType="textCapSentences"
+                    android:hint="@string/caller_profile_occupation"
+                    android:layout_height="wrap_content" />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/update_caller_profile_health_issues_layout"
                 android:layout_width="match_parent"
-                android:layout_margin="10dp"
-                android:inputType="textCapSentences"
-                android:hint="@string/caller_profile_health_issues"
-                android:layout_height="wrap_content" />
-            <EditText
-                android:id="@+id/update_caller_profile_frequency"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/update_caller_profile_health_issues"
+                    android:layout_width="match_parent"
+                    android:layout_margin="10dp"
+                    android:inputType="textCapSentences"
+                    android:hint="@string/caller_profile_health_issues"
+                    android:layout_height="wrap_content" />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/update_caller_profile_frequency_layout"
                 android:layout_width="match_parent"
-                android:layout_margin="10dp"
-                android:inputType="textCapSentences"
-                android:hint="@string/caller_profile_frequency"
-                android:layout_height="wrap_content" />
-            <EditText
-                android:id="@+id/update_caller_profile_suicide_attempts"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/update_caller_profile_frequency"
+                    android:layout_width="match_parent"
+                    android:layout_margin="10dp"
+                    android:inputType="textCapSentences"
+                    android:hint="@string/caller_profile_frequency"
+                    android:layout_height="wrap_content" />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/update_caller_profile_suicide_attempts_layout"
                 android:layout_width="match_parent"
-                android:layout_margin="10dp"
-                android:inputType="textCapSentences"
-                android:hint="@string/caller_profile_suicide_attempts"
-                android:layout_height="wrap_content" />
-            <EditText
-                android:id="@+id/update_caller_profile_gist"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/update_caller_profile_suicide_attempts"
+                    android:layout_width="match_parent"
+                    android:layout_margin="10dp"
+                    android:inputType="textCapSentences"
+                    android:hint="@string/caller_profile_suicide_attempts"
+                    android:layout_height="wrap_content" />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/update_caller_profile_gist_layout"
                 android:layout_width="match_parent"
-                android:layout_margin="10dp"
-                android:inputType="textCapSentences"
-                android:hint="@string/caller_profile_gist"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/update_caller_profile_gist"
+                    android:layout_width="match_parent"
+                    android:layout_margin="10dp"
+                    android:inputType="textCapSentences"
+                    android:hint="@string/caller_profile_gist"
+                    android:layout_height="wrap_content" />
+            </android.support.design.widget.TextInputLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"/>

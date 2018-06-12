@@ -98,24 +98,24 @@
 
     <string-array name="nature_array">
         <item>N/A</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10</item>
-        <item>11</item>
-        <item>12</item>
-        <item>13</item>
-        <item>14</item>
-        <item>15</item>
-        <item>16</item>
-        <item>17</item>
-        <item>18</item>
+        <item>1 - Mental Illness</item>
+        <item>2 - Terminal Illness</item>
+        <item>3 - Depression</item>
+        <item>4 - Family Problems</item>
+        <item>5 - Relationship Problems</item>
+        <item>6 - Marital Problems</item>
+        <item>7 - Sexual Problems</item>
+        <item>8 - Financial Problems</item>
+        <item>9 - Professional Problems</item>
+        <item>10 - Educational Problems</item>
+        <item>11 - Loneliness</item>
+        <item>12 - Failure</item>
+        <item>13 - Grief</item>
+        <item>14 - Loss</item>
+        <item>15 - Old Age</item>
+        <item>16 - Poverty</item>
+        <item>17 - Sexually Demanding</item>
+        <item>18 - Any other</item>
     </string-array>
     <string name="cd_caller_name">Caller Name:</string>
     <string name="cd_caller_age">Caller Age:</string>
@@ -195,6 +195,7 @@
     <string name="caller_profile_suicide_attempts">Suicide attempts, if any (number and details)</string>
     <string name="caller_profile_gist">Gist of calls/issues so far</string>
     <string name="caller_profile_new_info">New information/progress of the caller</string>
+
 
     <!-- Random Strings -->
     <string name="network_location_access">Please make sure your Internet is ON in order to login!</string>

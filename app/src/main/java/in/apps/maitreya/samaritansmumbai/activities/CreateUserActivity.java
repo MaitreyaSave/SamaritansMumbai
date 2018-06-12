@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -120,7 +121,31 @@ public class CreateUserActivity extends AppCompatActivity {
         String name =userName.getText().toString();
         String email = userEmail.getText().toString();
         String password = userPassword.getText().toString();
-        createAccount(email,password,name,role);
+        if( TextUtils.isEmpty(userName.getText())){
+            userName.setError( "Name is required!" );
+
+        }
+        else {
+            if (name.length() > 50) {
+                userName.setError("Name is too long! Maximum 50 characters allowed!");
+            } else {
+                if( TextUtils.isEmpty(userEmail.getText())){
+                    userEmail.setError( "Email is required!" );
+                }
+                else {
+                    if( TextUtils.isEmpty(userPassword.getText())){
+                        userPassword.setError( "Password is required!" );
+
+                    } else {
+                        if (password.length() < 6) {
+                            userPassword.setError("Password is too short! Minimum 6 characters required!");
+                        } else {
+                            createAccount(email, password, name, role);
+                        }
+                    }
+                }
+            }
+        }
     }
     public  void createAccount(String displayemail, String password, String displayName, String displayrole){
         final String name = displayName, email = displayemail, role = displayrole;

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -38,13 +39,26 @@ public class CreateCallerProfileActivity extends AppCompatActivity {
                 String suicideAttempts = callerProfileSuicideAttempts.getText().toString();
                 String gist = callerProfileGist.getText().toString();
                 //
-                DatabaseReference myRef = database.getReference("caller_profiles");
-                //
-                CallerProfile callerProfile = new CallerProfile(name,age,commonIdentifiers,supportSystem,occupation,healthIssues,frequency,suicideAttempts,gist);
-                myRef.child(name).setValue(callerProfile);
-                //
-                Toast.makeText(CreateCallerProfileActivity.this, "done", Toast.LENGTH_SHORT).show();
-                finish();
+                if( TextUtils.isEmpty(callerProfileName.getText())){
+                    callerProfileName.setError( "Name is required!" );
+
+                }
+                else{
+                    if (name.length()>50){
+                        callerProfileName.setError( "Name is too long! Maximum 50 characters allowed!" );
+                    }
+                    else{
+                        DatabaseReference myRef = database.getReference("caller_profiles");
+                        //
+                        CallerProfile callerProfile = new CallerProfile(name,age,commonIdentifiers,supportSystem,occupation,healthIssues,frequency,suicideAttempts,gist);
+                        myRef.child(name).setValue(callerProfile);
+                        //
+                        Toast.makeText(CreateCallerProfileActivity.this, "done", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+
+                }
+
             }
         });
 
