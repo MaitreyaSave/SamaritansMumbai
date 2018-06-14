@@ -2,9 +2,11 @@ package in.apps.maitreya.samaritansmumbai.activities;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -48,7 +50,7 @@ import in.apps.maitreya.samaritansmumbai.classes.LogEntry;
 
 public class LogEntryActivity extends AppCompatActivity {
 
-    //Shared preferences
+    // Declare variables.
     private static SharedPreferences pref;
     private static final String TAG = LogEntryActivity.class.getName();
     private static String timestamp,sams_name;
@@ -81,44 +83,28 @@ public class LogEntryActivity extends AppCompatActivity {
     private static String plan;
     private static String attempt;
     private static String secondary_nature ="N/A";
-
     public static  int cnt;
 
-    @SuppressLint("StaticFieldLeak")
-    private static View rView;
+    //@SuppressLint("StaticFieldLeak")
+    //private static View rView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_entry);
 
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        /*
-      The {@link android.caller_support.v4.view.PagerAdapter} that will provide
-      fragments for each of the sections. We use a
-      {@link FragmentPagerAdapter} derivative, which will keep every
-      loaded fragment in memory. If this becomes too memory intensive, it
-      may be best to switch to a
-      {@link android.caller_support.v4.app.FragmentStatePagerAdapter}.
-     */
         SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        // Set up the ViewPager with the sections adapter.
-        /*
-      The {@link ViewPager} that will host the section contents.
-     */
+        // Set up the View Pager with the sections adapter.
         ViewPager mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+        // Attach tab-layout to View Pager and add "On Tab Selected Listener".
         final TabLayout tabLayout = findViewById(R.id.tabs);
-
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
         //
-        //Re-initialize static edit texts
+        //Re-initialize static edit texts.
         leader_name="N/A";
         leader_spl_msg="N/A";
         pseudo_name="N/A";
@@ -135,20 +121,21 @@ public class LogEntryActivity extends AppCompatActivity {
         call_end="N/A";
         volunteers_response="N/A";
 
-        //
+        // Get current firebase user (user who has logged in).
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser != null) {
             sams_name = firebaseUser.getDisplayName();
         }
         //
-        //Shared preferences
+        // Fetch Shared Preferences.
         pref = getSharedPreferences("MyPref", 0); // 0 - for private mode
 
-
+        // Floating Action Button to submit caller (log) details.
         FloatingActionButton fab = findViewById(R.id.submit_caller_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Alert Dialog to prompt user before submitting.
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(LogEntryActivity.this);
                 alertDialog.setTitle("Submit");
                 alertDialog.setMessage("Do you wish to submit these Caller Details?");
@@ -161,108 +148,40 @@ public class LogEntryActivity extends AppCompatActivity {
                 alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        //Get values
-                        //
-                        EditText name_et = rView.findViewById(R.id.cd_name_val);
-                        EditText age_et = rView.findViewById(R.id.cd_age_val);
-                        EditText time_hours_et = rView.findViewById(R.id.cd_time_hours);
-                        EditText time_mins_et = rView.findViewById(R.id.cd_time_mins);
-                        EditText duration_hours_et = rView.findViewById(R.id.cd_duration_hours_val);
-                        EditText duration_mins_et = rView.findViewById(R.id.cd_duration_mins_val);
-                        EditText plan_et = rView.findViewById(R.id.cd_plan_val);
-                        EditText attempt_et = rView.findViewById(R.id.cd_attempt_val);
-                        //
-                        EditText gist_et = findViewById(R.id.cd_gist_et);
-                        EditText feelings_et = findViewById(R.id.cd_feelings_addressed_et);
-                        EditText volunteers_response_et = findViewById(R.id.cd_volunteers_response_et);
-                        EditText call_end_et = findViewById(R.id.cd_call_end_et);
-                        //
-                        EditText sams_leader_name_et = rView.findViewById(R.id.sams_leader_name_val);
-                        EditText leader_msg_et = rView.findViewById(R.id.sams_leader_msg_val);
-                        EditText pseudo_name_et = rView.findViewById(R.id.sams_pseudo_name_val);
-                        EditText secondary_nature_et = rView.findViewById(R.id.cd_problem_nature_secondary_val);
-                        //
+                        // Lose focus of current edit text so that the data in that edit text can be fetched.
+                        View v =getCurrentFocus();
+                        assert v != null;
+                        v.clearFocus();
 
-                        //
-                        //1st tab
-                        if (time_hours_et.hasFocus())
-                            time_hours_et.clearFocus();
-                        if (time_mins_et.hasFocus())
-                            time_mins_et.clearFocus();
-                        if (duration_hours_et.hasFocus())
-                            duration_hours_et.clearFocus();
-                        if (duration_mins_et.hasFocus())
-                            duration_mins_et.clearFocus();
-                        if (plan_et.hasFocus())
-                            plan_et.clearFocus();
-                        if (attempt_et.hasFocus())
-                            attempt_et.clearFocus();
-                        if (age_et.hasFocus())
-                            age_et.clearFocus();
-                        if (name_et.hasFocus())
-                            name_et.clearFocus();
-                        //
-                        //2nd tab
-                        if (gist_et.hasFocus())
-                            gist_et.clearFocus();
-                        if (call_end_et.hasFocus())
-                            call_end_et.clearFocus();
-                        if (volunteers_response_et.hasFocus())
-                            volunteers_response_et.clearFocus();
-                        if (feelings_et.hasFocus())
-                            feelings_et.clearFocus();
-                        //
-                        //3rd tab
-                        if (pseudo_name_et.hasFocus())
-                            pseudo_name_et.clearFocus();
-                        if (sams_leader_name_et.hasFocus())
-                            sams_leader_name_et.clearFocus();
-                        if (leader_msg_et.hasFocus())
-                            leader_msg_et.clearFocus();
-                        if (secondary_nature_et.hasFocus())
-                            secondary_nature_et.clearFocus();
-                        //
-                        //Log.d(TAG,"temp_et_in");
-
-                        //
+                        // Get count of logs from Shared Preferences and increment it by one.
                         cnt = pref.getInt("count", 0);
                         cnt++;
                         //
-                        //Firebase Database
+                        // Get a reference to Firebase Database.
                         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("log");
-                        //LogEntry logEntry = new LogEntry(cnt,timestamp,gist,sams_name,);
+                        // Convert time and duration into hours and minutes.
                         String time = hours + ":" + mins + " " + ampm;
                         String duration = duration_hours + " hours " + duration_mins + " mins";
+
+                        // Create and attach an object of "Log Entry" to the direbase database with "count" (of logs) as node.
                         LogEntry logEntry = new LogEntry(cnt, timestamp, gist, sams_name, gender, tel_door, new_old, suicide_qn, risk_level, problem_nature, leader_name, pseudo_name, leader_spl_msg, name, age, caller_support, occupation, self_assessment, PU_referred, feelings_addressed, volunteers_response, call_end, time, duration, language, frequent_caller, plan, attempt, secondary_nature);
                         final String child_sr_no = String.valueOf(cnt);
                         ref.child(child_sr_no).setValue(logEntry);
 
+                        // Add a value event listener to store the incremented count on Firebase Database.
                         ref.addValueEventListener(new ValueEventListener() {
                             @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 DatabaseReference ref_count = FirebaseDatabase.getInstance().getReference("count");
                                 ref_count.setValue(child_sr_no);
-                                ref_count.addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                        Log.d(TAG, "server cnt " + cnt);
-                                    }
-
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
-
-                                    }
-                                });
                             }
-
                             @Override
-                            public void onCancelled(DatabaseError databaseError) {
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
                             }
                         });
                         //
-                        //
+                        // Create a toast to notify the user that Caller Details were submitted successfully.
                         Toast.makeText(LogEntryActivity.this, "Caller Details submitted!", Toast.LENGTH_SHORT).show();
                         finish();
                     }
@@ -298,9 +217,7 @@ public class LogEntryActivity extends AppCompatActivity {
 
 
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
+    // A placeholder fragment containing a simple view.
     public static class PlaceholderFragment extends Fragment {
         /**
          * The fragment argument representing the section number for this
@@ -324,26 +241,26 @@ public class LogEntryActivity extends AppCompatActivity {
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+        public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_caller_details, container, false);
-            rView =rootView;
-            // TextViews and Values
+            //rView =rootView;
+            // TextViews and Values.
             TextView tv_cd_date_val, tv_cd_sams_name_val;
 
             //Layouts
             LinearLayout tab1,tab2,tab3;
             //
-            //Initialize Values
+            //Initialize Values.
             tv_cd_date_val = rootView.findViewById(R.id.cd_date_val);
             tv_cd_sams_name_val = rootView.findViewById(R.id.sams_name_tv_val);
             //
-            //Initializes Layouts
+            //Initializes Layouts.
             tab1 = rootView.findViewById(R.id.tab_linear_layout_child1);
             tab2 = rootView.findViewById(R.id.tab_linear_layout_child2);
             tab3 = rootView.findViewById(R.id.tab_linear_layout_child3);
 
-            //Shared Preferences time stamp
+            // Retrieve Shared Preferences time stamp.
             String timestamp_long=pref.getString("time_stamp", "-1");
             long ts = Long.parseLong(timestamp_long);
             Date date = new Date(ts);
@@ -355,14 +272,16 @@ public class LogEntryActivity extends AppCompatActivity {
             tv_cd_sams_name_val.setText(sams_name);
 
             //
-            //Spinner for Nature of Problem
+            // Spinner for Nature of Problem.
             Spinner spinner = rootView.findViewById(R.id.spinner_cd_problem_nature_val);
-            // Create an ArrayAdapter using the string array and a default spinner layout
-            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+            // Create an ArrayAdapter using the string array and a default spinner layout.
+            Context context=getContext();
+            assert context != null;
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context,
                     R.array.nature_array, android.R.layout.simple_spinner_item);
-            // Specify the layout to use when the list of choices appears
+            // Specify the layout to use when the list of choices appears.
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            // Apply the adapter to the spinner
+            // Apply the adapter to the spinner.
             spinner.setAdapter(adapter);
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -376,9 +295,8 @@ public class LogEntryActivity extends AppCompatActivity {
                 }
             });
             //
-            //Spinner for Time
-            //
-            //AMPM
+            // Spinner for Time AM/PM.
+
             Spinner spinner_ampm = rootView.findViewById(R.id.spinner_cd_ampm);
             ArrayAdapter<CharSequence> adapter_ampm = ArrayAdapter.createFromResource(getContext(),
                     R.array.am_pm_array, android.R.layout.simple_spinner_item);
@@ -432,44 +350,44 @@ public class LogEntryActivity extends AppCompatActivity {
             name_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
-                    if( TextUtils.isEmpty(name_et.getText())){
-                        name="N/A";
-                    }else{
-                        name = name_et.getText().toString();
-                    }
+                if( TextUtils.isEmpty(name_et.getText())){
+                    name="N/A";
+                }else{
+                    name = name_et.getText().toString();
+                }
                 }
             });
             final EditText age_et = rootView.findViewById(R.id.cd_age_val);
             age_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
-                    if( TextUtils.isEmpty(age_et.getText())){
-                        age="N/A";
-                    }else{
-                        age = age_et.getText().toString();
-                    }
+                if( TextUtils.isEmpty(age_et.getText())){
+                    age="N/A";
+                }else{
+                    age = age_et.getText().toString();
+                }
                 }
             });
             final EditText plan_et = rootView.findViewById(R.id.cd_plan_val);
             plan_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
-                    if( TextUtils.isEmpty(plan_et.getText())){
-                        plan="N/A";
-                    }else{
-                        plan = plan_et.getText().toString();
-                    }
+                if( TextUtils.isEmpty(plan_et.getText())){
+                    plan="N/A";
+                }else{
+                    plan = plan_et.getText().toString();
+                }
                 }
             });
             final EditText attempt_et = rootView.findViewById(R.id.cd_attempt_val);
             attempt_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
-                    if( TextUtils.isEmpty(attempt_et.getText())){
-                        attempt="N/A";
-                    }else{
-                        attempt = attempt_et.getText().toString();
-                    }
+                if( TextUtils.isEmpty(attempt_et.getText())){
+                    attempt="N/A";
+                }else{
+                    attempt = attempt_et.getText().toString();
+                }
                 }
             });
             //
@@ -478,11 +396,11 @@ public class LogEntryActivity extends AppCompatActivity {
             pseudo_name_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
-                    if( TextUtils.isEmpty(pseudo_name_et.getText())){
-                        pseudo_name="N/A";
-                    }else{
-                        pseudo_name = pseudo_name_et.getText().toString();
-                    }
+                if( TextUtils.isEmpty(pseudo_name_et.getText())){
+                    pseudo_name="N/A";
+                }else{
+                    pseudo_name = pseudo_name_et.getText().toString();
+                }
 
                 }
             });
@@ -490,33 +408,33 @@ public class LogEntryActivity extends AppCompatActivity {
             leader_name_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
-                    if( TextUtils.isEmpty(leader_name_et.getText())){
-                        leader_name="N/A";
-                    }else{
-                        leader_name = leader_name_et.getText().toString();
-                    }
+                if( TextUtils.isEmpty(leader_name_et.getText())){
+                    leader_name="N/A";
+                }else{
+                    leader_name = leader_name_et.getText().toString();
+                }
                 }
             });
             final EditText leader_msg_et = rootView.findViewById(R.id.sams_leader_msg_val);
             leader_msg_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
-                    if( TextUtils.isEmpty(leader_msg_et.getText())){
-                        leader_spl_msg="N/A";
-                    }else{
-                        leader_spl_msg = leader_msg_et.getText().toString();
-                    }
+                if( TextUtils.isEmpty(leader_msg_et.getText())){
+                    leader_spl_msg="N/A";
+                }else{
+                    leader_spl_msg = leader_msg_et.getText().toString();
+                }
                 }
             });
             final EditText secondary_nature_et = rootView.findViewById(R.id.cd_problem_nature_secondary_val);
             secondary_nature_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
-                    if( TextUtils.isEmpty(secondary_nature_et.getText())){
-                        secondary_nature="N/A";
-                    }else{
-                        secondary_nature = secondary_nature_et.getText().toString();
-                    }
+                if( TextUtils.isEmpty(secondary_nature_et.getText())){
+                    secondary_nature="N/A";
+                }else{
+                    secondary_nature = secondary_nature_et.getText().toString();
+                }
                 }
             });
             //for tab2
@@ -524,49 +442,50 @@ public class LogEntryActivity extends AppCompatActivity {
             gist_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
-                    if( TextUtils.isEmpty(gist_et.getText())){
-                        gist="N/A";
-                    }else{
-                        gist = gist_et.getText().toString();
-                    }
+                if( TextUtils.isEmpty(gist_et.getText())){
+                    gist="N/A";
+                }else{
+                    gist = gist_et.getText().toString();
+                }
                 }
             });
             final EditText feelings_addressed_et = rootView.findViewById(R.id.cd_feelings_addressed_et);
             feelings_addressed_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
-                    if( TextUtils.isEmpty(feelings_addressed_et.getText())){
-                        feelings_addressed="N/A";
-                    }else{
-                        feelings_addressed = feelings_addressed_et.getText().toString();
-                    }
+                if( TextUtils.isEmpty(feelings_addressed_et.getText())){
+                    feelings_addressed="N/A";
+                }else{
+                    feelings_addressed = feelings_addressed_et.getText().toString();
+                }
                 }
             });
             final EditText volunteers_response_et = rootView.findViewById(R.id.cd_volunteers_response_et);
             volunteers_response_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
-                    if( TextUtils.isEmpty(volunteers_response_et.getText())){
-                        volunteers_response="N/A";
-                    }else{
-                        volunteers_response = volunteers_response_et.getText().toString();
-                    }
+                if( TextUtils.isEmpty(volunteers_response_et.getText())){
+                    volunteers_response="N/A";
+                }else{
+                    volunteers_response = volunteers_response_et.getText().toString();
+                }
                 }
             });
             final EditText call_end_et = rootView.findViewById(R.id.cd_call_end_et);
             call_end_et.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View view, boolean b) {
-                    if( TextUtils.isEmpty(call_end_et.getText())){
-                        call_end="N/A";
-                    }else{
-                        call_end = call_end_et.getText().toString();
-                    }
+                if( TextUtils.isEmpty(call_end_et.getText())){
+                    call_end="N/A";
+                }else{
+                    call_end = call_end_et.getText().toString();
+                }
                 }
             });
             //
 
             //Use separate logic for each tab
+            assert getArguments() != null;
             int tabNumber = getArguments().getInt(ARG_SECTION_NUMBER);
             switch (tabNumber){
                 case 1:
@@ -588,10 +507,7 @@ public class LogEntryActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
+    //A FragmentPagerAdapter that returns a fragment corresponding to one of the sections/tabs/pages.
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         SectionsPagerAdapter(FragmentManager fm) {
@@ -647,6 +563,7 @@ public class LogEntryActivity extends AppCompatActivity {
                 break;
             case R.id.cd_radio_old:
                 if (checked)
+                    // In case the caller is and old caller, prompt user to update caller profile. (If profile exists for this caller)
                     new_old = ((RadioButton) view).getText().toString();
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(LogEntryActivity.this);
                     alertDialog.setTitle("Old Caller");
@@ -657,14 +574,15 @@ public class LogEntryActivity extends AppCompatActivity {
 
                         }
                     });
+                    // Start activity to update Caller Profile.
                     alertDialog.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            Intent intent = new Intent(LogEntryActivity.this,ViewCallerProfilesRecyclerActivity.class);
-                            SharedPreferences.Editor editor =pref.edit();
-                            editor.putBoolean("update_CP",true);
-                            editor.apply();
-                            startActivity(intent);
+                        Intent intent = new Intent(LogEntryActivity.this,ViewCallerProfilesRecyclerActivity.class);
+                        SharedPreferences.Editor editor =pref.edit();
+                        editor.putBoolean("update_CP",true);
+                        editor.apply();
+                        startActivity(intent);
                         }
                     });
                     alertDialog.show();
@@ -769,7 +687,6 @@ public class LogEntryActivity extends AppCompatActivity {
                 if (checked)
                     frequent_caller = ((RadioButton) view).getText().toString();
                 break;
-
         }
     }
 }

@@ -16,52 +16,59 @@ import in.apps.maitreya.samaritansmumbai.R;
 import in.apps.maitreya.samaritansmumbai.classes.CallerProfile;
 
 public class CreateCallerProfileActivity extends AppCompatActivity {
+    // Declare all variables for firebase database and edit texts
     private FirebaseDatabase database;
     private EditText callerProfileName, callerProfileAge, callerProfileCommonIdentifiers, callerProfileSupportSystem, callerProfileOccupation, callerProfileHealthIssues, callerProfileFrequency, callerProfileSuicideAttempts, callerProfileGist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Attach toolbar to the view
         setContentView(R.layout.activity_create_caller_profile);
         Toolbar toolbar = findViewById(R.id.toolbar_create_caller_profile);
         setSupportActionBar(toolbar);
 
+        // Floating Action Button for submitting caller profile
         FloatingActionButton fab = findViewById(R.id.submit_caller_profile_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = callerProfileName.getText().toString();
-                String age = callerProfileAge.getText().toString();
-                String commonIdentifiers = callerProfileCommonIdentifiers.getText().toString();
-                String supportSystem = callerProfileSupportSystem.getText().toString();
-                String occupation = callerProfileOccupation.getText().toString();
-                String healthIssues = callerProfileHealthIssues.getText().toString();
-                String frequency = callerProfileFrequency.getText().toString();
-                String suicideAttempts = callerProfileSuicideAttempts.getText().toString();
-                String gist = callerProfileGist.getText().toString();
-                //
-                if( TextUtils.isEmpty(callerProfileName.getText())){
-                    callerProfileName.setError( "Name is required!" );
+            // Fetch all values from Edit Texts
+            String name = callerProfileName.getText().toString();
+            String age = callerProfileAge.getText().toString();
+            String commonIdentifiers = callerProfileCommonIdentifiers.getText().toString();
+            String supportSystem = callerProfileSupportSystem.getText().toString();
+            String occupation = callerProfileOccupation.getText().toString();
+            String healthIssues = callerProfileHealthIssues.getText().toString();
+            String frequency = callerProfileFrequency.getText().toString();
+            String suicideAttempts = callerProfileSuicideAttempts.getText().toString();
+            String gist = callerProfileGist.getText().toString();
+            //
+            // If profile name is empty, throw error. Name is required because it is the node field in firebase.
+            if( TextUtils.isEmpty(callerProfileName.getText())){
+                callerProfileName.setError( "Name is required!" );
 
+            }
+            else{
+                // Length check for name to avoid garbage values
+                if (name.length()>50){
+                    callerProfileName.setError( "Name is too long! Maximum 50 characters allowed!" );
                 }
                 else{
-                    if (name.length()>50){
-                        callerProfileName.setError( "Name is too long! Maximum 50 characters allowed!" );
-                    }
-                    else{
-                        DatabaseReference myRef = database.getReference("caller_profiles");
-                        //
-                        CallerProfile callerProfile = new CallerProfile(name,age,commonIdentifiers,supportSystem,occupation,healthIssues,frequency,suicideAttempts,gist);
-                        myRef.child(name).setValue(callerProfile);
-                        //
-                        Toast.makeText(CreateCallerProfileActivity.this, "done", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-
+                    //Get a reference to "caller profiles" node from firebase
+                    DatabaseReference myRef = database.getReference("caller_profiles");
+                    //
+                    //create and attach an object of Caller Profile to firebase.
+                    CallerProfile callerProfile = new CallerProfile(name,age,commonIdentifiers,supportSystem,occupation,healthIssues,frequency,suicideAttempts,gist);
+                    myRef.child(name).setValue(callerProfile);
+                    //
+                    Toast.makeText(CreateCallerProfileActivity.this, "Caller Profile Added!", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
-
+            }
             }
         });
 
+        // Fetch references to all Edit Texts
         callerProfileName = findViewById(R.id.create_caller_profile_name);
         callerProfileAge = findViewById(R.id.create_caller_profile_age);
         callerProfileCommonIdentifiers = findViewById(R.id.create_caller_profile_common_identifiers);
@@ -73,7 +80,7 @@ public class CreateCallerProfileActivity extends AppCompatActivity {
         callerProfileGist = findViewById(R.id.create_caller_profile_gist);
 
         //
-        //Firebase
+        // Getting instance of Firebase
         database = FirebaseDatabase.getInstance();
 
         //

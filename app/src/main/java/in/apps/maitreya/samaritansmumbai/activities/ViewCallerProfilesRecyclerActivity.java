@@ -1,6 +1,7 @@
 package in.apps.maitreya.samaritansmumbai.activities;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -47,7 +48,7 @@ public class ViewCallerProfilesRecyclerActivity extends AppCompatActivity {
         //
         callerProfiles = new ArrayList<>();
         //
-        boolean update = getIntent().getBooleanExtra("update_CP",false);
+        //boolean update = getIntent().getBooleanExtra("update_CP",false);
         mAdapter = new CallerProfilesAdapter(callerProfiles, this);
 
         mRecyclerView.setAdapter(mAdapter);
@@ -55,7 +56,7 @@ public class ViewCallerProfilesRecyclerActivity extends AppCompatActivity {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("caller_profiles/");
         ref.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
                 CallerProfile callerProfile = dataSnapshot.getValue(CallerProfile.class);
                 callerProfiles.add(callerProfile);
                 mAdapter = new CallerProfilesAdapter(callerProfiles, ViewCallerProfilesRecyclerActivity.this);
@@ -63,23 +64,23 @@ public class ViewCallerProfilesRecyclerActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
 
             }
 
             @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
                 CallerProfile callerProfile = dataSnapshot.getValue(CallerProfile.class);
                 callerProfiles.remove(callerProfile);
             }
 
             @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, String s) {
 
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });

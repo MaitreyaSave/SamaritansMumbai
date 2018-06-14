@@ -30,7 +30,7 @@
             android:id="@+id/create_user_name"
             android:layout_width="match_parent"
             android:layout_margin="10dp"
-            android:inputType="text"
+            android:inputType="textCapWords"
             android:hint="@string/enter_user_name"
             android:layout_height="wrap_content" />
         <EditText

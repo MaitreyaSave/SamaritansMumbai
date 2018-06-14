@@ -198,12 +198,28 @@ public class MainActivity extends AppCompatActivity {
     public void addLogEntry(View v) {
 
             if (checkDistance()) {
-                Intent intent = new Intent(this, LogEntryActivity.class);
-                startActivity(intent);
+                if(isCheckedIn) {
+                    Intent intent = new Intent(this, LogEntryActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                    alertDialogBuilder.setTitle("Checkin Error");
+                    alertDialogBuilder.setMessage("You cannot create a Log Entry without checking-in!")
+                            .setCancelable(false)
+                            .setPositiveButton("Ok",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+                    AlertDialog alert = alertDialogBuilder.create();
+                    alert.show();
+                }
             } else {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setTitle("Location Error");
-                alertDialogBuilder.setMessage("You cannot create a Log Entry outside of Samaritans!")
+                alertDialogBuilder.setMessage("You cannot create a Log Entry outside of Samaritans! In case your GPS is off, please turn it on.")
                         .setCancelable(false)
                         .setPositiveButton("Ok",
                                 new DialogInterface.OnClickListener() {
