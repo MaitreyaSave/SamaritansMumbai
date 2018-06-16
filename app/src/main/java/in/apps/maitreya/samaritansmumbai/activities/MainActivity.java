@@ -107,12 +107,13 @@ public class MainActivity extends AppCompatActivity {
         df1 = new SimpleDateFormat("h:mm a", Locale.UK);
         String currentTime_string = df1.format(date);
         Log.d("time_difference","last "+lastCheckIn_string+" current "+currentTime_string+"\ndiff "+(currentTime-lastCheckIn)/60000);
-        if(currentTime-lastCheckIn>1000){
+        if(currentTime-lastCheckIn>60*1000){
             countOccurrences=0;
             setCheckInCountSP();
             Log.d("time_difference","true "+(currentTime-lastCheckIn)/1000);
         }
-        if(countOccurrences==0||countOccurrences>1){
+        if(countOccurrences!=1){
+            //isCheckedIn=false;
             checkinButton.setEnabled(true);
             checkoutButton.setEnabled(false);
         }

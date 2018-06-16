@@ -31,6 +31,15 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/create_user_alert_tv"
+                android:textAlignment="center"
+                android:visibility="gone"
+                android:textColor="@color/red"
+                android:text="@string/create_user_alert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -71,7 +80,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:enabled="false"
                 android:text="@string/action_sign_in_short"
+                android:textColor="@color/common_google_signin_btn_text_light_disabled"
                 android:textStyle="bold" />
 
         </LinearLayout>

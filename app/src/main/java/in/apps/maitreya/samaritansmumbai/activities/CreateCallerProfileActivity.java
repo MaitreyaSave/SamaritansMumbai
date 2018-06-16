@@ -14,6 +14,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import in.apps.maitreya.samaritansmumbai.R;
 import in.apps.maitreya.samaritansmumbai.classes.CallerProfile;
+import in.apps.maitreya.samaritansmumbai.classes.Functions;
 
 public class CreateCallerProfileActivity extends AppCompatActivity {
     // Declare all variables for firebase database and edit texts
@@ -26,6 +27,9 @@ public class CreateCallerProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_caller_profile);
         Toolbar toolbar = findViewById(R.id.toolbar_create_caller_profile);
         setSupportActionBar(toolbar);
+
+        // Setup UI to make soft-input keyboard disapper
+        Functions.setupUI(findViewById(R.id.create_caller_profile_scrollView),this);
 
         // Floating Action Button for submitting caller profile
         FloatingActionButton fab = findViewById(R.id.submit_caller_profile_fab);

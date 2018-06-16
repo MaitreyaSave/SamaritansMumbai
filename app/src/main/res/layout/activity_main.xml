@@ -38,6 +38,7 @@
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:text="@string/add_log_main"
+                    android:textColor="@color/colorPrimaryDark"
                     android:onClick="addLogEntry"
                     tools:ignore="ButtonStyle" />
                 <Button
@@ -49,6 +50,7 @@
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
                     android:text="@string/view_logs_main"
+                    android:textColor="@color/colorPrimaryDark"
                     android:onClick="viewLogs"
                     tools:ignore="ButtonStyle" />
             </LinearLayout>
@@ -62,6 +64,7 @@
                     android:id="@+id/checkIn"
                     android:layout_width="100dp"
                     android:layout_height="70dp"
+                    android:textColor="@color/colorPrimaryDark"
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
@@ -71,6 +74,7 @@
                 <Button
                     android:id="@+id/checkOut"
                     android:layout_width="100dp"
+                    android:textColor="@color/colorPrimaryDark"
                     android:layout_height="70dp"
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
@@ -91,6 +95,7 @@
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:textColor="@color/colorPrimaryDark"
                     android:text="@string/view_caller_profiles"
                     android:onClick="viewCallerProfiles"
                     tools:ignore="ButtonStyle" />

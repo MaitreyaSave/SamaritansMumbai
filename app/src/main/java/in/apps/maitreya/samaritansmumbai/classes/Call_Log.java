@@ -8,16 +8,26 @@ import java.io.Serializable;
  */
 
 public class Call_Log implements Serializable{
-    private String date,new_info,ref_no;
+    private String date,new_info,ref_no,updates;
 
     public Call_Log(){
         ref_no="-1";
     }
-    public  Call_Log(String date,String new_info,String ref_no){
+    public  Call_Log(String date,String new_info,String ref_no, String updates){
         this.date=date;
         this.new_info=new_info;
         this.ref_no=ref_no;
+        this.updates=updates;
     }
+
+    public String getUpdates() {
+        return updates;
+    }
+
+    public void setUpdates(String updates) {
+        this.updates = updates;
+    }
+
     public String getDate() {
         return date;
     }

@@ -11,20 +11,21 @@ import java.util.Map;
  */
 
 public class User {
-    private String role, email, username, uid, shift_day,shift_time;
+    private String role, email, username, uid, shift_day,shift_time, created_by, time_created;
     private int countA;
     private long timestamp;
 
-    public User() {
-        countA=0;
-    }
-
-    public User(String username, String email, String role, String shift_day, String shift_time){
+    public User(String username, String email, String role, String shift_day, String shift_time, String created_by){
         this.username = username;
         this.email = email;
         this.role = role;
         this.shift_day=shift_day;
         this.shift_time=shift_time;
+        this.created_by=created_by;
+        countA=0;
+    }
+
+    public User() {
         countA=0;
     }
 
@@ -90,6 +91,21 @@ public class User {
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getCreated_by() {
+        return created_by;
+    }
+
+    public void setCreated_by(String created_by) {
+        this.created_by = created_by;
+    }
+    public String getTime_created() {
+        return time_created;
+    }
+
+    public void setTime_created(String time_created) {
+        this.time_created = time_created;
     }
 
     @Exclude

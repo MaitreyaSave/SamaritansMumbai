@@ -28,6 +28,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.security.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import in.apps.maitreya.samaritansmumbai.classes.Functions;
 import in.apps.maitreya.samaritansmumbai.R;
 import in.apps.maitreya.samaritansmumbai.classes.User;
@@ -173,9 +178,10 @@ public class CreateUserActivity extends AppCompatActivity {
                         SharedPreferences pref = getSharedPreferences("MyPref", 0); // 0 - for private mode
                         String og_email = pref.getString("user_email", "-1");
                         String og_pwd = pref.getString("user_pwd", "-1");
+                        String og_name = pref.getString("user_name","-1");
                         long ts = Long.parseLong(pref.getString("time_stamp","-1"));
                         //
-                        // Add user name to firebase.
+                        // Add user name to firebase authentication.
                         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                 .setDisplayName(name).build();
                         firebaseUser.updateProfile(profileUpdates);
@@ -183,7 +189,12 @@ public class CreateUserActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
 
                         // Create user object and attach it to Firebase Database.
-                        User user = new User(name,email,role,shift_day,shift_time);
+                        User user = new User(name,email,role,shift_day,shift_time,og_name);
+                        Date date = new Date(ts);
+                        SimpleDateFormat df1 = new SimpleDateFormat("dd-MMM-yyyy h:mm a", Locale.UK);
+                        String time_in_string = df1.format(date);
+
+                        user.setTime_created(time_in_string);
                         user.setTimestamp(ts);
                         //
                         // Write a user (user name as node) to the Firebase Database.

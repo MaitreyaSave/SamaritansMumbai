@@ -1,29 +1,25 @@
 package in.apps.maitreya.samaritansmumbai.activities;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
-
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -46,13 +42,13 @@ import java.util.Date;
 import java.util.Locale;
 
 import in.apps.maitreya.samaritansmumbai.R;
+import in.apps.maitreya.samaritansmumbai.classes.Functions;
 import in.apps.maitreya.samaritansmumbai.classes.LogEntry;
 
 public class LogEntryActivity extends AppCompatActivity {
 
     // Declare variables.
     private static SharedPreferences pref;
-    private static final String TAG = LogEntryActivity.class.getName();
     private static String timestamp,sams_name;
     private static String gist;
     private String gender="Male";
@@ -104,6 +100,8 @@ public class LogEntryActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
         //
+
+
         //Re-initialize static edit texts.
         leader_name="N/A";
         leader_spl_msg="N/A";
@@ -259,6 +257,11 @@ public class LogEntryActivity extends AppCompatActivity {
             tab1 = rootView.findViewById(R.id.tab_linear_layout_child1);
             tab2 = rootView.findViewById(R.id.tab_linear_layout_child2);
             tab3 = rootView.findViewById(R.id.tab_linear_layout_child3);
+
+            // Setup UI to make soft-input keyboard disapper
+            Functions.setupUI(rootView.findViewById(R.id.tab_linear_layout_child1),getActivity());
+            Functions.setupUI(rootView.findViewById(R.id.tab_linear_layout_child2),getActivity());
+            Functions.setupUI(rootView.findViewById(R.id.tab_linear_layout_child3),getActivity());
 
             // Retrieve Shared Preferences time stamp.
             String timestamp_long=pref.getString("time_stamp", "-1");
@@ -580,6 +583,7 @@ public class LogEntryActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialogInterface, int i) {
                         Intent intent = new Intent(LogEntryActivity.this,ViewCallerProfilesRecyclerActivity.class);
                         SharedPreferences.Editor editor =pref.edit();
+                        editor.putString("updated_by",sams_name);
                         editor.putBoolean("update_CP",true);
                         editor.apply();
                         startActivity(intent);

@@ -64,6 +64,7 @@
         <item>6 to 9 pm</item>
     </string-array>
     <string name="proceed_create_user">Proceed to Create User</string>
+    <string name="create_user_alert">Security alert!\nPlease login in again to create a new user!\n</string>
 
     <!-- Strings related to caller details -->
     <string name="tab_text_1">Basic</string>
@@ -195,6 +196,10 @@
     <string name="caller_profile_suicide_attempts">Suicide attempts, if any (number and details)</string>
     <string name="caller_profile_gist">Gist of calls/issues so far</string>
     <string name="caller_profile_new_info">New information/progress of the caller</string>
+    <string name="caller_profile_updates_ref_no">Ref No:</string>
+    <string name="caller_profile_updates_date">Date:</string>
+    <string name="caller_profile_updates_details">Details:</string>
+    <string name="caller_profile_updates">Updates:</string>
 
 
     <!-- Random Strings -->

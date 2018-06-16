@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Loader;
@@ -15,16 +16,24 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,10 +51,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
-
+    private FirebaseAuth mAuth;
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
+    private TextView createUserAlertTextView;
     private View mProgressView;
     private View mLoginFormView;
     private boolean create_user;
@@ -57,9 +67,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
+        createUserAlertTextView = findViewById(R.id.create_user_alert_tv);
         mEmailView = findViewById(R.id.email);
-
+        mAuth = FirebaseAuth.getInstance();
         mPasswordView = findViewById(R.id.password);
+        final Button mEmailSignInButton = findViewById(R.id.email_sign_in_button);
+
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -71,10 +84,40 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        Button mEmailSignInButton = findViewById(R.id.email_sign_in_button);
+        // Add text change listeners
+        TextWatcher editTextWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (!TextUtils.isEmpty(mEmailView.getText().toString()) && mPasswordView.getText().toString().length()>4) {
+                    mEmailSignInButton.setEnabled(true);
+                    mEmailSignInButton.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                }else {
+                    mEmailSignInButton.setEnabled(false);
+                    mEmailSignInButton.setTextColor(getResources().getColor(R.color.common_google_signin_btn_text_light_disabled));
+                }
+            }
+        };
+        mEmailView.addTextChangedListener(editTextWatcher);
+        mPasswordView.addTextChangedListener(editTextWatcher);
+
+        // Setup UI to make soft-input keyboard disapper
+        Functions.setupUI(findViewById(R.id.email_login_form),this);
+
+
         //get boolean for create user
         create_user=getIntent().getBooleanExtra("create_user",false);
         if (create_user){
+            createUserAlertTextView.setVisibility(View.VISIBLE);
             mEmailSignInButton.setText(getResources().getString(R.string.proceed_create_user));
         }
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
@@ -259,14 +302,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected Boolean doInBackground(Void... params) {
             //
+            Functions.signIn(mEmail,mPassword,LoginActivity.this,create_user);
+
             //SharedPrefs
             SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
             SharedPreferences.Editor editor = pref.edit();
+            FirebaseUser user = mAuth.getCurrentUser();
+            if(user!=null && create_user)
+                editor.putString("user_name",user.getDisplayName());
             editor.putString("user_email", mEmail);
             editor.putString("user_pwd", mPassword);
             editor.apply();
             //
-            Functions.signIn(mEmail,mPassword,LoginActivity.this,create_user);
+
             //
             //
             try {
@@ -299,6 +347,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
         }
     }
+
 
 }
 

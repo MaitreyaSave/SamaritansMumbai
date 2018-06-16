@@ -2,19 +2,26 @@ package in.apps.maitreya.samaritansmumbai.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.util.Log;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import in.apps.maitreya.samaritansmumbai.R;
+import in.apps.maitreya.samaritansmumbai.adapters.CallerProfileUpdatesAdapter;
+import in.apps.maitreya.samaritansmumbai.adapters.CallerProfilesAdapter;
 import in.apps.maitreya.samaritansmumbai.classes.Call_Log;
 import in.apps.maitreya.samaritansmumbai.classes.CallerProfile;
 
 public class ViewSingleCallerProfileActivity extends AppCompatActivity {
     TextView cp_name,cp_age,cp_occupation,cp_common_identifiers,cp_health_issues,cp_frequency,cp_suicide_attempts,cp_gist,cp_support_system,cp_new_info,cp_new_info_ref,cp_new_info_date,cp_new_info_details;
-
+    RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +44,7 @@ public class ViewSingleCallerProfileActivity extends AppCompatActivity {
         cp_gist = findViewById(R.id.single_cp_gist);
         cp_support_system = findViewById(R.id.single_cp_support_system);
         cp_new_info = findViewById(R.id.list_new_info);
-        cp_new_info_ref = findViewById(R.id.new_info_ref);
-        cp_new_info_date = findViewById(R.id.new_info_date);
-        cp_new_info_details = findViewById(R.id.new_info_details);
+
         //
         String temp = getResources().getString(R.string.caller_profile_name)+": "+callerProfile.getName();
         cp_name.setText(temp);
@@ -61,28 +66,25 @@ public class ViewSingleCallerProfileActivity extends AppCompatActivity {
         cp_support_system.setText(temp);
 
         //
-        //Display new information (call logs)
-        String new_info_heading=getResources().getString(R.string.caller_profile_new_info)+"\n";
-        cp_new_info.setText(new_info_heading);
-        StringBuilder sb_ref=new StringBuilder("<b>Ref No</b><br/><br/>");
-        StringBuilder sb_date=new StringBuilder("<b>Date</b><br/><br/>");
-        StringBuilder sb_details=new StringBuilder("<b>Details</b><br/><br/>");
-        
-        if(call_logs!=null) {
-            for (int i = 0; i < call_logs.size(); i++) {
-                Call_Log call_log = call_logs.get(i);
-                sb_ref.append(call_log.getRef_no()).append("<br/>");
-                sb_date.append(call_log.getDate()).append("<br/>");
-                sb_details.append(call_log.getNew_info()).append("<br/>");
-            }
-        }
-        String new_info_ref =sb_ref.toString();
-        String new_info_date=sb_date.toString();
-        String new_info_details=sb_details.toString();
-        cp_new_info_ref.setText(Html.fromHtml(new_info_ref));
-        cp_new_info_date.setText(Html.fromHtml(new_info_date));
-        cp_new_info_details.setText(Html.fromHtml(new_info_details));
+        //Recycler view
+        mRecyclerView = findViewById(R.id.recycler_view_caller_profile_updates);
 
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager.setStackFromEnd(true);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        //
+
+        mAdapter = new CallerProfileUpdatesAdapter(call_logs, this);
+
+        mRecyclerView.setAdapter(mAdapter);
+        //
+        //
         //
     }
 
