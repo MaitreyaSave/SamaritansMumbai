@@ -61,7 +61,7 @@ public class ViewSingleCallerProfileActivity extends AppCompatActivity {
         temp = "<b>"+getResources().getString(R.string.caller_profile_gist)+"</b>: "+callerProfile.getCall_gist();
         cp_gist.setText(Html.fromHtml(temp));
         temp = "<b>"+getResources().getString(R.string.caller_profile_support_system)+"</b>: "+callerProfile.getSupport_system();
-        cp_support_system.setText(temp);
+        cp_support_system.setText(Html.fromHtml(temp));
 
         //
         //Recycler view
