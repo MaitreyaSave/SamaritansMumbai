@@ -27,7 +27,6 @@ import in.apps.maitreya.samaritansmumbai.classes.LogEntry;
 
 public class LogsAdapter extends RecyclerView.Adapter<LogsAdapter.ViewHolder> {
     private List<LogEntry> mDataset;
-    private Context ctx;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -42,9 +41,8 @@ public class LogsAdapter extends RecyclerView.Adapter<LogsAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public LogsAdapter(List<LogEntry> myDataset, Context context) {
+    public LogsAdapter(List<LogEntry> myDataset) {
         mDataset = myDataset;
-        ctx = context;
     }
 
     // Create new views (invoked by the layout manager)
@@ -102,6 +100,7 @@ public class LogsAdapter extends RecyclerView.Adapter<LogsAdapter.ViewHolder> {
         temp = "Duration: "+mDataset.get(position).getDuration();
         cardView_duration.setText(temp);
         //
+        final Context ctx = holder.mView.getContext();
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

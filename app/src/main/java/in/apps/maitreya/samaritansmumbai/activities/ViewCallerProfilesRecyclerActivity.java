@@ -42,14 +42,14 @@ public class ViewCallerProfilesRecyclerActivity extends AppCompatActivity {
 
         // use a linear layout manager
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
-        mLayoutManager.setStackFromEnd(true);
+        mLayoutManager.setStackFromEnd(false);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         //
         callerProfiles = new ArrayList<>();
         //
         //boolean update = getIntent().getBooleanExtra("update_CP",false);
-        mAdapter = new CallerProfilesAdapter(callerProfiles, this);
+        mAdapter = new CallerProfilesAdapter(callerProfiles);
 
         mRecyclerView.setAdapter(mAdapter);
         //
@@ -59,7 +59,7 @@ public class ViewCallerProfilesRecyclerActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
                 CallerProfile callerProfile = dataSnapshot.getValue(CallerProfile.class);
                 callerProfiles.add(callerProfile);
-                mAdapter = new CallerProfilesAdapter(callerProfiles, ViewCallerProfilesRecyclerActivity.this);
+                mAdapter = new CallerProfilesAdapter(callerProfiles);
                 mRecyclerView.setAdapter(mAdapter);
             }
 

@@ -60,7 +60,7 @@ public class ViewLogsRecyclerActivity extends AppCompatActivity {
         //
         logEntries = new ArrayList<>();
         //
-        mAdapter = new LogsAdapter(logEntries, this);
+        mAdapter = new LogsAdapter(logEntries);
         mRecyclerView.setAdapter(mAdapter);
         //
 
@@ -70,7 +70,7 @@ public class ViewLogsRecyclerActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
                 LogEntry entry = dataSnapshot.getValue(LogEntry.class);
                 logEntries.add(entry);
-                mAdapter = new LogsAdapter(logEntries,ViewLogsRecyclerActivity.this);
+                mAdapter = new LogsAdapter(logEntries);
                 mRecyclerView.setAdapter(mAdapter);
                 Log.d("ChildAdded","check_test "+logEntries.size());
             }

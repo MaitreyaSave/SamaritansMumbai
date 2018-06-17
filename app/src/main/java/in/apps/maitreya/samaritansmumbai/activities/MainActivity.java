@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         df1 = new SimpleDateFormat("h:mm a", Locale.UK);
         String currentTime_string = df1.format(date);
         Log.d("time_difference","last "+lastCheckIn_string+" current "+currentTime_string+"\ndiff "+(currentTime-lastCheckIn)/60000);
-        if(currentTime-lastCheckIn>60*1000){
+        if(currentTime-lastCheckIn>8*3600*1000){
             countOccurrences=0;
             setCheckInCountSP();
             Log.d("time_difference","true "+(currentTime-lastCheckIn)/1000);
@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
                 distance = mlocation.distanceTo(source);
             }
             Log.d("test_dis","d "+distance);
-            checkBool = (distance > 200);
+            checkBool = (distance < 200);
         }
         return checkBool;
     }

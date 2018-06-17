@@ -26,7 +26,6 @@ import in.apps.maitreya.samaritansmumbai.classes.CallerProfile;
 
 public class CallerProfilesAdapter extends RecyclerView.Adapter<CallerProfilesAdapter.ViewHolder>{
     private List<CallerProfile> mDataset;
-    private Context ctx;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -41,9 +40,8 @@ public class CallerProfilesAdapter extends RecyclerView.Adapter<CallerProfilesAd
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public CallerProfilesAdapter(List<CallerProfile> myDataset, Context context) {
+    public CallerProfilesAdapter(List<CallerProfile> myDataset) {
         mDataset = myDataset;
-        ctx = context;
     }
 
     // Create new views (invoked by the layout manager)
@@ -67,6 +65,7 @@ public class CallerProfilesAdapter extends RecyclerView.Adapter<CallerProfilesAd
         // - replace the contents of the view with that element
         //holder.mView.setText(mDataset[position]);
         //
+        final Context ctx=holder.mView.getContext();
         CardView cardView = holder.mView.findViewById(R.id.card_view_caller_profile);
         TextView caller_profile_name;
         caller_profile_name = holder.mView.findViewById(R.id.card_view_caller_profile_name);

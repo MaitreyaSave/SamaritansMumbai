@@ -37,7 +37,7 @@
                 <TextView
                     android:id="@+id/card_view_caller_profile_date"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:textSize="@dimen/basic_font"
                     android:gravity="end"
                     android:text="@string/caller_profile_updates_date"/>

@@ -1,10 +1,7 @@
 package in.apps.maitreya.samaritansmumbai.adapters;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +14,6 @@ import in.apps.maitreya.samaritansmumbai.classes.Call_Log;
 
 public class CallerProfileUpdatesAdapter extends RecyclerView.Adapter<CallerProfileUpdatesAdapter.ViewHolder>{
     private List<Call_Log> mDataset;
-    private Context ctx;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -32,9 +28,8 @@ public class CallerProfileUpdatesAdapter extends RecyclerView.Adapter<CallerProf
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public CallerProfileUpdatesAdapter(List<Call_Log> myDataset, Context context) {
+    public CallerProfileUpdatesAdapter(List<Call_Log> myDataset) {
         mDataset = myDataset;
-        ctx = context;
     }
 
     // Create new views (invoked by the layout manager)
@@ -65,7 +60,8 @@ public class CallerProfileUpdatesAdapter extends RecyclerView.Adapter<CallerProf
         TextView caller_profile_updates_details= holder.mView.findViewById(R.id.card_view_caller_profile_details_value);
         TextView caller_profile_updates_updates= holder.mView.findViewById(R.id.card_view_caller_profile_updates_value);
 
-        caller_profile_updates_ref_no.setText(mDataset.get(position).getRef_no());
+        String ref_no = "Ref No: "+mDataset.get(position).getRef_no();
+        caller_profile_updates_ref_no.setText(ref_no);
         caller_profile_updates_date.setText(mDataset.get(position).getDate());
 
         caller_profile_updates_details.setText(mDataset.get(position).getNew_info());
